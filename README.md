@@ -7,14 +7,19 @@
  * @LastEditTime: 2023-07-10 16:29:09
 -->
 # Welcome to JJBond
-**<font face="Helvetica" color="gray">这是Yan的Blog,目前正在建设中...</font>**
+
+**<font face="Helvetica" color="#C0C0C0">这是Yan的Blog,目前正在建设中...</font>**
 
 ## Task List
+
 ### 2023.7.10
-- [x] 添加网易云音乐歌单
-- [x] 安装RSS插件
-- [x] 建立README文档
+
+- 添加网易云音乐歌单
+- 安装RSS插件
+- 建立README文档
 
 ## Study List
+
 ### 2023.7.10
-- [x] 学习markdown语法
+
+- 学习markdown语法
