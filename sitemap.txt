@@ -1,6 +1,0 @@
-http://jjbond.cn/about/index.html
-http://jjbond.cn/tags/index.html
-http://jjbond.cn/categories/index.html
-http://jjbond.cn/2023/07/06/youyan.xml
-http://jjbond.cn/2023/07/06/hello-world.xml
-http://jjbond.cn/
