@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://jjbond.cn/about/index.html</loc>
+    <loc>https://jjbond.cn/about/index.html</loc>
     
     <lastmod>2023-07-06</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>http://jjbond.cn/tags/index.html</loc>
+    <loc>https://jjbond.cn/tags/index.html</loc>
     
     <lastmod>2023-07-06</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>http://jjbond.cn/categories/index.html</loc>
+    <loc>https://jjbond.cn/categories/index.html</loc>
     
     <lastmod>2023-07-06</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>http://jjbond.cn/2023/07/06/youyan.xml</loc>
+    <loc>https://jjbond.cn/youyan/</loc>
     
     <lastmod>2023-07-06</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://jjbond.cn/2023/07/06/hello-world.xml</loc>
+    <loc>https://jjbond.cn/hello-world/</loc>
     
     <lastmod>2023-07-06</lastmod>
     
@@ -48,7 +48,7 @@
   
 
   <url>
-    <loc>http://jjbond.cn/</loc>
+    <loc>https://jjbond.cn/</loc>
     <lastmod>2023-07-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>

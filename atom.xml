@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>吉吉邦德</title>
-  <icon>http://jjbond.cn/icon.png</icon>
+  <icon>https://jjbond.cn/icon.png</icon>
   
-  <link href="http://jjbond.cn/atom.xml" rel="self"/>
+  <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
-  <link href="http://jjbond.cn/"/>
+  <link href="https://jjbond.cn/"/>
   <updated>2023-07-06T07:48:11.456Z</updated>
-  <id>http://jjbond.cn/</id>
+  <id>https://jjbond.cn/</id>
   
   <author>
     <name>右眼</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>youyan</title>
-    <link href="http://jjbond.cn/2023/07/06/youyan.xml"/>
-    <id>http://jjbond.cn/2023/07/06/youyan.xml</id>
+    <link href="https://jjbond.cn/youyan/"/>
+    <id>https://jjbond.cn/youyan/</id>
     <published>2023-07-06T07:48:11.000Z</published>
     <updated>2023-07-06T07:48:11.456Z</updated>
     
@@ -31,8 +31,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://jjbond.cn/2023/07/06/hello-world.xml"/>
-    <id>http://jjbond.cn/2023/07/06/hello-world.xml</id>
+    <link href="https://jjbond.cn/hello-world/"/>
+    <id>https://jjbond.cn/hello-world/</id>
     <published>2023-07-06T07:41:49.739Z</published>
     <updated>2023-07-06T07:41:49.739Z</updated>
     
