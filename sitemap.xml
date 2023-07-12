@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jjbond.cn/youyan/</loc>
+    <loc>https://jjbond.cn/%E7%94%A8React-Hooks%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2App/</loc>
     
     <lastmod>2023-07-12</lastmod>
     
@@ -13,7 +13,7 @@
   <url>
     <loc>https://jjbond.cn/about/index.html</loc>
     
-    <lastmod>2023-07-06</lastmod>
+    <lastmod>2023-07-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,7 +22,7 @@
   <url>
     <loc>https://jjbond.cn/tags/index.html</loc>
     
-    <lastmod>2023-07-06</lastmod>
+    <lastmod>2023-07-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,7 +31,16 @@
   <url>
     <loc>https://jjbond.cn/categories/index.html</loc>
     
-    <lastmod>2023-07-06</lastmod>
+    <lastmod>2023-07-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jjbond.cn/youyan/</loc>
+    
+    <lastmod>2023-07-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -55,6 +64,27 @@
   </url>
 
   
+  <url>
+    <loc>https://jjbond.cn/tags/React/</loc>
+    <lastmod>2023-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jjbond.cn/tags/Web/</loc>
+    <lastmod>2023-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2023-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
