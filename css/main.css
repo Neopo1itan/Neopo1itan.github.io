@@ -249,10 +249,11 @@ hr {
   margin: 40px 0;
 }
 blockquote {
-  border-left: 4px solid #ddd;
-  color: var(--blockquote-color);
+  border-left: 4px solid #31708f;
+  color: #31708f;
   margin: 0;
   padding: 0 15px;
+  background: rgba(217,237,247,0.8);
 }
 blockquote cite::before {
   content: '-';
@@ -1217,7 +1218,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #cdf9fe;
+  background: #ffff2f;
   border-radius: 50%;
   content: ' ';
   display: inline-block;

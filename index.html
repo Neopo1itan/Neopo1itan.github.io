@@ -290,6 +290,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/958.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/958.html" class="post-title-link" itemprop="url">用nodejs编写一个淘宝秒杀脚本</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-13 17:11:38 / 修改时间：17:27:08" itemprop="dateCreated datePublished" datetime="2023-07-13T17:11:38+08:00">2023-07-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/" itemprop="url" rel="index"><span itemprop="name">自动化脚本</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文运用dayjs和selenium-webdriver两个包来编写自动秒杀taobao商品的脚本，功能单一简单。脚本的流程如下：</p>
+<ol>
+<li>打开浏览器<code>chrome</code>，最大化并跳转到taobao.com</li>
+<li>打开登录页，人工扫码登陆</li>
+<li>登陆成功跳转到购物车界面</li>
+<li>自动点击全选按钮</li>
+<li>自动点击结算按钮</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>打开命令行工具，安装该脚本所需要的两个包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//因为作者设置了打赏，需要在末尾加入--no-fund</span><br><span class="line">npm i dayjs --save --no-fund</span><br><span class="line">npm i selenium-webdriver --save --no fund</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，新建一个<code>.js</code>文件，名称任意，加入如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dayjs = <span class="built_in">require</span>(<span class="string">&quot;dayjs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">By</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;selenium-webdriver&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> selenium = <span class="built_in">require</span>(<span class="string">&quot;selenium-webdriver&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> driver = <span class="keyword">new</span> selenium.<span class="title class_">Builder</span>().<span class="title function_">forBrowser</span>(<span class="string">&quot;chrome&quot;</span>).<span class="title function_">build</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最大化浏览器</span></span><br><span class="line">driver.<span class="title function_">manage</span>().<span class="title function_">window</span>().<span class="title function_">maximize</span>();</span><br><span class="line">driver.<span class="title function_">get</span>(<span class="string">&quot;https://www.taobao.com&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sleep</span> = (<span class="params">time</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, time * <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 登录</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> loginText = driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">linkText</span>(<span class="string">&quot;亲，请登录&quot;</span>));</span><br><span class="line">  <span class="keyword">if</span> (loginText) loginText.<span class="title function_">click</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;请在20秒内完成扫码&quot;</span>);</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">20</span>);</span><br><span class="line">  driver.<span class="title function_">get</span>(<span class="string">&quot;https://cart.taobao.com/cart.htm&quot;</span>);</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">3</span>);</span><br><span class="line">  <span class="comment">//   点击全选按钮</span></span><br><span class="line">  <span class="keyword">if</span> (driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">id</span>(<span class="string">&quot;J_SelectAll1&quot;</span>)))</span><br><span class="line">    driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">id</span>(<span class="string">&quot;J_SelectAll1&quot;</span>)).<span class="title function_">click</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;登录成功：&quot;</span>, <span class="title function_">dayjs</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>));</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">0.4</span>);</span><br><span class="line">  <span class="title function_">buy</span>(<span class="string">&quot;20xx-xx-xx xx:xx:xx&quot;</span>);<span class="comment">//此处修改开售时间</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 秒杀</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">buy</span> = <span class="keyword">async</span> (<span class="params">buyTime</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="title function_">dayjs</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (now === buyTime) &#123;</span><br><span class="line">      <span class="keyword">if</span> (driver.<span class="title function_">findElement</span>(&#123; <span class="attr">id</span>: <span class="string">&quot;J_Go&quot;</span> &#125;))</span><br><span class="line">        driver.<span class="title function_">findElement</span>(&#123; <span class="attr">id</span>: <span class="string">&quot;J_Go&quot;</span> &#125;).<span class="title function_">click</span>();</span><br><span class="line">      <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">0.4</span>);</span><br><span class="line">      <span class="title function_">submit</span>();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提交订单</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">submit</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">linkText</span>(<span class="string">&quot;提交订单&quot;</span>)))</span><br><span class="line">    driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">linkText</span>(<span class="string">&quot;提交订单&quot;</span>)).<span class="title function_">click</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;抢购时间：&quot;</span>, <span class="title function_">dayjs</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>));</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">1000</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">login</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>在该脚本文件所在位置打开命令行工具，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//xxx.js为刚才保存的脚本文件，名字自定</span><br><span class="line">node xxx.js //回车</span><br></pre></td></tr></table></figure>
+
+<p>脚本自动运行，扫码登陆后就在你设置好的时间开始帮你秒杀商品。</p>
+<blockquote>
+<p>参考链接:<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/bd/art/609639709?source_id=1001">https://www.zhihu.com/tardis/bd/art/609639709?source_id=1001</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/13078.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -547,20 +651,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -610,12 +714,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">11k</span>
+    <span title="站点总字数">13k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">10 分钟</span>
+    <span title="站点阅读时长">11 分钟</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动 -->
