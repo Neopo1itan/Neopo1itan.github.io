@@ -4,7 +4,7 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2023-07-13 11:23:12
+ * @LastEditTime: 2023-07-13 16:27:50
 -->
 # Welcome to JJBond
 
@@ -39,6 +39,8 @@
 - 修改next主题下代码块背景
 - 增加生成文章url链接插件addrlink
 - 设置分类页和标签页的样式
+- 修改博文中引用块默认配色
+- 完成文章《用React Hooks搭建一个电影搜索App》
 
 ## Study List
 
