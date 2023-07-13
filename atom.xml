@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-07-12T10:39:09.848Z</updated>
+  <updated>2023-07-13T01:35:53.187Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -18,19 +18,14 @@
   
   <entry>
     <title>用React Hooks搭建一个电影搜索App</title>
-    <link href="https://jjbond.cn/%E7%94%A8React-Hooks%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2App/"/>
-    <id>https://jjbond.cn/%E7%94%A8React-Hooks%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%94%B5%E5%BD%B1%E6%90%9C%E7%B4%A2App/</id>
+    <link href="https://jjbond.cn/posts/13078.html"/>
+    <id>https://jjbond.cn/posts/13078.html</id>
     <published>2023-07-12T07:55:35.000Z</published>
-    <updated>2023-07-12T10:39:09.848Z</updated>
+    <updated>2023-07-13T01:35:53.187Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;下面是-App-完成后的效果预览&quot;&gt;&lt;a href=&quot;#下面是-App-完成后的效果预览&quot; class=&quot;headerlink&quot; title=&quot;下面是 App 完成后的效果预览&quot;&gt;&lt;/a&gt;下面是 App 完成后的效果预览&lt;/h3&gt;&lt;h2 id=&quot;img&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">&lt;p&gt;这个 App 实现的效果是通过&lt;strong&gt;OMDB API&lt;/strong&gt;来搜索电影并将结果展现给用户。搭建这个 App 的过程能帮助我们很好的学习&lt;strong&gt;React Hooks&lt;/strong&gt;的用法，练习实际项目能帮助更快上手。&lt;/p&gt;
+&lt;h3 id=&quot;App-完成后的效果预览&quot;&gt;&lt;a href=&quot;#App-完成后的效果预览&quot; class=&quot;headerlink&quot; title=&quot;App 完成后的效果预览&quot;&gt;&lt;/a&gt;App 完成后的效果预览&lt;/h3&gt;&lt;p&gt;img&lt;/p&gt;</summary>
     
     
     
@@ -45,8 +40,8 @@
   
   <entry>
     <title>youyan</title>
-    <link href="https://jjbond.cn/youyan/"/>
-    <id>https://jjbond.cn/youyan/</id>
+    <link href="https://jjbond.cn/posts/2492.html"/>
+    <id>https://jjbond.cn/posts/2492.html</id>
     <published>2023-07-06T07:48:11.000Z</published>
     <updated>2023-07-12T07:14:56.082Z</updated>
     
@@ -60,8 +55,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://jjbond.cn/hello-world/"/>
-    <id>https://jjbond.cn/hello-world/</id>
+    <link href="https://jjbond.cn/posts/16107.html"/>
+    <id>https://jjbond.cn/posts/16107.html</id>
     <published>2023-07-06T07:41:49.739Z</published>
     <updated>2023-07-06T07:41:49.739Z</updated>
     

@@ -4,7 +4,7 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2023-07-10 16:29:09
+ * @LastEditTime: 2023-07-13 10:00:47
 -->
 # Welcome to JJBond
 
@@ -33,6 +33,11 @@
 - 添加加速插件
 - 注册图床网站imgtg
 - 设置文章主页预览(在文章中插入'<!--more-->'可生效)
+
+### 2023.7.13
+
+- 修改next主题下代码块背景
+- 增加生成文章url链接插件addrlink
 
 ## Study List
 
