@@ -30,7 +30,7 @@
     <title>用React Hooks搭建一个电影搜索App</title>
     <url>/posts/13078.html</url>
     <content><![CDATA[<p>这个 App 实现的效果是通过<strong>OMDB API</strong>来搜索电影并将结果展现给用户。搭建这个 App 的过程能帮助我们很好的学习<strong>React Hooks</strong>的用法，练习实际项目能帮助更快上手。</p>
-<h3 id="App-完成后的效果预览"><a href="#App-完成后的效果预览" class="headerlink" title="App 完成后的效果预览"></a>App 完成后的效果预览</h3><p><a href="https://imgtg.com/image/OzZvvc"><img data-src="https://i.imgtg.com/2023/07/13/OzZvvc.md.png" alt="app"></a></p>
+<h3 id="App-完成后的效果预览"><a href="#App-完成后的效果预览" class="headerlink" title="App 完成后的效果预览"></a>App 完成后的效果预览</h3><p><a href="https://imgtg.com/image/OzZvvc"><img data-src="https://i.imgtg.com/2023/07/13/OzZvvc.md.png" alt="OzZvvc.md.png"></a></p>
 <span id="more"></span>
 <h3 id="项目用到的工具"><a href="#项目用到的工具" class="headerlink" title="项目用到的工具"></a>项目用到的工具</h3><ul>
 <li>Node</li>
