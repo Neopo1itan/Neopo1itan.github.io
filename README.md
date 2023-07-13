@@ -4,7 +4,7 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2023-07-13 10:00:47
+ * @LastEditTime: 2023-07-13 11:23:12
 -->
 # Welcome to JJBond
 
@@ -38,6 +38,7 @@
 
 - 修改next主题下代码块背景
 - 增加生成文章url链接插件addrlink
+- 设置分类页和标签页的样式
 
 ## Study List
 
