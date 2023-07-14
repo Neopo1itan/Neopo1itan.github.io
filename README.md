@@ -4,7 +4,7 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2023-07-13 17:28:45
+ * @LastEditTime: 2023-07-14 16:03:14
 -->
 # Welcome to JJBond
 
@@ -42,6 +42,11 @@
 - 修改博文中引用块默认配色
 - 完成文章《用React Hooks搭建一个电影搜索App》
 - 完成文章《用nodejs编写一个淘宝秒杀脚本》
+
+### 2023.7.14
+
+- 修复标签页需要手动刷新才能加载颜色的bug
+- 修改菜单栏hover样式
 
 ## Study List
 
