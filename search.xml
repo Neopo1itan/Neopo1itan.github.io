@@ -37,8 +37,8 @@
         <category>自动化脚本</category>
       </categories>
       <tags>
-        <tag>Web</tag>
         <tag>nodejs</tag>
+        <tag>Web</tag>
       </tags>
   </entry>
   <entry>
@@ -120,8 +120,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>React</tag>
         <tag>Web</tag>
+        <tag>React</tag>
       </tags>
   </entry>
 </search>
