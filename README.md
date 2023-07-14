@@ -4,7 +4,7 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2023-07-13 16:27:50
+ * @LastEditTime: 2023-07-13 17:28:45
 -->
 # Welcome to JJBond
 
@@ -41,6 +41,7 @@
 - 设置分类页和标签页的样式
 - 修改博文中引用块默认配色
 - 完成文章《用React Hooks搭建一个电影搜索App》
+- 完成文章《用nodejs编写一个淘宝秒杀脚本》
 
 ## Study List
 
