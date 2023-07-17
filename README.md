@@ -4,7 +4,7 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2023-07-14 16:03:14
+ * @LastEditTime: 2023-07-17 16:53:34
 -->
 # Welcome to JJBond
 
@@ -47,6 +47,10 @@
 
 - 修复标签页需要手动刷新才能加载颜色的bug
 - 修改菜单栏hover样式
+
+### 2023.7.17
+
+- 完成文章《用Python编写一个jd秒杀脚本》
 
 ## Study List
 

@@ -7,6 +7,35 @@
 ]]></content>
   </entry>
   <entry>
+    <title>用Python编写一个jd秒杀脚本</title>
+    <url>/posts/33264.html</url>
+    <content><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文运用python的selenium模块来编写实现自动秒杀jd商品的脚本。</p>
+<span id="more"></span>
+<p>脚本的流程如下：</p>
+<ol>
+<li>在控制台输入抢购的时间</li>
+<li>打开浏览器，跳转到<a href="http://www.jd.com/">www.jd.com</a></li>
+<li>打开登录页，人工扫码登陆</li>
+<li>登陆成功跳转到购物车界面</li>
+<li>控制台选择全选还是手动勾选商品</li>
+<li>抢购时间自动点击结算按钮</li>
+</ol>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p><font size="2" color="grey">python环境和ide工具就不作多说</font></p>
+<ol>
+<li><strong>ChromeDriver安装</strong>：自行搜索网上教程，有很多。</li>
+<li><strong>selenium安装</strong>：selenium是python的第三方库，用于Web应用测试，可以直接运行在浏览器模拟用户操作。通过<code>pip install selenium</code>安装，速度慢可以替换国内镜像源，教程网上也有。</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>新建一个<code>.py</code>文件打开输入如下代码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="comment"># 打开京东登录页，并进行扫码登录</span></span><br><span class="line">    browser.get(<span class="string">&quot;https://www.jd.com&quot;</span>)</span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> browser.find_element(By.LINK_TEXT, <span class="string">&quot;你好，请登录&quot;</span>):</span><br><span class="line">        browser.find_element(By.LINK_TEXT, <span class="string">&quot;你好，请登录&quot;</span>).click()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;======请在30秒内完成登录&quot;</span>)</span><br><span class="line">        time.sleep(<span class="number">30</span>)</span><br><span class="line">        browser.get(<span class="string">&quot;https://cart.jd.com&quot;</span>)</span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    now = datetime.datetime.now()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;======login success:&#x27;</span>, now.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>))</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">buy</span>(<span class="params">times, choose</span>):</span><br><span class="line">    <span class="comment"># 点击购物车里全选按钮</span></span><br><span class="line">    <span class="keyword">if</span> choose == <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;======请手动勾选需要购买的商品&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        now = datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S.%f&#x27;</span>)</span><br><span class="line">        <span class="comment"># 对比时间，时间到的话就点击结算</span></span><br><span class="line">        <span class="keyword">if</span> now &gt; times:</span><br><span class="line">            <span class="keyword">if</span> choose == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="keyword">if</span> browser.find_element(By.ID, <span class="string">&quot;J_SelectAll2&quot;</span>):</span><br><span class="line">                            browser.find_element(By.ID, <span class="string">&quot;J_SelectAll2&quot;</span>).click()</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">except</span>:</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">&quot;======找不到购买按钮&quot;</span>)</span><br><span class="line">            <span class="comment"># 点击结算按钮</span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="keyword">if</span> browser.find_element(By.LINK_TEXT, <span class="string">&quot;去结算&quot;</span>):</span><br><span class="line">                        browser.find_element(By.LINK_TEXT, <span class="string">&quot;去结算&quot;</span>).click()</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">&quot;======结算成功&quot;</span>)</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="keyword">if</span> browser.find_element(By.ID, <span class="string">&#x27;order-submit&#x27;</span>):</span><br><span class="line">                        browser.find_element(By.ID, <span class="string">&#x27;order-submit&#x27;</span>).click()</span><br><span class="line">                        now1 = datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S.%f&#x27;</span>)</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">&quot;======抢购成功时间：%s&quot;</span> % now1)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&quot;======再次尝试提交订单&quot;</span>)</span><br><span class="line">            time.sleep(<span class="number">0.01</span>)</span><br><span class="line"><span class="comment"># 抢购主函数</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    times = <span class="built_in">input</span>(<span class="string">&quot;请输入抢购时间，格式如(2018-09-06 11:20:00.000000):&quot;</span>)</span><br><span class="line">    browser = webdriver.Chrome()</span><br><span class="line">    browser.maximize_window()</span><br><span class="line">    login()</span><br><span class="line">    choose = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;到时间自动勾选购物车请输入“1”，否则输入“2”：&quot;</span>))</span><br><span class="line">    buy(times, choose)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>值得注意的是，网上有的教程写法是<code>find_element_by_link_text</code>，运行会报错，是因为新版本selenium已经使用新的写法<code>find_element(By.XX, &#39; &#39;)</code>，<strong>XX</strong>可以是ID，LINK_TEXT，class_name等等。</p>
+<p>运行代码按流程操作就能秒杀抢购自己需要的商品。</p>
+<blockquote>
+<p>参考链接:<br><a href="https://blog.csdn.net/python03014/article/details/130477281">https://blog.csdn.net/python03014/article/details/130477281</a></p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
     <title>用nodejs编写一个淘宝秒杀脚本</title>
     <url>/posts/958.html</url>
     <content><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文运用dayjs和selenium-webdriver两个包来编写自动秒杀taobao商品的脚本，功能单一简单。</p>
@@ -37,8 +66,8 @@
         <category>自动化脚本</category>
       </categories>
       <tags>
-        <tag>nodejs</tag>
         <tag>Web</tag>
+        <tag>nodejs</tag>
       </tags>
   </entry>
   <entry>
@@ -120,8 +149,8 @@
         <category>前端开发</category>
       </categories>
       <tags>
-        <tag>Web</tag>
         <tag>React</tag>
+        <tag>Web</tag>
       </tags>
   </entry>
 </search>

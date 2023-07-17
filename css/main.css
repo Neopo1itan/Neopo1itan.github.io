@@ -1218,7 +1218,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #5cff13;
+  background: #adff60;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2794,7 +2794,7 @@ a.my-post-title-link:before {
   top: 10px;
   width: 18px;
   height: 18px;
-  content: "📚";
+  content: "🎏";
   margin-right: 5px;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: 15px;

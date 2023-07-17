@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-07-14T01:07:51.466Z</updated>
+  <updated>2023-07-17T08:52:33.728Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用Python编写一个jd秒杀脚本</title>
+    <link href="https://jjbond.cn/posts/33264.html"/>
+    <id>https://jjbond.cn/posts/33264.html</id>
+    <published>2023-07-17T08:33:52.000Z</published>
+    <updated>2023-07-17T08:52:33.728Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;本文运用python的selenium模块来编写实现自动秒杀jd商品的脚本。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>用nodejs编写一个淘宝秒杀脚本</title>
@@ -31,9 +46,9 @@
     <category term="自动化脚本" scheme="https://jjbond.cn/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/"/>
     
     
-    <category term="nodejs" scheme="https://jjbond.cn/tags/nodejs/"/>
-    
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="nodejs" scheme="https://jjbond.cn/tags/nodejs/"/>
     
   </entry>
   
@@ -53,9 +68,9 @@
     <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
-    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
-    
     <category term="React" scheme="https://jjbond.cn/tags/React/"/>
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
     
   </entry>
   
