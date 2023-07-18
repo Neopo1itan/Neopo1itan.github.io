@@ -31,9 +31,9 @@
     <category term="自动化脚本" scheme="https://jjbond.cn/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/"/>
     
     
-    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
-    
     <category term="python" scheme="https://jjbond.cn/tags/python/"/>
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
     
   </entry>
   
@@ -74,9 +74,9 @@
     <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
-    <category term="React" scheme="https://jjbond.cn/tags/React/"/>
-    
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="React" scheme="https://jjbond.cn/tags/React/"/>
     
   </entry>
   
