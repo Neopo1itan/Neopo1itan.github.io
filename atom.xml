@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-07-17T08:52:33.728Z</updated>
+  <updated>2023-07-17T09:02:39.143Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -21,13 +21,19 @@
     <link href="https://jjbond.cn/posts/33264.html"/>
     <id>https://jjbond.cn/posts/33264.html</id>
     <published>2023-07-17T08:33:52.000Z</published>
-    <updated>2023-07-17T08:52:33.728Z</updated>
+    <updated>2023-07-17T09:02:39.143Z</updated>
     
     
     <summary type="html">&lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;本文运用python的selenium模块来编写实现自动秒杀jd商品的脚本。&lt;/p&gt;</summary>
     
     
     
+    <category term="自动化脚本" scheme="https://jjbond.cn/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="python" scheme="https://jjbond.cn/tags/python/"/>
     
   </entry>
   
