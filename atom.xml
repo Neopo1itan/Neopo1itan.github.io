@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-07-17T09:02:39.143Z</updated>
+  <updated>2023-09-12T02:12:20.439Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>什么是Nginx?</title>
+    <link href="https://jjbond.cn/posts/36796.html"/>
+    <id>https://jjbond.cn/posts/36796.html</id>
+    <published>2023-09-12T02:10:42.000Z</published>
+    <updated>2023-09-12T02:12:20.439Z</updated>
+    
+    
+    
+    
+    <category term="服务器" scheme="https://jjbond.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>用Python编写一个jd秒杀脚本</title>
