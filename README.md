@@ -4,11 +4,15 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2023-07-17 16:53:34
+ * @LastEditTime: 2023-11-27 16:43:36
 -->
 # Welcome to JJBond
 
 **<font face="Helvetica" color="#C0C0C0">这是Yan的Blog,目前正在建设中...</font>**
+
+## 前端爪哇教育学习
+
+### 2023.11.27 学习this指针/闭包/作用域
 
 ## Task List
 
