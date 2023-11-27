@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-11-25T03:33:45.389Z</updated>
+  <updated>2023-11-27T08:39:22.191Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -17,20 +17,26 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2023/11/16 this指针/闭包/作用域</title>
+    <title>this指针/闭包/作用域</title>
     <link href="https://jjbond.cn/posts/4503.html"/>
     <id>https://jjbond.cn/posts/4503.html</id>
     <published>2023-11-25T03:26:38.000Z</published>
-    <updated>2023-11-25T03:33:45.389Z</updated>
+    <updated>2023-11-27T08:39:22.191Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;2023&amp;#x2F;11&amp;#x2F;26 爪哇教育</summary>
-        
-      
+    <summary type="html">&lt;h1 id=&quot;2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域&quot;&gt;&lt;a href=&quot;#2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&quot;&gt;&lt;/a&gt;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;面试时必知必会&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;JS&lt;/li&gt;
+&lt;li&gt;布局&lt;/li&gt;
+&lt;li&gt;端(小程序、web)&lt;/li&gt;
+&lt;li&gt;技术栈(Vue、React)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;争取学习&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;辅助技术栈&lt;/li&gt;
+&lt;li&gt;热门模块和工程化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;为我所用&lt;/strong&gt;&lt;br&gt;实战 | 算法 | 模式&lt;/p&gt;</summary>
     
     
     
@@ -48,8 +54,16 @@
     <link href="https://jjbond.cn/posts/36796.html"/>
     <id>https://jjbond.cn/posts/36796.html</id>
     <published>2023-09-12T02:10:42.000Z</published>
-    <updated>2023-11-25T03:28:59.468Z</updated>
+    <updated>2023-11-27T06:29:55.632Z</updated>
     
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;什么是Nginx？&quot;&gt;&lt;a href=&quot;#什么是Nginx？&quot; class=&quot;headerlink&quot; title=&quot;什么是Nginx？&quot;&gt;&lt;/a&gt;什么是Nginx？&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Nginx&lt;/strong&gt;(engine x)</summary>
+        
+      
     
     
     

@@ -168,7 +168,11 @@
   <entry>
     <title>什么是Nginx?</title>
     <url>/posts/36796.html</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="什么是Nginx？"><a href="#什么是Nginx？" class="headerlink" title="什么是Nginx？"></a>什么是Nginx？</h1><p><strong>Nginx</strong>(engine x) 是一个高性能的HTTP和反向代理Web服务器，同时也提供IMAP&#x2F;POP3&#x2F;SMTP服务。<br><strong>特点</strong>是1.占有内存少 2.并发能力强<br><strong>Nginx</strong>几乎可以做到7*24h不间断运行，能在不间断服务下进行软件版本的升级，其代码完全由C语言从头写成，官方数据表示能同时支持5w个并发连接数的响应。</p>
+<h1 id="正向代理-x2F-反向代理"><a href="#正向代理-x2F-反向代理" class="headerlink" title="正向代理&#x2F;反向代理"></a>正向代理&#x2F;反向代理</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>代理客户端的，安装在自己电脑上的，如<strong>VPN</strong></p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>代理服务端的，客户端只用访问同一域名，客户无感知浏览服务资源</p>
+<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><p><strong>Nginx</strong>提供2种负载均衡策略——内置策略和扩展策略。<br>内置策略主要有轮询、加权轮询、Ip hash等。</p>
+]]></content>
       <categories>
         <category>服务器</category>
       </categories>
@@ -177,10 +181,89 @@
       </tags>
   </entry>
   <entry>
-    <title>2023/11/16 this指针/闭包/作用域</title>
+    <title>this指针/闭包/作用域</title>
     <url>/posts/4503.html</url>
-    <content><![CDATA[<p>2023&#x2F;11&#x2F;26 爪哇教育 JavaScript高级内功修炼直播课笔记</p>
-]]></content>
+    <content><![CDATA[<h1 id="2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域"><a href="#2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域" class="headerlink" title="2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域"></a>2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域</h1><p><strong>面试时必知必会</strong>  </p>
+<ol>
+<li>JS</li>
+<li>布局</li>
+<li>端(小程序、web)</li>
+<li>技术栈(Vue、React)</li>
+</ol>
+<p><strong>争取学习</strong>  </p>
+<ol>
+<li>辅助技术栈</li>
+<li>热门模块和工程化</li>
+</ol>
+<p><strong>为我所用</strong><br>实战 | 算法 | 模式</p>
+<span id="more"></span>
+<p>@[TOC]</p>
+<h2 id="作用域-amp-上下文"><a href="#作用域-amp-上下文" class="headerlink" title="作用域 &amp; 上下文"></a>作用域 &amp; 上下文</h2><h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p><strong>面试题</strong>  </p>
+<pre><code class="js">    let a= &#39;global&#39;
+
+    function course()&#123;
+        let b = &#39;bbb&#39;
+
+        session()
+        fuction session()&#123;
+            let c = &#39;ccc&#39;
+
+            teacher()
+            fuction teacher()&#123;
+                // let d = &#39;ddd&#39;
+
+                //变量提升,提升范围在当前作用域下
+                //var存在声明提升和赋值提升，可以提前访问，结果为undefined
+                //let仅仅存在声明提升，不会给它初始化，更不会给他赋值，暂时性死区,真正赋值才会初始化
+                console.log(d)
+                var d = &#39;yy&#39;
+
+                console.log(d);//作用域生效
+                console.log(b);//作用域向上查找
+            &#125;
+        &#125;
+    &#125;
+
+    course()
+
+    // **************
+    //提升优先级 =&gt; 函数需要变量
+    console.log(xxx)
+    var xxx =123
+    function xxx()&#123;
+        console.log(&#39;functionXXX&#39;)
+    &#125;
+    console.log(xxx)
+
+    //打印结果：
+    // ƒ xxx()&#123;
+    //     console.log(&#39;functionXXX&#39;)
+    // &#125;
+
+    // 123
+    //等价于
+    1.var xxx
+    2.function xxx()&#123;&#125;
+    3.console.log(xxx)//xxx()
+    4.xxx=123
+    5.console.log(xxx)//123
+    //变量和函数同时提升时 
+    //提升维度：变量有限  执行维度：函数优先
+
+    // ********************
+    // 结论：函数是天然的作用域隔离方案 =&gt; 模块化基础
+</code></pre>
+<ul>
+<li><ol>
+<li>对于作用域链 我们可以用创建态去定位链条中的某一环</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>手动取消链条环甚至全局作用域的时候，可以利用块级作用域做性能优化 &#x3D;&gt; 性能优化</li>
+</ol>
+</li>
+</ul>
+<h3 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h3>]]></content>
       <categories>
         <category>前端开发</category>
       </categories>
