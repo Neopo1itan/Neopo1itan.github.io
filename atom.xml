@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-11-28T03:40:07.650Z</updated>
+  <updated>2023-12-04T04:57:11.002Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OOP与继承</title>
+    <link href="https://jjbond.cn/posts/3835.html"/>
+    <id>https://jjbond.cn/posts/3835.html</id>
+    <published>2023-12-04T01:06:37.000Z</published>
+    <updated>2023-12-04T04:57:11.002Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;2023-x2F-12-x2F-4-OOP与继承&quot;&gt;&lt;a href=&quot;#2023-x2F-12-x2F-4-OOP与继承&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;器：工具，JS，VUE，React…&lt;/li&gt;
+&lt;li&gt;术：用前端做了什么项目。React设计了什么，针对了什么问题，解决了什么&lt;/li&gt;
+&lt;li&gt;道：知识体系 -&amp;gt; 以道驭术&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="JavaScript" scheme="https://jjbond.cn/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>this指针/闭包/作用域</title>
