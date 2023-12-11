@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://ooo.0x0.ooo/2023/12/04/OATdaG.jpg">
 <meta property="og:image" content="https://ooo.0x0.ooo/2023/12/04/OAnbrC.jpg">
 <meta property="article:published_time" content="2023-12-04T01:06:37.000Z">
-<meta property="article:modified_time" content="2023-12-04T06:25:17.045Z">
+<meta property="article:modified_time" content="2023-12-04T06:50:05.370Z">
 <meta property="article:author" content="右眼">
 <meta property="article:tag" content="Web">
 <meta property="article:tag" content="JavaScript">
@@ -142,7 +142,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-regular fa-inbox fa-fw"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-regular fa-inbox fa-fw"></i>归档<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-rss">
@@ -230,7 +230,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-04 09:06:37 / 修改时间：14:25:17" itemprop="dateCreated datePublished" datetime="2023-12-04T09:06:37+08:00">2023-12-04</time>
+              <time title="创建时间：2023-12-04 09:06:37 / 修改时间：14:50:05" itemprop="dateCreated datePublished" datetime="2023-12-04T09:06:37+08:00">2023-12-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,7 +252,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.3k</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -277,7 +277,32 @@
 <li>道：知识体系 -&gt; 以道驭术</li>
 </ul>
 <span id="more"></span>
-
+<ul>
+<li><a href="#2023124-oop%E4%B8%8E%E7%BB%A7%E6%89%BF">2023&#x2F;12&#x2F;4 OOP与继承</a><ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1object-oriented-programming">什么是面向对象Object-oriented Programming</a><ul>
+<li><a href="#js%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1">JS中的面向对象</a><ul>
+<li><a href="#js%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95">JS中创建一个对象，有哪些方法？</a></li>
+<li><a href="#__proto__%E6%9C%AC%E8%B4%A8%E6%98%AF%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%85%B3%E7%B3%BB">__proto__本质是原型链关系</a></li>
+<li><a href="#new%E5%85%B3%E9%94%AE%E5%AD%97">new关键字</a></li>
+<li><a href="#new%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%B0%E5%BA%95%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88">new关键字到底干了什么？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%BB%A7%E6%89%BF">继承</a><ul>
+<li><a href="#%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF">原型继承</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%BB%A7%E6%89%BF">构造函数继承</a></li>
+<li><a href="#%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">组合继承</a></li>
+<li><a href="#%E7%BB%84%E5%90%88%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF">组合寄生式继承</a></li>
+</ul>
+</li>
+<li><a href="#qa">Q&amp;A</a><ul>
+<li><a href="#%E7%BB%84%E5%90%88%E5%AF%84%E7%94%9F%E5%92%8Cclass%E7%9A%84%E5%8C%BA%E5%88%AB">组合寄生和class的区别？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="什么是面向对象Object-oriented-Programming"><a href="#什么是面向对象Object-oriented-Programming" class="headerlink" title="什么是面向对象Object-oriented Programming"></a>什么是面向对象Object-oriented Programming</h2><p><strong>Java -&gt; 一切皆对象</strong></p>
 <p><strong>类</strong>:1.属性 2.方法<br><u>对象是类的实例化</u></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//面向过程</span></span><br><span class="line"><span class="title function_">init</span>();</span><br><span class="line"><span class="title function_">whitePlay</span>();</span><br><span class="line"><span class="title function_">repaint</span>();</span><br><span class="line"><span class="title function_">check</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//面向对象</span></span><br><span class="line"><span class="keyword">const</span> checkerBoard = <span class="keyword">new</span> <span class="title class_">CheckerBoard</span>();</span><br><span class="line"><span class="keyword">const</span> whitePlayer = <span class="keyword">new</span> <span class="title class_">Player</span>(<span class="string">&#x27;white&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> blackPlayer = <span class="keyword">new</span> <span class="title class_">Player</span>(<span class="string">&#x27;black&#x27;</span>);</span><br><span class="line"></span><br><span class="line">whitePlayer.<span class="title function_">start</span>()</span><br><span class="line">checkerBoard.<span class="title function_">repaint</span>()</span><br><span class="line">checkerBoard.<span class="title function_">check</span>()</span><br><span class="line"></span><br><span class="line">blackPlayer.<span class="title function_">start</span>()</span><br><span class="line"></span><br><span class="line">whitePlayer.<span class="title function_">rollback</span>()</span><br></pre></td></tr></table></figure>
@@ -367,7 +392,10 @@
     <a href="/posts/4503.html" rel="prev" title="this指针/闭包/作用域">
       <i class="fa fa-chevron-left"></i> this指针/闭包/作用域
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/posts/7303.html" rel="next" title="Promise规范及应用">
+      Promise规范及应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -449,7 +477,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -493,7 +521,7 @@
         <div class="widget-wrap">
           <div id="myCanvasContainer" class="widget tagcloud">
             <canvas width="250" height="250" id="resCanvas" style="width:100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li></ul>
             </canvas>
           </div>
         </div>
@@ -525,12 +553,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">25k</span>
+    <span title="站点总字数">31k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">23 分钟</span>
+    <span title="站点阅读时长">28 分钟</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动 -->

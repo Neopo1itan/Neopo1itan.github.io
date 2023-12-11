@@ -7,6 +7,193 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Promise规范及应用</title>
+    <url>/posts/7303.html</url>
+    <content><![CDATA[<h1 id="2023-x2F-12-x2F-11-Promise规范及应用"><a href="#2023-x2F-12-x2F-11-Promise规范及应用" class="headerlink" title="2023&#x2F;12&#x2F;11 Promise规范及应用"></a>2023&#x2F;12&#x2F;11 Promise规范及应用</h1><ul>
+<li><a href="#20231211-promise%E8%A7%84%E8%8C%83%E5%8F%8A%E5%BA%94%E7%94%A8">2023&#x2F;12&#x2F;11 Promise规范及应用</a><ul>
+<li><a href="#1-%E5%BC%82%E6%AD%A5%E7%9A%84%E9%80%BB%E8%BE%91">1 异步的逻辑</a></li>
+<li><a href="#2-%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8F%91%E5%B1%95">2 异步的发展</a><ul>
+<li><a href="#callback">Callback</a></li>
+<li><a href="#promise">Promise</a></li>
+<li><a href="#generator">Generator</a></li>
+<li><a href="#async--await">async &#x2F; await</a></li>
+</ul>
+</li>
+<li><a href="#3-promise-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3">3 Promise 深入理解</a><ul>
+<li><a href="#31-%E5%88%9D%E6%8E%A2promise">3.1 初探Promise</a><ul>
+<li><a href="#%E8%A7%84%E5%88%99">规则</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95">测试</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+</ul>
+</li>
+<li><a href="#32-promise%E8%BF%9B%E9%98%B6">3.2 Promise进阶</a><ul>
+<li><a href="#%E8%A7%84%E5%88%99-1">规则</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98-1">问题</a></li>
+</ul>
+</li>
+<li><a href="#33-promise%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8">3.3 Promise的链式调用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="1-异步的逻辑"><a href="#1-异步的逻辑" class="headerlink" title="1 异步的逻辑"></a>1 异步的逻辑</h2><p><img data-src="https://ooo.0x0.ooo/2023/12/07/OARqNM.jpg" alt="OARqNM.jpg"></p>
+<blockquote>
+<p><strong>宏任务</strong>：script（整体代码）、setTimeout、setInterval、setImmediate、I&#x2F;O、UI rendering<br><strong>微任务</strong>：promise、Object.observe、MutationObserver<br>promise.nextTick &gt; promise.then &gt; setTimeout &gt; setImmediate</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>);</span><br><span class="line">  <span class="title function_">resolve</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="comment">//5</span></span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-异步的发展"><a href="#2-异步的发展" class="headerlink" title="2 异步的发展"></a>2 异步的发展</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一般情况</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> bar = <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果调用后1000s再拿到bar该如何调用</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">cb:<span class="built_in">Function</span></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> bar = <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="title function_">cb</span>(bar)</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(res)=&gt;&#123;</span><br><span class="line">  <span class="comment">// res就是想要的bar</span></span><br><span class="line">  <span class="comment">//但是想基于bar的值以后再写新的逻辑只能在这里写</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h3><p>当没有Promise的时候，大量的异步逻辑回调，都依赖于callback</p>
+<blockquote>
+<p>在node中大量的:  </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&gt;fs.<span class="title function_">readFile</span>(<span class="string">&quot;a.text&quot;</span>,<span class="string">&quot;utf-8&quot;</span>,<span class="keyword">function</span>(<span class="params">err,data</span>)&#123;</span><br><span class="line"> fs.<span class="title function_">readFile</span>(<span class="string">&quot;a.text&quot;</span>,<span class="string">&quot;utf-8&quot;</span>,<span class="keyword">function</span>(<span class="params">err,data</span>)&#123;</span><br><span class="line">  fs.<span class="title function_">readFile</span>(<span class="string">&quot;a.text&quot;</span>,<span class="string">&quot;utf-8&quot;</span>,<span class="keyword">function</span>(<span class="params">err,data</span>)&#123;</span><br><span class="line">  &#125;)</span><br><span class="line"> &#125;)</span><br><span class="line">&gt;&#125;)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p>应用 -&gt; fetch,webpack</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">getData</span> = (<span class="params"></span>)=&gt; <span class="title function_">post</span>(<span class="string">&#x27;xxx/xxxx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">getData</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dataList</span> = res.<span class="property">data</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">post</span>(<span class="params">url</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="title function_">resolve</span>(&#123;<span class="attr">data</span>:[],url&#125;)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">gen</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">let</span> res = <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = <span class="title function_">gen</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>(<span class="string">&quot;over&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="async-x2F-await"><a href="#async-x2F-await" class="headerlink" title="async &#x2F; await"></a>async &#x2F; await</h3><p>异步编程的改进,提供一种不阻塞主线程的情况下,使用同步代码执行异步的逻辑</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">post</span>(<span class="params">url</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="title function_">resolve</span>(&#123;<span class="attr">data</span>:[],url&#125;)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getData</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; <span class="keyword">await</span> <span class="title function_">post</span>(<span class="string">&#x27;xxx/xxx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">run</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;starting&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">getData</span>()</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">run</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Promise-深入理解"><a href="#3-Promise-深入理解" class="headerlink" title="3 Promise 深入理解"></a>3 Promise 深入理解</h2><h3 id="3-1-初探Promise"><a href="#3-1-初探Promise" class="headerlink" title="3.1 初探Promise"></a>3.1 初探Promise</h3><h4 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h4><blockquote>
+<ul>
+<li><code>Promise</code>是一个构造函数</li>
+<li><code>Promise</code>接受一个函数作为参数,这个函数的参数式两个函数(<code>resolve</code>和<code>reject</code>)</li>
+<li><code>Promise</code>返回一个对象,这个对象包含一个then函数,这个<code>then</code>函数接受两个函数参数  </li>
+<li><code>Promise</code>的<strong>status</strong>:  </li>
+<li><ul>
+<li><code>pending</code></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>初始状态,可以改变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>一个<code>Promise</code>在<code>resolve</code>和<code>reject</code>之前都是这个状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>可以通过调用<code>resolve</code>或者<code>reject</code>方法,让这个<code>Promise</code>变成<code>fullfilled</code>或者<code>rejected</code>状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><code>fulfilled</code></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>不可变状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在<code>resolve</code>之后变成这个状态,拥有一个<code>value</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><code>rejected</code></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>不可变状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在<code>rejected</code>之后变成这个状态,拥有一个reason</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>then</code>函数</li>
+<li><ul>
+<li><strong>参数</strong></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><code>onFulfilled</code>,<code>onRejected</code>必须是函数类型,如果不是,应该被忽略:</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><code>onFulfilled</code>和<code>onRejected</code>的特性</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在promise变成<code>fulfilled</code> &#x2F; <code>rejected</code>状态的时候,应该调用<code>onFulfilled</code>或者<code>onRejected</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在promise变成<code>fulfilled</code> &#x2F; <code>rejected</code>状态之前,不应该调用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>只能调用一次</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Lpromise</span>(<span class="params">execute</span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;pending&quot;</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onFulfilled</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onRejected</span> = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">resolve</span> = value =&gt; &#123;</span><br><span class="line">    <span class="comment">// pending才是可变状态</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;fulfilled&quot;</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">reject</span> = reason =&gt; &#123;</span><br><span class="line">    <span class="comment">// pending才是可变状态</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;rejected&quot;</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">reason</span> = reason</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">execute</span>(resolve,reject);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Lpromise</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">then</span> = <span class="keyword">function</span>(<span class="params">onFulfilled,onRejected</span>)&#123;</span><br><span class="line">  onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">&quot;function&quot;</span> ? onFulfilled :<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">  onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">&quot;function&quot;</span> ? onRejected : <span class="function">(<span class="params">error</span>) =&gt;</span> &#123; <span class="keyword">throw</span> error &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;fulfilled&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onFulfilled</span>(<span class="variable language_">this</span>.<span class="property">value</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;rejected&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onRejected</span>(<span class="variable language_">this</span>.<span class="property">reason</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Lpromise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Lpromise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>没有输出了<br>因在执行<code>resolve</code>的时候,<code>then</code>已经执行过了<br>所以要在一个合适的时机,去执行<code>then</code>的<code>onFulfilled</code></p>
+<h3 id="3-2-Promise进阶"><a href="#3-2-Promise进阶" class="headerlink" title="3.2 Promise进阶"></a>3.2 Promise进阶</h3><h4 id="规则-1"><a href="#规则-1" class="headerlink" title="规则"></a>规则</h4><blockquote>
+<ul>
+<li><code>resolve</code>&#x2F;<code>reject</code>执行了之后，再执行<code>onfulfilled</code>和<code>onrejected</code></li>
+<li><code>onfulfilled</code>和<code>onrejected</code>应该是微任务</li>
+</ul>
+</blockquote>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Lpromise</span>(<span class="params">execute</span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;pending&quot;</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onFulfilledArray</span> = []</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onRejectedArray</span> = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">resolve</span> = value =&gt; &#123;</span><br><span class="line">    <span class="comment">//queueMicrotask 方法用于将一个微任务添加到微任务队列中。微任务是异步执行的任务，它们在宏任务之间插入。</span></span><br><span class="line">    <span class="title function_">queueMicrotask</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;fulfilled&quot;</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">onFulfilledArray</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">fn</span>=&gt;</span><span class="title function_">fn</span>(value))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">reject</span> = reason =&gt; &#123;</span><br><span class="line">    <span class="title function_">queueMicrotask</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;rejected&quot;</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">reason</span> = reason</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">onRejectedArray</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">fn</span>=&gt;</span><span class="title function_">fn</span>(reason))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">execute</span>(resolve,reject);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Lpromise</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">then</span> = <span class="keyword">function</span>(<span class="params">onFulfilled,onRejected</span>)&#123;</span><br><span class="line">  onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">&quot;function&quot;</span> ? onFulfilled :<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">  onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">&quot;function&quot;</span> ? onRejected : <span class="function">(<span class="params">error</span>) =&gt;</span> &#123; <span class="keyword">throw</span> error &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;fulfilled&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onFulfilled</span>(<span class="variable language_">this</span>.<span class="property">value</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;rejected&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onRejected</span>(<span class="variable language_">this</span>.<span class="property">reason</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">onFulfilledArray</span>.<span class="title function_">push</span>(onFulfilled)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">onRejectedArray</span>.<span class="title function_">push</span>(onRejected)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://ooo.0x0.ooo/2023/12/11/OAVYUi.png" alt="OAVYUi.png"></p>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>链式调用无法work</p>
+<h3 id="3-3-Promise的链式调用"><a href="#3-3-Promise的链式调用" class="headerlink" title="3.3 Promise的链式调用"></a>3.3 Promise的链式调用</h3>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>培训课</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OOP与继承</title>
     <url>/posts/3835.html</url>
     <content><![CDATA[<h1 id="2023-x2F-12-x2F-4-OOP与继承"><a href="#2023-x2F-12-x2F-4-OOP与继承" class="headerlink" title="2023&#x2F;12&#x2F;4 OOP与继承"></a>2023&#x2F;12&#x2F;4 OOP与继承</h1><ul>
@@ -15,7 +202,32 @@
 <li>道：知识体系 -&gt; 以道驭术</li>
 </ul>
 <span id="more"></span>
-
+<ul>
+<li><a href="#2023124-oop%E4%B8%8E%E7%BB%A7%E6%89%BF">2023&#x2F;12&#x2F;4 OOP与继承</a><ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1object-oriented-programming">什么是面向对象Object-oriented Programming</a><ul>
+<li><a href="#js%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1">JS中的面向对象</a><ul>
+<li><a href="#js%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%B3%95">JS中创建一个对象，有哪些方法？</a></li>
+<li><a href="#__proto__%E6%9C%AC%E8%B4%A8%E6%98%AF%E5%8E%9F%E5%9E%8B%E9%93%BE%E5%85%B3%E7%B3%BB">__proto__本质是原型链关系</a></li>
+<li><a href="#new%E5%85%B3%E9%94%AE%E5%AD%97">new关键字</a></li>
+<li><a href="#new%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%B0%E5%BA%95%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88">new关键字到底干了什么？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%BB%A7%E6%89%BF">继承</a><ul>
+<li><a href="#%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF">原型继承</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%BB%A7%E6%89%BF">构造函数继承</a></li>
+<li><a href="#%E7%BB%84%E5%90%88%E7%BB%A7%E6%89%BF">组合继承</a></li>
+<li><a href="#%E7%BB%84%E5%90%88%E5%AF%84%E7%94%9F%E5%BC%8F%E7%BB%A7%E6%89%BF">组合寄生式继承</a></li>
+</ul>
+</li>
+<li><a href="#qa">Q&amp;A</a><ul>
+<li><a href="#%E7%BB%84%E5%90%88%E5%AF%84%E7%94%9F%E5%92%8Cclass%E7%9A%84%E5%8C%BA%E5%88%AB">组合寄生和class的区别？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="什么是面向对象Object-oriented-Programming"><a href="#什么是面向对象Object-oriented-Programming" class="headerlink" title="什么是面向对象Object-oriented Programming"></a>什么是面向对象Object-oriented Programming</h2><p><strong>Java -&gt; 一切皆对象</strong></p>
 <p><strong>类</strong>:1.属性 2.方法<br><u>对象是类的实例化</u></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//面向过程</span></span><br><span class="line"><span class="title function_">init</span>();</span><br><span class="line"><span class="title function_">whitePlay</span>();</span><br><span class="line"><span class="title function_">repaint</span>();</span><br><span class="line"><span class="title function_">check</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">//面向对象</span></span><br><span class="line"><span class="keyword">const</span> checkerBoard = <span class="keyword">new</span> <span class="title class_">CheckerBoard</span>();</span><br><span class="line"><span class="keyword">const</span> whitePlayer = <span class="keyword">new</span> <span class="title class_">Player</span>(<span class="string">&#x27;white&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> blackPlayer = <span class="keyword">new</span> <span class="title class_">Player</span>(<span class="string">&#x27;black&#x27;</span>);</span><br><span class="line"></span><br><span class="line">whitePlayer.<span class="title function_">start</span>()</span><br><span class="line">checkerBoard.<span class="title function_">repaint</span>()</span><br><span class="line">checkerBoard.<span class="title function_">check</span>()</span><br><span class="line"></span><br><span class="line">blackPlayer.<span class="title function_">start</span>()</span><br><span class="line"></span><br><span class="line">whitePlayer.<span class="title function_">rollback</span>()</span><br></pre></td></tr></table></figure>
@@ -111,7 +323,7 @@
 </li>
 </ul>
 <h2 id="作用域-amp-上下文"><a href="#作用域-amp-上下文" class="headerlink" title="作用域 &amp; 上下文"></a>作用域 &amp; 上下文</h2><h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p><strong>面试题</strong>  </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    <span class="keyword">let</span> a= <span class="string">&#x27;global&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">course</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> b = <span class="string">&#x27;bbb&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="title function_">session</span>()</span><br><span class="line">        fuction <span class="title function_">session</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">let</span> c = <span class="string">&#x27;ccc&#x27;</span></span><br><span class="line"></span><br><span class="line">            <span class="title function_">teacher</span>()</span><br><span class="line">            fuction <span class="title function_">teacher</span>(<span class="params"></span>)&#123;</span><br><span class="line">                <span class="comment">// let d = &#x27;ddd&#x27;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//变量提升,提升范围在当前作用域下</span></span><br><span class="line">                <span class="comment">//var存在声明提升和赋值提升，可以提前访问，结果为undefined</span></span><br><span class="line">                <span class="comment">//let仅仅存在声明提升，不会给它初始化，更不会给他赋值，暂时性死区,真正赋值才会初始化</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(d)</span><br><span class="line">                <span class="keyword">var</span> d = <span class="string">&#x27;yy&#x27;</span></span><br><span class="line"></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(d);<span class="comment">//作用域生效</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(b);<span class="comment">//作用域向上查找</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">course</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// **************</span></span><br><span class="line">    <span class="comment">//提升优先级 =&gt; 函数需要变量</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xxx)</span><br><span class="line">    <span class="keyword">var</span> xxx =<span class="number">123</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">xxx</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;functionXXX&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xxx)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打印结果：</span></span><br><span class="line">    <span class="comment">// ƒ xxx()&#123;</span></span><br><span class="line">    <span class="comment">//     console.log(&#x27;functionXXX&#x27;)</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 123</span></span><br><span class="line">    <span class="comment">//等价于</span></span><br><span class="line">    <span class="comment">//1.var xxx</span></span><br><span class="line">    <span class="comment">//2.function xxx()&#123;&#125;</span></span><br><span class="line">    <span class="comment">//3.console.log(xxx)//xxx()</span></span><br><span class="line">    <span class="comment">//4.xxx=123</span></span><br><span class="line">    <span class="comment">//5.console.log(xxx)//123</span></span><br><span class="line">    <span class="comment">//变量和函数同时提升时 </span></span><br><span class="line">    <span class="comment">//提升维度：变量有限  执行维度：函数优先</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ********************</span></span><br><span class="line">    <span class="comment">// 结论：函数是天然的作用域隔离方案 =&gt; 模块化基础</span></span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 1. 对于作用域链 我们可以用创建态去定位链条中的某一环  </span></span><br><span class="line"><span class="string">- 2. 手动取消链条环甚至全局作用域的时候，可以利用块级作用域做性能优化 =&gt; 性能优化</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### this 上下文 context  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- this是在执行过程中动态读取的上下文所决定的</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">考察重点 - 各**使用态**中的指针指向</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#### 函数直接调用 - this指向是window  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;函数内部this&#x27;</span>,<span class="variable language_">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">foo</span>()<span class="comment">//打印window</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    <span class="keyword">let</span> a= <span class="string">&#x27;global&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">course</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> b = <span class="string">&#x27;bbb&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="title function_">session</span>()</span><br><span class="line">        fuction <span class="title function_">session</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">let</span> c = <span class="string">&#x27;ccc&#x27;</span></span><br><span class="line"></span><br><span class="line">            <span class="title function_">teacher</span>()</span><br><span class="line">            fuction <span class="title function_">teacher</span>(<span class="params"></span>)&#123;</span><br><span class="line">                <span class="comment">// let d = &#x27;ddd&#x27;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//变量提升,提升范围在当前作用域下</span></span><br><span class="line">                <span class="comment">//var存在声明提升和赋值提升，可以提前访问，结果为undefined</span></span><br><span class="line">                <span class="comment">//let仅仅存在声明提升，不会给它初始化，更不会给他赋值，暂时性死区,真正赋值才会初始化</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(d)</span><br><span class="line">                <span class="keyword">var</span> d = <span class="string">&#x27;yy&#x27;</span></span><br><span class="line"></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(d);<span class="comment">//作用域生效</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(b);<span class="comment">//作用域向上查找</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">course</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// **************</span></span><br><span class="line">    <span class="comment">//提升优先级 =&gt; 函数需要变量</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xxx)</span><br><span class="line">    <span class="keyword">var</span> xxx =<span class="number">123</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">xxx</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;functionXXX&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xxx)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打印结果：</span></span><br><span class="line">    <span class="comment">// ƒ xxx()&#123;</span></span><br><span class="line">    <span class="comment">//     console.log(&#x27;functionXXX&#x27;)</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 123</span></span><br><span class="line">    <span class="comment">//等价于</span></span><br><span class="line">    <span class="comment">//1.var xxx</span></span><br><span class="line">    <span class="comment">//2.function xxx()&#123;&#125;</span></span><br><span class="line">    <span class="comment">//3.console.log(xxx)//xxx()</span></span><br><span class="line">    <span class="comment">//4.xxx=123</span></span><br><span class="line">    <span class="comment">//5.console.log(xxx)//123</span></span><br><span class="line">    <span class="comment">//变量和函数同时提升时 </span></span><br><span class="line">    <span class="comment">//提升维度：变量优先  执行维度：函数优先</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ********************</span></span><br><span class="line">    <span class="comment">// 结论：函数是天然的作用域隔离方案 =&gt; 模块化基础</span></span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 1. 对于作用域链 我们可以用创建态去定位链条中的某一环  </span></span><br><span class="line"><span class="string">- 2. 手动取消链条环甚至全局作用域的时候，可以利用块级作用域做性能优化 =&gt; 性能优化</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### this 上下文 context  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- this是在执行过程中动态读取的上下文所决定的</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">考察重点 - 各**使用态**中的指针指向</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#### 函数直接调用 - this指向是window  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;函数内部this&#x27;</span>,<span class="variable language_">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">foo</span>()<span class="comment">//打印window</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="隐式绑定-this指向调用堆栈的上一级"><a href="#隐式绑定-this指向调用堆栈的上一级" class="headerlink" title="隐式绑定 - this指向调用堆栈的上一级"></a>隐式绑定 - this指向调用堆栈的上一级</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;隐式绑定&#x27;</span>,<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="number">1</span>,</span><br><span class="line">    fn</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="property">fn</span> = fn</span><br><span class="line">obj.<span class="title function_">fn</span>()<span class="comment">//打印这个obj,既 &#123;a:1,fn:f&#125;</span></span><br></pre></td></tr></table></figure>
 
