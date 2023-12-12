@@ -27,7 +27,7 @@
     "hexo-lazyload-image": "^1.0.13",
     "hexo-offline-popup": "^1.0.3",
     "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-marked": "^6.0.0",
+    "hexo-renderer-marked": "^6.2.0",
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-server": "^3.0.0",
     "hexo-symbols-count-time": "^0.7.1",
