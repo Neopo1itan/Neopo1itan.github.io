@@ -1,0 +1,362 @@
+@import '../Pisces/_layout';
+@import '../Pisces/_header';
+@import '../Pisces/_menu';
+@import '../Pisces/_sub-menu';
+@import '../Pisces/_sidebar';
+
+// ==================================================
+// Rewrite _layout.styl
+// ==================================================
+// Sidebar padding used as main desktop content padding for sidebar padding and post blocks padding too.
+
+// In `source/css/_variables/Pisces.styl` there are variable for main offset:
+// $sidebar-offset                   = 12px;
+// This value alse can be changed in main NexT config as `sidebar: offset: 12` option.
+
+// In `source/css/_variables/base.styl` there are variables for other resolutions:
+// $content-tablet-padding           = 10px;
+// $content-mobile-padding           = 8px;
+// P.S. If u want to change this paddings u may set this variables into `custom_file_path.variable` (in theme _config.yml).
+
+// So, it will 12px in Desktop, 10px in Tablets and 8px in Mobiles for all possible paddings.
+// ==================================================
+// Read values from NexT config and set they as local variables to use as string variables (in any CSS section).
+$use-seo = hexo-config('seo');
+
+// ==================================================
+// Desktop layout styles.
+// ==================================================
+// Post blocks.
+.content-wrap {
+  background: initial;
+  box-shadow: initial;
+  padding: initial;
+}
+
+// Post & Comments blocks.
+.post-block {
+  background: var(--content-bg-color);
+  border-radius: $border-radius-inner;
+  box-shadow: $box-shadow-inner;
+  padding: $content-desktop-padding;
+
+  // When blocks are siblings (homepage).
+  & + .post-block {
+    border-radius: $border-radius;
+    // Rewrite shadows & borders because all blocks have offsets.
+    box-shadow: $box-shadow;
+    margin-top: $sidebar-offset;
+  }
+}
+
+// Comments blocks.
+.comments {
+  background: var(--content-bg-color);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  margin-top: $sidebar-offset;
+  padding: $content-desktop-padding;
+}
+
+.tabs-comment {
+  margin-top: 1em;
+}
+
+// Top main padding from header to posts (default 40px).
+.content {
+  padding-top: initial;
+}
+
+// Post delimiters.
+.post-eof {
+  display: none;
+}
+
+// Pagination.
+.pagination {
+  .prev, .next, .page-number {
+    margin-bottom: initial;
+    top: initial;
+  }
+
+  background: var(--content-bg-color);
+  border-radius: $border-radius;
+  border-top: initial;
+  box-shadow: $box-shadow;
+  margin: $sidebar-offset 0 0;
+  padding: 10px 0 10px;
+}
+
+// Footer alignment.
+.main {
+  padding-bottom: initial;
+}
+
+.footer {
+  bottom: auto;
+}
+
+// Sub-menu(s).
+.sub-menu {
+  border-bottom: initial;
+  box-shadow: $box-shadow-inner;
+
+  // Adapt submenu(s) with post-blocks.
+  + .content .post-block {
+    box-shadow: $box-shadow;
+    margin-top: $sidebar-offset;
+
+    +tablet() {
+      margin-top: $content-tablet-padding;
+    }
+
+    +mobile() {
+      margin-top: $content-mobile-padding;
+    }
+  }
+}
+
+// ==================================================
+// Headers.
+// ==================================================
+.post-body {
+  h1, h2 {
+    border-bottom: 1px solid $body-bg-color;
+  }
+
+  h3 {
+    if ($use-seo) {
+      border-bottom: 1px solid $body-bg-color;
+    } else {
+      border-bottom: 1px dotted $body-bg-color;
+    }
+  }
+
+  h4 {
+    if ($use-seo) {
+      border-bottom: 1px dotted $body-bg-color;
+    }
+  }
+}
+
+// ==================================================
+// > 768px & < 991px
+// ==================================================
++tablet() {
+  // Posts in blocks.
+  .content-wrap {
+    padding: $content-tablet-padding;
+  }
+
+  .posts-expand {
+    // Components inside Posts.
+    .post-button {
+      margin-top: ($content-tablet-padding * 2);
+    }
+  }
+
+  .post-block {
+    border-radius: $border-radius;
+    // Rewrite shadows & borders because all blocks have offsets.
+    box-shadow: $box-shadow;
+    // Inside posts blocks content padding (default 40px).
+    padding: ($content-tablet-padding * 2);
+  }
+
+  // Only if blocks are siblings need bottom margin (homepage).
+  .post-block + .post-block {
+    margin-top: $content-tablet-padding;
+  }
+
+  .comments {
+    margin-top: $content-tablet-padding;
+    padding: $content-tablet-padding ($content-tablet-padding * 2);
+    // padding: initial;
+    // padding-top: $content-tablet-padding;
+  }
+
+  .pagination {
+    margin: $content-tablet-padding 0 0;
+  }
+}
+
+// ==================================================
+// < 767px
+// ==================================================
++mobile() {
+  // Posts in blocks.
+  .content-wrap {
+    padding: $content-mobile-padding;
+  }
+
+  .posts-expand {
+    // Components inside Posts.
+    .post-button {
+      margin: $sidebar-offset 0;
+    }
+  }
+
+  .post-block {
+    border-radius: $border-radius;
+    // Rewrite shadows & borders because all blocks have offsets.
+    box-shadow: $box-shadow;
+    min-height: auto;
+    // Inside posts blocks content padding (default 40px).
+    padding: $sidebar-offset;
+  }
+
+  // Only if blocks are siblings need bottom margin (homepage).
+  .post-block + .post-block {
+    margin-top: $content-mobile-padding;
+  }
+
+  .comments {
+    margin-top: $content-mobile-padding;
+    padding: 10px $sidebar-offset;
+  }
+
+  .pagination {
+    margin: $content-mobile-padding 0 0;
+  }
+}
+
+/*文章底部标签样式*/
+.posts-expand .post-tags a {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  font-family: 'Comic Sans MS', sans-serif;
+  transition: .2s ease-out;
+  padding: 3px 5px;
+  margin: 5px;
+  background: #f5f5f5;
+  border-bottom: none;
+  border-radius: 15px;
+
+  +mobile(){
+    padding: 1px 3px;
+    font-size: 8px;
+  }
+
+  &:hover {
+    background: rgba(100,154,182,0.902);
+    color: #fff;
+    -webkit-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    -moz-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+}
+
+/* 归档页样式 began */
+.page-archive .archive-page-counter {
+  font-size: 18px;
+  background-color: #49b1f5;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 8px;
+  color: #fff;
+  +mobile() {
+    font-size: 16px;
+  }
+}
+.my-post-time{
+  font-size: 11px;
+  position: absolute;
+  color: #fff;
+  background-color: #49b1f5;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 15px;
+}
+.mypost{
+  position: relative;
+  margin-bottom: 1rem;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+a.my-post-title-link:before{
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  content: "🎏";
+  margin-right: 5px;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: 15px;
+  line-height: 18px;
+}
+.my-post:hover{
+  transform: scale(1.1);
+  box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);
+  border-radius: 30px;
+  width: 400px;
+  padding: 1px 10px;
+  margin-left: 25px;
+  font-size: 16px;
+  transition-duration: 0.15s;
+  +mobile(){
+    width: 260px;
+    margin-left: 18px;
+  }
+  //display:flex;
+}
+a.my-post-title-link{
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  +mobile() {
+    font-size: 14px;
+  }
+}
+.my-post-title{
+  display: block;
+  margin-left: 4.5rem;
+  color: #4c4948;
+  text-decoration: none;
+  font-size: .8rem;
+  cursor: pointer;
+  +mobile() {
+    //margin-left: 4rem;
+  }
+}
+.my-post-header{
+  position: top;
+  margin-bottom: 1rem;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+//.my-post-title-link{
+//  font-size: 16px;
+//  font-weight: 500;
+//}
+.my-post-meta{
+  position: absolute;
+  color: #99a9bf;
+  width: 80px;
+  color: #114142;
+}
+div.post-block.tag .collection-title h2 {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #3f3f3f;
+  border-radius: 20px;
+  font-size: 22px;
+  background-color: #b4e8fa;
+  padding: 2px 15px;
+  letter-spacing: 1.5px;
+  box-sizing: border-box;
+  color: #3f3f3f;
+  display: inline-block;
+  margin: 10px 0 10px;
+  text-align: center;
+  +mobile(){
+    font-size: 18px;
+  }
+}
+/* 归档页样式 end */
