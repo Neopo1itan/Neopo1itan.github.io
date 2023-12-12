@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jjbond.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":false,"sidebar_rss":{"text":"RSS","icon":"fa fa-rss","color":"burlywood","link":"atom.xml"}},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="2023&#x2F;12&#x2F;11 Promise规范及应用 2023&#x2F;12&#x2F;11 Promise规范及应用 1 异步的逻辑 2 异步的发展 Callback Promise Generator async &#x2F; await   3 Promise 深入理解 3.1 初探Promise 规则 测试 问题   3.2 Promise进阶 规则 实现 问题   3.3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise规范及应用">
+<meta property="og:url" content="https://jjbond.cn/posts/7303.html">
+<meta property="og:site_name" content="吉吉邦德">
+<meta property="og:description" content="2023&#x2F;12&#x2F;11 Promise规范及应用 2023&#x2F;12&#x2F;11 Promise规范及应用 1 异步的逻辑 2 异步的发展 Callback Promise Generator async &#x2F; await   3 Promise 深入理解 3.1 初探Promise 规则 测试 问题   3.2 Promise进阶 规则 实现 问题   3.3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ooo.0x0.ooo/2023/12/07/OARqNM.jpg">
+<meta property="og:image" content="https://ooo.0x0.ooo/2023/12/11/OAVYUi.png">
+<meta property="article:published_time" content="2023-12-08T00:58:28.000Z">
+<meta property="article:modified_time" content="2023-12-12T03:10:10.074Z">
+<meta property="article:author" content="右眼">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ooo.0x0.ooo/2023/12/07/OARqNM.jpg">
+
+<link rel="canonical" href="https://jjbond.cn/posts/7303.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Promise规范及应用 | 吉吉邦德</title>
+
+  <!-- 球形气泡标签云 -->
+  <script type="text/javascript" src="/js/bubble.js"></script>
+
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="吉吉邦德" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+      <a target="_blank" rel="noopener" href="https://github.com/Neopo1itan/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#1f3e5c; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a ><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">吉吉邦德</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-regular fa-desktop fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-regular fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-regular fa-shapes fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-regular fa-inbox fa-fw"></i>归档<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/7303.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Promise规范及应用
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-08 08:58:28" itemprop="dateCreated datePublished" datetime="2023-12-08T08:58:28+08:00">2023-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-12 11:10:10" itemprop="dateModified" datetime="2023-12-12T11:10:10+08:00">2023-12-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="2023-x2F-12-x2F-11-Promise规范及应用"><a href="#2023-x2F-12-x2F-11-Promise规范及应用" class="headerlink" title="2023&#x2F;12&#x2F;11 Promise规范及应用"></a>2023&#x2F;12&#x2F;11 Promise规范及应用</h1><ul>
+<li><a href="#20231211-promise%E8%A7%84%E8%8C%83%E5%8F%8A%E5%BA%94%E7%94%A8">2023&#x2F;12&#x2F;11 Promise规范及应用</a><ul>
+<li><a href="#1-%E5%BC%82%E6%AD%A5%E7%9A%84%E9%80%BB%E8%BE%91">1 异步的逻辑</a></li>
+<li><a href="#2-%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8F%91%E5%B1%95">2 异步的发展</a><ul>
+<li><a href="#callback">Callback</a></li>
+<li><a href="#promise">Promise</a></li>
+<li><a href="#generator">Generator</a></li>
+<li><a href="#async--await">async &#x2F; await</a></li>
+</ul>
+</li>
+<li><a href="#3-promise-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3">3 Promise 深入理解</a><ul>
+<li><a href="#31-%E5%88%9D%E6%8E%A2promise">3.1 初探Promise</a><ul>
+<li><a href="#%E8%A7%84%E5%88%99">规则</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95">测试</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+</ul>
+</li>
+<li><a href="#32-promise%E8%BF%9B%E9%98%B6">3.2 Promise进阶</a><ul>
+<li><a href="#%E8%A7%84%E5%88%99-1">规则</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a></li>
+<li><a href="#%E9%97%AE%E9%A2%98-1">问题</a></li>
+</ul>
+</li>
+<li><a href="#33-promise%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8">3.3 Promise的链式调用</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+<h2 id="1-异步的逻辑"><a href="#1-异步的逻辑" class="headerlink" title="1 异步的逻辑"></a>1 异步的逻辑</h2><p><img data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://ooo.0x0.ooo/2023/12/07/OARqNM.jpg" alt="OARqNM.jpg"></p>
+<blockquote>
+<p><strong>宏任务</strong>：script（整体代码）、setTimeout、setInterval、setImmediate、I&#x2F;O、UI rendering<br><strong>微任务</strong>：promise、Object.observe、MutationObserver<br>promise.nextTick &gt; promise.then &gt; setTimeout &gt; setImmediate</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="keyword">function</span> (<span class="params">resolve</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>);</span><br><span class="line">  <span class="title function_">resolve</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="comment">//5</span></span><br><span class="line"><span class="comment">//4</span></span><br><span class="line"><span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-异步的发展"><a href="#2-异步的发展" class="headerlink" title="2 异步的发展"></a>2 异步的发展</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般情况</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> bar = <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果调用后1000s再拿到bar该如何调用</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params">cb:<span class="built_in">Function</span></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> bar = <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="title function_">cb</span>(bar)</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>(res)=&gt;&#123;</span><br><span class="line">  <span class="comment">// res就是想要的bar</span></span><br><span class="line">  <span class="comment">//但是想基于bar的值以后再写新的逻辑只能在这里写</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Callback"><a href="#Callback" class="headerlink" title="Callback"></a>Callback</h3><p>当没有Promise的时候，大量的异步逻辑回调，都依赖于callback</p>
+<blockquote>
+<p>在node中大量的:  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;fs.<span class="title function_">readFile</span>(<span class="string">&quot;a.text&quot;</span>,<span class="string">&quot;utf-8&quot;</span>,<span class="keyword">function</span>(<span class="params">err,data</span>)&#123;</span><br><span class="line"> fs.<span class="title function_">readFile</span>(<span class="string">&quot;a.text&quot;</span>,<span class="string">&quot;utf-8&quot;</span>,<span class="keyword">function</span>(<span class="params">err,data</span>)&#123;</span><br><span class="line">  fs.<span class="title function_">readFile</span>(<span class="string">&quot;a.text&quot;</span>,<span class="string">&quot;utf-8&quot;</span>,<span class="keyword">function</span>(<span class="params">err,data</span>)&#123;</span><br><span class="line">  &#125;)</span><br><span class="line"> &#125;)</span><br><span class="line">&gt;&#125;)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p>应用 -&gt; fetch,webpack</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">getData</span> = (<span class="params"></span>)=&gt; <span class="title function_">post</span>(<span class="string">&#x27;xxx/xxxx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="title function_">getData</span>().<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">dataList</span> = res.<span class="property">data</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">post</span>(<span class="params">url</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="title function_">resolve</span>(&#123;<span class="attr">data</span>:[],url&#125;)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">gen</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">let</span> res = <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = <span class="title function_">gen</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>())</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>(<span class="string">&quot;over&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="async-x2F-await"><a href="#async-x2F-await" class="headerlink" title="async &#x2F; await"></a>async &#x2F; await</h3><p>异步编程的改进,提供一种不阻塞主线程的情况下,使用同步代码执行异步的逻辑</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">post</span>(<span class="params">url</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="title function_">resolve</span>(&#123;<span class="attr">data</span>:[],url&#125;)</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getData</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; <span class="keyword">await</span> <span class="title function_">post</span>(<span class="string">&#x27;xxx/xxx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">run</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;starting&#x27;</span>)</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">getData</span>()</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">run</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Promise-深入理解"><a href="#3-Promise-深入理解" class="headerlink" title="3 Promise 深入理解"></a>3 Promise 深入理解</h2><h3 id="3-1-初探Promise"><a href="#3-1-初探Promise" class="headerlink" title="3.1 初探Promise"></a>3.1 初探Promise</h3><h4 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h4><blockquote>
+<ul>
+<li><code>Promise</code>是一个构造函数</li>
+<li><code>Promise</code>接受一个函数作为参数,这个函数的参数式两个函数(<code>resolve</code>和<code>reject</code>)</li>
+<li><code>Promise</code>返回一个对象,这个对象包含一个then函数,这个<code>then</code>函数接受两个函数参数  </li>
+<li><code>Promise</code>的<strong>status</strong>:  </li>
+<li><ul>
+<li><code>pending</code></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>初始状态,可以改变</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>一个<code>Promise</code>在<code>resolve</code>和<code>reject</code>之前都是这个状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>可以通过调用<code>resolve</code>或者<code>reject</code>方法,让这个<code>Promise</code>变成<code>fullfilled</code>或者<code>rejected</code>状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><code>fulfilled</code></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>不可变状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在<code>resolve</code>之后变成这个状态,拥有一个<code>value</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><code>rejected</code></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>不可变状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在<code>rejected</code>之后变成这个状态,拥有一个reason</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>then</code>函数</li>
+<li><ul>
+<li><strong>参数</strong></li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li><code>onFulfilled</code>,<code>onRejected</code>必须是函数类型,如果不是,应该被忽略:</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><code>onFulfilled</code>和<code>onRejected</code>的特性</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在promise变成<code>fulfilled</code> &#x2F; <code>rejected</code>状态的时候,应该调用<code>onFulfilled</code>或者<code>onRejected</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>在promise变成<code>fulfilled</code> &#x2F; <code>rejected</code>状态之前,不应该调用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>只能调用一次</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Lpromise</span>(<span class="params">execute</span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;pending&quot;</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onFulfilled</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onRejected</span> = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">resolve</span> = value =&gt; &#123;</span><br><span class="line">    <span class="comment">// pending才是可变状态</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;fulfilled&quot;</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">reject</span> = reason =&gt; &#123;</span><br><span class="line">    <span class="comment">// pending才是可变状态</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;rejected&quot;</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">reason</span> = reason</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">execute</span>(resolve,reject);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Lpromise</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">then</span> = <span class="keyword">function</span>(<span class="params">onFulfilled,onRejected</span>)&#123;</span><br><span class="line">  onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">&quot;function&quot;</span> ? onFulfilled :<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">  onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">&quot;function&quot;</span> ? onRejected : <span class="function">(<span class="params">error</span>) =&gt;</span> &#123; <span class="keyword">throw</span> error &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;fulfilled&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onFulfilled</span>(<span class="variable language_">this</span>.<span class="property">value</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;rejected&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onRejected</span>(<span class="variable language_">this</span>.<span class="property">reason</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Lpromise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Lpromise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">  &#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>没有输出了<br>因在执行<code>resolve</code>的时候,<code>then</code>已经执行过了<br>所以要在一个合适的时机,去执行<code>then</code>的<code>onFulfilled</code></p>
+<h3 id="3-2-Promise进阶"><a href="#3-2-Promise进阶" class="headerlink" title="3.2 Promise进阶"></a>3.2 Promise进阶</h3><h4 id="规则-1"><a href="#规则-1" class="headerlink" title="规则"></a>规则</h4><blockquote>
+<ul>
+<li><code>resolve</code>&#x2F;<code>reject</code>执行了之后，再执行<code>onfulfilled</code>和<code>onrejected</code></li>
+<li><code>onfulfilled</code>和<code>onrejected</code>应该是微任务</li>
+</ul>
+</blockquote>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Lpromise</span>(<span class="params">execute</span>)&#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;pending&quot;</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">null</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onFulfilledArray</span> = []</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onRejectedArray</span> = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">resolve</span> = value =&gt; &#123;</span><br><span class="line">    <span class="comment">//queueMicrotask 方法用于将一个微任务添加到微任务队列中。微任务是异步执行的任务，它们在宏任务之间插入。</span></span><br><span class="line">    <span class="title function_">queueMicrotask</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;fulfilled&quot;</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">onFulfilledArray</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">fn</span>=&gt;</span><span class="title function_">fn</span>(value))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">reject</span> = reason =&gt; &#123;</span><br><span class="line">    <span class="title function_">queueMicrotask</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">status</span> = <span class="string">&quot;rejected&quot;</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">reason</span> = reason</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">onRejectedArray</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">fn</span>=&gt;</span><span class="title function_">fn</span>(reason))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">execute</span>(resolve,reject);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Lpromise</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">then</span> = <span class="keyword">function</span>(<span class="params">onFulfilled,onRejected</span>)&#123;</span><br><span class="line">  onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">&quot;function&quot;</span> ? onFulfilled :<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; <span class="keyword">return</span> data &#125;</span><br><span class="line">  onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">&quot;function&quot;</span> ? onRejected : <span class="function">(<span class="params">error</span>) =&gt;</span> &#123; <span class="keyword">throw</span> error &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;fulfilled&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onFulfilled</span>(<span class="variable language_">this</span>.<span class="property">value</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;rejected&quot;</span>)&#123;</span><br><span class="line">    <span class="title function_">onRejected</span>(<span class="variable language_">this</span>.<span class="property">reason</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">onFulfilledArray</span>.<span class="title function_">push</span>(onFulfilled)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">onRejectedArray</span>.<span class="title function_">push</span>(onRejected)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://ooo.0x0.ooo/2023/12/11/OAVYUi.png" alt="OAVYUi.png"></p>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>链式调用无法work</p>
+<h3 id="3-3-Promise的链式调用"><a href="#3-3-Promise的链式调用" class="headerlink" title="3.3 Promise的链式调用"></a>3.3 Promise的链式调用</h3><blockquote>
+<p><strong>then</strong>方法应该返回一个promise<br><code>promise2 = promise1.then(onFulfilled,onRejected)</code></p>
+<ul>
+<li><code>onFulfilled</code>&#x2F;<code>onRejected</code>的执行结果为x 调用<code>resolvePromise</code></li>
+<li>如果<code>onFulfilled</code>&#x2F;<code>onRejected</code>执行时抛出异常，我们promise2需要被reject</li>
+<li>如果<code>onFulfilled</code>&#x2F;<code>onRejected</code>不是一个函数，promise2以promise1的valve或者reason触发fulfilled和rejected<br><strong>promise1中的onfulfilled返回了一个值，是then返回的promise2需要resolve的。</strong></li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">-------------本文结束<i class="fa fa-bolt"></i>感谢阅读-------------</div>
+    
+</div>
+      </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>右眼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jjbond.cn/posts/7303.html" title="Promise规范及应用">https://jjbond.cn/posts/7303.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3835.html" rel="prev" title="OOP与继承">
+      <i class="fa fa-chevron-left"></i> OOP与继承
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODY4My8zNTE0NQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2023-x2F-12-x2F-11-Promise%E8%A7%84%E8%8C%83%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">2023&#x2F;12&#x2F;11 Promise规范及应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BC%82%E6%AD%A5%E7%9A%84%E9%80%BB%E8%BE%91"><span class="nav-number">1.1.</span> <span class="nav-text">1 异步的逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8F%91%E5%B1%95"><span class="nav-number">1.2.</span> <span class="nav-text">2 异步的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Callback"><span class="nav-number">1.2.1.</span> <span class="nav-text">Callback</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">1.2.2.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generator"><span class="nav-number">1.2.3.</span> <span class="nav-text">Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-x2F-await"><span class="nav-number">1.2.4.</span> <span class="nav-text">async &#x2F; await</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Promise-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">3 Promise 深入理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%88%9D%E6%8E%A2Promise"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 初探Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Promise%E8%BF%9B%E9%98%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 Promise进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99-1"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AE%E9%A2%98-1"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Promise%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 Promise的链式调用</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="右眼"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">右眼</p>
+  <div class="site-description" itemprop="description">任何时间 任何地点<br>超级侦探 认真办案</div>
+</div>
+
+
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Neopo1itan/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Neopo1itan&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/youyan030" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;youyan030" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/id/youyanww/" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;youyanww&#x2F;" rel="noopener" target="_blank"><i class="fab fa-steam fa-fw"></i>Steam</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/895680/video" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;895680&#x2F;video" rel="noopener" target="_blank"><i class="fa fa-wheelchair fa-fw"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+      
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=320 height=240 src="//music.163.com/outchain/player?type=0&id=8545160772&auto=1&height=430"></iframe>
+    
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+          <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+          </div>
+        </div>
+    
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">右眼</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">31k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">28 分钟</span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动 -->
+    <span>个人网站&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp吉吉邦德</span>
+  </div>
+
+
+
+<!--添加运行时间--> 
+</br>
+<span id="sitetime"></span> 
+<script language=javascript> 
+  function siteTime(){ 
+    window.setTimeout("siteTime()", 1000); 
+    var seconds = 1000; 
+    var minutes = seconds * 60; 
+    var hours = minutes * 60; 
+    var days = hours * 24; 
+    var years = days * 365; 
+    var today = new Date(); 
+    var todayYear = today.getFullYear(); 
+    var todayMonth = today.getMonth()+1; 
+    var todayDate = today.getDate(); 
+    var todayHour = today.getHours(); 
+    var todayMinute = today.getMinutes(); 
+    var todaySecond = today.getSeconds(); 
+    /* 
+    Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳) 
+    year - 作为date对象的年份，为4位年份值 
+    month - 0-11之间的整数，做为date对象的月份 
+    day - 1-31之间的整数，做为date对象的天数 
+    hours - 0(午夜24点)-23之间的整数，做为date对象的小时数 
+    minutes - 0-59之间的整数，做为date对象的分钟数 
+    seconds - 0-59之间的整数，做为date对象的秒数 
+    microseconds - 0-999之间的整数，做为date对象的毫秒数 
+    */ 
+    var t1 = Date.UTC(2023,07,06,15,49,36); //北京时间2018-2-13 00:00:00 
+    var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond); 
+    var diff = t2-t1; 
+    var diffYears = Math.floor(diff/years); 
+    var diffDays = Math.floor((diff/days)-diffYears*365); 
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours); 
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes); 
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds); 
+    document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒"; 
+    } 
+    siteTime(); 
+</script> 
+<!--// 添加运行时间-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+    
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: true,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

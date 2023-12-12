@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>吉吉邦德</title>
+  <icon>https://jjbond.cn/icon.png</icon>
+  
+  <link href="https://jjbond.cn/atom.xml" rel="self"/>
+  
+  <link href="https://jjbond.cn/"/>
+  <updated>2023-12-12T03:10:10.074Z</updated>
+  <id>https://jjbond.cn/</id>
+  
+  <author>
+    <name>右眼</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Promise规范及应用</title>
+    <link href="https://jjbond.cn/posts/7303.html"/>
+    <id>https://jjbond.cn/posts/7303.html</id>
+    <published>2023-12-08T00:58:28.000Z</published>
+    <updated>2023-12-12T03:10:10.074Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;2023-x2F-12-x2F-11-Promise规范及应用&quot;&gt;&lt;a href=&quot;#2023-x2F-12-x2F-11-Promise规范及应用&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;11 Promise规范及应用&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;11 Promise规范及应用&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#20231211-promise%E8%A7%84%E8%8C%83%E5%8F%8A%E5%BA%94%E7%94%A8&quot;&gt;2023&amp;#x2F;12&amp;#x2F;11 Promise规范及应用&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#1-%E5%BC%82%E6%AD%A5%E7%9A%84%E9%80%BB%E8%BE%91&quot;&gt;1 异步的逻辑&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#2-%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8F%91%E5%B1%95&quot;&gt;2 异步的发展&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#callback&quot;&gt;Callback&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#promise&quot;&gt;Promise&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#generator&quot;&gt;Generator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#async--await&quot;&gt;async &amp;#x2F; await&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#3-promise-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3&quot;&gt;3 Promise 深入理解&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#31-%E5%88%9D%E6%8E%A2promise&quot;&gt;3.1 初探Promise&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E8%A7%84%E5%88%99&quot;&gt;规则&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E6%B5%8B%E8%AF%95&quot;&gt;测试&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E9%97%AE%E9%A2%98&quot;&gt;问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#32-promise%E8%BF%9B%E9%98%B6&quot;&gt;3.2 Promise进阶&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E8%A7%84%E5%88%99-1&quot;&gt;规则&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E5%AE%9E%E7%8E%B0&quot;&gt;实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E9%97%AE%E9%A2%98-1&quot;&gt;问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#33-promise%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8&quot;&gt;3.3 Promise的链式调用&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="JavaScript" scheme="https://jjbond.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OOP与继承</title>
+    <link href="https://jjbond.cn/posts/3835.html"/>
+    <id>https://jjbond.cn/posts/3835.html</id>
+    <published>2023-12-04T01:06:37.000Z</published>
+    <updated>2023-12-04T06:50:05.370Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;2023-x2F-12-x2F-4-OOP与继承&quot;&gt;&lt;a href=&quot;#2023-x2F-12-x2F-4-OOP与继承&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;器：工具，JS，VUE，React…&lt;/li&gt;
+&lt;li&gt;术：用前端做了什么项目。React设计了什么，针对了什么问题，解决了什么&lt;/li&gt;
+&lt;li&gt;道：知识体系 -&amp;gt; 以道驭术&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="JavaScript" scheme="https://jjbond.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>this指针/闭包/作用域</title>
+    <link href="https://jjbond.cn/posts/4503.html"/>
+    <id>https://jjbond.cn/posts/4503.html</id>
+    <published>2023-11-25T03:26:38.000Z</published>
+    <updated>2023-12-04T06:48:31.247Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域&quot;&gt;&lt;a href=&quot;#2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&quot;&gt;&lt;/a&gt;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;面试时必知必会&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;JS&lt;/li&gt;
+&lt;li&gt;布局&lt;/li&gt;
+&lt;li&gt;端(小程序、web)&lt;/li&gt;
+&lt;li&gt;技术栈(Vue、React)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;争取学习&lt;/strong&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;辅助技术栈&lt;/li&gt;
+&lt;li&gt;热门模块和工程化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;为我所用&lt;/strong&gt;&lt;br&gt;实战 | 算法 | 模式&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="JavaScript" scheme="https://jjbond.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么是Nginx?</title>
+    <link href="https://jjbond.cn/posts/36796.html"/>
+    <id>https://jjbond.cn/posts/36796.html</id>
+    <published>2023-09-12T02:10:42.000Z</published>
+    <updated>2023-11-27T06:29:55.632Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;什么是Nginx？&quot;&gt;&lt;a href=&quot;#什么是Nginx？&quot; class=&quot;headerlink&quot; title=&quot;什么是Nginx？&quot;&gt;&lt;/a&gt;什么是Nginx？&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Nginx&lt;/strong&gt;(engine x)</summary>
+        
+      
+    
+    
+    
+    <category term="服务器" scheme="https://jjbond.cn/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Python编写一个jd秒杀脚本</title>
+    <link href="https://jjbond.cn/posts/33264.html"/>
+    <id>https://jjbond.cn/posts/33264.html</id>
+    <published>2023-07-17T08:33:52.000Z</published>
+    <updated>2023-07-17T09:02:39.143Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;本文运用python的selenium模块来编写实现自动秒杀jd商品的脚本。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="自动化脚本" scheme="https://jjbond.cn/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/"/>
+    
+    
+    <category term="python" scheme="https://jjbond.cn/tags/python/"/>
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用nodejs编写一个淘宝秒杀脚本</title>
+    <link href="https://jjbond.cn/posts/958.html"/>
+    <id>https://jjbond.cn/posts/958.html</id>
+    <published>2023-07-13T09:11:38.000Z</published>
+    <updated>2023-08-01T03:57:26.074Z</updated>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;本文运用dayjs和selenium-webdriver两个包来编写自动秒杀taobao商品的脚本，功能单一简单。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="自动化脚本" scheme="https://jjbond.cn/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="nodejs" scheme="https://jjbond.cn/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用React Hooks搭建一个电影搜索App</title>
+    <link href="https://jjbond.cn/posts/13078.html"/>
+    <id>https://jjbond.cn/posts/13078.html</id>
+    <published>2023-07-12T07:55:35.000Z</published>
+    <updated>2023-07-13T08:33:12.188Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;这个 App 实现的效果是通过&lt;strong&gt;OMDB API&lt;/strong&gt;来搜索电影并将结果展现给用户。搭建这个 App 的过程能帮助我们很好的学习&lt;strong&gt;React Hooks&lt;/strong&gt;的用法，练习实际项目能帮助更快上手。&lt;/p&gt;
+&lt;h3 id=&quot;App-完成后的效果预览&quot;&gt;&lt;a href=&quot;#App-完成后的效果预览&quot; class=&quot;headerlink&quot; title=&quot;App 完成后的效果预览&quot;&gt;&lt;/a&gt;App 完成后的效果预览&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://imgtg.com/image/OzZvvc&quot;&gt;&lt;img data-src=&quot;https://i.imgtg.com/2023/07/13/OzZvvc.md.png&quot; alt=&quot;OzZvvc.md.png&quot;&gt;&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="React" scheme="https://jjbond.cn/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>youyan</title>
+    <link href="https://jjbond.cn/posts/2492.html"/>
+    <id>https://jjbond.cn/posts/2492.html</id>
+    <published>2023-07-06T07:48:11.000Z</published>
+    <updated>2023-11-25T03:49:46.539Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;图床测试&lt;br&gt;中等大小:&lt;a href=&quot;https://img.tg/image/OrPPjY&quot;&gt;&lt;img data-src=&quot;https://ooo.0x0.ooo/2023/11/25/OrPPjY.jpg&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
