@@ -323,4 +323,5 @@ Lpromise.prototype.then = function(onFulfilled,onRejected){
 >
 >- `onFulfilled`/`onRejected`的执行结果为x 调用`resolvePromise`
 >- 如果`onFulfilled`/`onRejected`执行时抛出异常，我们promise2需要被reject
->- 如果`onFulfilled`/`onRejected`不是一个函数，promise2以promise1的valve或者reason出发fulfilled和rejected
+>- 如果`onFulfilled`/`onRejected`不是一个函数，promise2以promise1的valve或者reason触发fulfilled和rejected  
+>**promise1中的onfulfilled返回了一个值，是then返回的promise2需要resolve的。**
