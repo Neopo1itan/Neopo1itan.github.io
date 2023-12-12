@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-12-12T11:03:39.067Z</updated>
+  <updated>2023-12-12T11:07:11.854Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://jjbond.cn/posts/7303.html"/>
     <id>https://jjbond.cn/posts/7303.html</id>
     <published>2023-12-08T00:58:28.000Z</published>
-    <updated>2023-12-12T11:03:39.067Z</updated>
+    <updated>2023-12-12T11:07:11.854Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;2023-x2F-12-x2F-11-Promise-规范及应用&quot;&gt;&lt;a href=&quot;#2023-x2F-12-x2F-11-Promise-规范及应用&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&lt;/h1&gt;&lt;ul&gt;
@@ -52,6 +52,11 @@
 &lt;li&gt;&lt;a href=&quot;#%E5%AE%9E%E7%8E%B0-1&quot;&gt;实现&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#%E9%80%89%E8%AF%BBresolvepromise-%E8%A7%84%E8%8C%83&quot;&gt;选读：resolvePromise 规范&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#%E5%AE%9E%E7%8E%B0-2&quot;&gt;实现&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#34-promise-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3&quot;&gt;3.4 Promise 的一些理解&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E9%93%BE%E5%BC%8F%E6%89%A7%E8%A1%8C&quot;&gt;链式执行&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91&quot;&gt;手动触发&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
