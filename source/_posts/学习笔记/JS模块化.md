@@ -1,12 +1,13 @@
 ---
 title: JS模块化
-date: 2024-01-05 16:55:59
 categories:
   - 前端开发
   - 培训课
 tags:
   - Web
   - JavaScript
+abbrlink: 58364
+date: 2024-01-05 16:55:59
 ---
 
 # JS 模块化
