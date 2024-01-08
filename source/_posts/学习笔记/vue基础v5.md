@@ -1,11 +1,19 @@
 ---
-title: vue基础v5
+
+title: vue 基础 v5
 abbrlink: 45434
 date: 2024-01-06 20:07:53
 tags:
+
+- Web
+- JavaScript
+  categories:
+- 前端开发
+- 培训课
+
 ---
 
-<!--more-->
+<!-- more -->
 
 - [vue 基础](#vue-基础)
   - [理论](#理论)
