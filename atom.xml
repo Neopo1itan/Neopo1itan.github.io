@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2023-12-12T11:07:11.854Z</updated>
+  <updated>2024-01-08T00:46:38.946Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue基础v5</title>
+    <link href="https://jjbond.cn/posts/45434.html"/>
+    <id>https://jjbond.cn/posts/45434.html</id>
+    <published>2024-01-06T12:07:53.000Z</published>
+    <updated>2024-01-08T00:46:38.946Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#vue-%E5%9F%BA%E7%A1%80&quot;&gt;vue 基础&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E7%90%86%E8%AE%BA&quot;&gt;理论&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS模块化</title>
+    <link href="https://jjbond.cn/posts/58364.html"/>
+    <id>https://jjbond.cn/posts/58364.html</id>
+    <published>2024-01-05T08:55:59.000Z</published>
+    <updated>2024-01-08T00:46:38.946Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;JS-模块化&quot;&gt;&lt;a href=&quot;#JS-模块化&quot; class=&quot;headerlink&quot; title=&quot;JS 模块化&quot;&gt;&lt;/a&gt;JS 模块化&lt;/h1&gt;&lt;p&gt;本节课是基础和工程化之间的&lt;strong&gt;模块化&lt;/strong&gt;&lt;br&gt;基础 &amp;#x3D;&amp;gt; &lt;em&gt;模块化&lt;/em&gt; &amp;#x3D;&amp;gt; 工程化&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="JavaScript" scheme="https://jjbond.cn/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>Promise规范及应用</title>

@@ -7,6 +7,251 @@
 ]]></content>
   </entry>
   <entry>
+    <title>vue基础v5</title>
+    <url>/posts/45434.html</url>
+    <content><![CDATA[<span id="more"></span>
+
+<ul>
+<li><a href="#vue-%E5%9F%BA%E7%A1%80">vue 基础</a><ul>
+<li><a href="#%E7%90%86%E8%AE%BA">理论</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9-mvvm-%E7%9A%84%E4%BA%86%E8%A7%A3">面试题：对 MVVM 的了解</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%99%E6%B3%95">写法</a><ul>
+<li><a href="#vue-%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-mvvm-%E5%BC%80%E5%8F%91">vue 如何利用 mvvm 开发?</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98vue-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">面试题：vue 的生命周期</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%91%E5%90%AC">监听</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98computed-%E5%92%8C-watch">面试题：computed 和 watch</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8C%87%E4%BB%A4--%E6%9D%A1%E4%BB%B6">指令 &amp; 条件</a><ul>
+<li><a href="#%E6%9D%A1%E4%BB%B6">条件</a></li>
+<li><a href="#v-for--v-if-%E5%9C%A8%E5%90%8C%E4%B8%80%E8%8A%82%E7%82%B9%E4%BD%BF%E7%94%A8%E6%97%B6">v-for &amp; v-if 在同一节点使用时</a></li>
+<li><a href="#v-model-v-once-v-text-v-html-v-bind">v-model v-once v-text v-html v-bind</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4">自定义指令</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E4%BB%B6---v-on">事件 - v-on</a><ul>
+<li><a href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6">修饰符</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%AE%BE%E8%AE%A1---%E4%B8%BA%E4%BD%95-vue-%E6%8A%8A%E4%BA%8B%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%9C%A8%E6%A8%A1%E6%9D%BF%E4%B8%8A%E8%80%8C%E4%B8%8D%E6%98%AF-js-%E4%B8%AD">事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E4%BB%B6%E5%8C%96">组件化</a><ul>
+<li><a href="#%E4%B8%80%E8%88%AC%E7%BB%84%E4%BB%B6--%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6--%E6%8F%92%E4%BB%B6">一般组件 + 动态组件 &#x3D;&gt; 插件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="vue-基础"><a href="#vue-基础" class="headerlink" title="vue 基础"></a>vue 基础</h2><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><h4 id="面试题：对-MVVM-的了解"><a href="#面试题：对-MVVM-的了解" class="headerlink" title="面试题：对 MVVM 的了解"></a>面试题：对 MVVM 的了解</h4><ul>
+<li>Web 应用发展史<ol>
+<li>语义化模板</li>
+<li>MVC - model view controller</li>
+<li>MVVM - model view viewModel<ol>
+<li>数据本身会通过 model 挂在在 viewModel，vm 会劫持数据并同步至渲染层</li>
+<li>视图层发生外部变化，会同样回调给 vw，返回给 model</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><h4 id="vue-如何利用-mvvm-开发"><a href="#vue-如何利用-mvvm-开发" class="headerlink" title="vue 如何利用 mvvm 开发?"></a>vue 如何利用 mvvm 开发?</h4><p>数据双向绑定</p>
+<ol>
+<li>利用花括号，构筑了数据与 vm 的双向绑定关系 &#x3D;》 buildTemplate | compile</li>
+<li>通过视图绑定监听事件来处理数据 &#x3D;》v-model &#x3D;&#x3D;&#x3D; :value @input &#x3D;&gt; 节点处理流程</li>
+</ol>
+<p><strong>buildTemplate &#x3D;》 render()</strong></p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h4 id="面试题：vue-的生命周期"><a href="#面试题：vue-的生命周期" class="headerlink" title="面试题：vue 的生命周期"></a>面试题：vue 的生命周期</h4><p>创建阶段: beforeCreate &#x3D;&gt; created &#x3D;&gt; beforeMount &#x3D;&gt; mounted</p>
+<p>更新阶段: beforeUpdate &#x3D;&gt; updated</p>
+<p>销毁阶段: beforeDestroy &#x3D;》 destroyed</p>
+<p><font color=LightSkyBlue>beforeCreate</font>： new Vue() - 创建实例阶段<br><font color=LightSkyBlue>created</font>: data | props | method | computed - 数据创建</p>
+<p><font color=orange>beforeMount</font>: vDom(虚拟节点) - 数据操作以及虚拟 dom 的变化 但不能涉及 dom<br><font color=orange>mounted</font>: Dom 更新</p>
+<p><font color=CadetBlue>beforeUpdate</font>： vDom - 完成更新，dom 还未更新<br><font color=CadetBlue>updated</font>： dom 完成更新 &#x3D;》 谨慎做更新数据操作</p>
+<p><font color=Green>beforeDestroy</font>：实例尚未销毁 - 清空 eventBus setTimeOut<br><font color=Green>destroyed</font>：完全销毁</p>
+<p>补充：key &#x3D;》 diff &#x3D;》 dom diff &#x3D;》 节点 id</p>
+<h3 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h3><h4 id="面试题：computed-和-watch"><a href="#面试题：computed-和-watch" class="headerlink" title="面试题：computed 和 watch"></a>面试题：computed 和 watch</h4><p>相同点：</p>
+<ol>
+<li><strong>基于 vue 的依赖收集机制</strong>进行采集</li>
+<li>都是被依赖的变化所触发，从而进行处理回调</li>
+</ol>
+<p>不同点：</p>
+<ol>
+<li>入&#x2F;出：computed 多入单出，watch 单入多出</li>
+<li>性能：computed 存在缓存，不收调用次数的性能损耗；watch 只在监听的值变化时，不包含生成 immediate</li>
+<li>computed 关注结果，watch 关注过程</li>
+</ol>
+<p>问：computed 缓存和响应式如何实现的?</p>
+<p>完整过程：</p>
+<ol>
+<li>流程：new Vue() &#x3D;&gt; 初始化 computed(initState) &#x3D;&gt; createComputedGetter(key) &#x3D;&gt; mount</li>
+<li>劫持：getter 属性变化区分是否是最新状态 dirty</li>
+<li>target depend &lt;&#x3D;&#x3D;&gt; 原值和依赖之间的关系链</li>
+</ol>
+<h3 id="指令-条件"><a href="#指令-条件" class="headerlink" title="指令 &amp; 条件"></a>指令 &amp; 条件</h3><h4 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h4><p>v-if | v-show<br>v-else | v-else-if</p>
+<p>v-for</p>
+<h4 id="v-for-v-if-在同一节点使用时"><a href="#v-for-v-if-在同一节点使用时" class="headerlink" title="v-for &amp; v-if 在同一节点使用时"></a>v-for &amp; v-if 在同一节点使用时</h4><p>vue2.x v-for 会优先作用<br>vue3.x v-if 总是优先于 v-for</p>
+<h4 id="v-model-v-once-v-text-v-html-v-bind"><a href="#v-model-v-once-v-text-v-html-v-bind" class="headerlink" title="v-model v-once v-text v-html v-bind"></a>v-model v-once v-text v-html v-bind</h4><h4 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h4><h3 id="事件-v-on"><a href="#事件-v-on" class="headerlink" title="事件 - v-on"></a>事件 - v-on</h3><h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>.stop .prevent .once .capture .self .passive</p>
+<h4 id="事件的设计-为何-vue-把事件设计在模板上而不是-js-中"><a href="#事件的设计-为何-vue-把事件设计在模板上而不是-js-中" class="headerlink" title="事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中"></a>事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</h4><ol>
+<li>模板定位视图绑定的触发源 + 触发源寻找触发事件的逻辑 —— 方便定位</li>
+<li>js 与视图绑定解耦 —— 更便于测试隔离</li>
+<li>vm 销毁，自动解绑事件 —— 便于回收</li>
+</ol>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><h4 id="一般组件-动态组件-插件"><a href="#一般组件-动态组件-插件" class="headerlink" title="一般组件 + 动态组件 &#x3D;&gt; 插件"></a>一般组件 + 动态组件 &#x3D;&gt; 插件</h4>]]></content>
+  </entry>
+  <entry>
+    <title>JS模块化</title>
+    <url>/posts/58364.html</url>
+    <content><![CDATA[<h1 id="JS-模块化"><a href="#JS-模块化" class="headerlink" title="JS 模块化"></a>JS 模块化</h1><p>本节课是基础和工程化之间的<strong>模块化</strong><br>基础 &#x3D;&gt; <em>模块化</em> &#x3D;&gt; 工程化</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="#js-%E6%A8%A1%E5%9D%97%E5%8C%96">JS 模块化</a><ul>
+<li><a href="#1-%E5%8E%86%E5%8F%B2">1. 历史</a><ul>
+<li><a href="#%E8%83%8C%E6%99%AF">背景</a></li>
+<li><a href="#%E5%B9%BC%E5%B9%B4%E6%9C%9F%E6%97%A0%E6%A8%A1%E5%9D%97%E5%8C%96">幼年期：无模块化</a></li>
+<li><a href="#%E6%88%90%E9%95%BF%E6%9C%9F%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E9%9B%8F%E5%BD%A2---iife%E8%AF%AD%E6%B3%95%E4%BE%A7%E7%9A%84%E5%A4%84%E7%90%86">成长期：模块化的雏形 - IIFE(语法侧的处理)</a><ul>
+<li><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%8A%8A%E6%8E%A7">作用域的把控</a></li>
+</ul>
+</li>
+<li><a href="#%E6%88%90%E7%86%9F%E6%9C%9F">成熟期</a><ul>
+<li><a href="#cjs---commonjs">Cjs - commonjs</a></li>
+<li><a href="#amd">AMD</a></li>
+<li><a href="#cmd-%E8%A7%84%E8%8C%83">CMD 规范</a></li>
+<li><a href="#%E5%AE%8C%E5%85%A8%E4%BD%93-esm--es-module">完全体 ESM &#x3D;&gt; ES Module</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B">函数式编程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-历史"><a href="#1-历史" class="headerlink" title="1. 历史"></a>1. 历史</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>JS 最开始定位：简单页面设计支撑 —— 页面的动画+表单提交<br>并无模块化 or 命名空间基础</p>
+<p>JS 的模块化需求日益增长</p>
+<h3 id="幼年期：无模块化"><a href="#幼年期：无模块化" class="headerlink" title="幼年期：无模块化"></a>幼年期：无模块化</h3><ol>
+<li>开始需要页面加载不同的 js 库：动画库、表单库、格式化工具</li>
+<li>多种 js 文件被分在不同的文件中</li>
+<li>不同的文件又被同一个模板引用</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.html</span></span><br><span class="line">&lt;script src=<span class="string">&#x27;tools.js&#x27;</span>&gt;&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;map.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="comment">// 主</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&#x27;main.js&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>追问<br>script 标签的两个参数- async &amp; defer</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">&#x27;tools.js&#x27;</span> type=<span class="string">&#x27;text/javascript&#x27;</span> <span class="keyword">async</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>总结：<br><strong>普通</strong>：解析到标签，立刻 pending，并且下载执行<br><strong>defer</strong>：解析到标签，开始异步下载，继续往后进行，完成之后开始执行<br><strong>async</strong>：解析到标签，开始异步下载，下载完成之后立刻执行并且阻塞往后解析，执行完成后再继续向下</p>
+</blockquote>
+<p>问题导向：浏览器渲染原理、同步异步原理、模块化加载原理</p>
+<p>问题出现</p>
+<ul>
+<li>污染全局作用域 &#x3D;&gt; 不利于大型项目的开发与多人团队的构建</li>
+</ul>
+<h3 id="成长期：模块化的雏形-IIFE-语法侧的处理"><a href="#成长期：模块化的雏形-IIFE-语法侧的处理" class="headerlink" title="成长期：模块化的雏形 - IIFE(语法侧的处理)"></a>成长期：模块化的雏形 - IIFE(语法侧的处理)</h3><h4 id="作用域的把控"><a href="#作用域的把控" class="headerlink" title="作用域的把控"></a>作用域的把控</h4><p>举例子：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 全局变量</span></span><br><span class="line"><span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码块01</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">increase</span> = (<span class="params"></span>) =&gt; ++count</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码块02</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reset</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">	count = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">increase</span>()</span><br><span class="line"><span class="title function_">reset</span>()</span><br></pre></td></tr></table></figure>
+
+<p>利用函数的独立作用域</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">;(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p><strong>定义的函数 + 立即执行 &#x3D;&gt; 独立的空间</strong><br>初步实现了一个<strong>基础模块</strong></p>
+<p>尝试定义一个简单的模块</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">cosnt <span class="variable language_">module</span> =(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> count =<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    <span class="attr">increase</span>:<span class="function">()=&gt;</span>++count;</span><br><span class="line">    <span class="attr">reset</span>:<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      count =<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="variable language_">module</span>.<span class="title function_">increase</span>();</span><br><span class="line"><span class="variable language_">module</span>.<span class="title function_">reset</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 追问：有外部依赖的情况如何优化处理</span></span><br><span class="line"><span class="keyword">const</span> iifeModule = (<span class="function">(<span class="params">dependencyModule,dependencyModule2</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> count =<span class="number">0</span>;</span><br><span class="line">  <span class="comment">// dependencyModule,dependencyModule2..</span></span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    <span class="attr">increase</span>:<span class="function">()=&gt;</span>++count;</span><br><span class="line">    <span class="attr">reset</span>:<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      count =<span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(dependencyModule,dependencyModule2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 揭示模式</span></span><br><span class="line"><span class="keyword">const</span> iifeModule = (<span class="function">(<span class="params">dependencyModule,dependencyModule2</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> count =<span class="number">0</span>;</span><br><span class="line">  <span class="comment">// dependencyModule,dependencyModule2..</span></span><br><span class="line">  <span class="comment">// 代码块01</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">increase</span> = (<span class="params"></span>) =&gt; ++count;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码块02</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reset</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    increase,</span><br><span class="line">    reset</span><br><span class="line">&#125;)(dependencyModule,dependencyModule2);</span><br><span class="line"><span class="comment">// 返回的是能力 = 使用方的传参 + 本身的逻辑能力 + 依赖能力</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>面试方向</li>
+<li><ol>
+<li>深入模块化实现</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>转向框架 jquery vue react 模块组件的实现细节，以及框架原理特征</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>转向设计模式 - 注重模块化的设计</li>
+</ol>
+</li>
+</ul>
+<h3 id="成熟期"><a href="#成熟期" class="headerlink" title="成熟期"></a>成熟期</h3><h4 id="Cjs-commonjs"><a href="#Cjs-commonjs" class="headerlink" title="Cjs - commonjs"></a>Cjs - commonjs</h4><blockquote>
+<p>node.js 指定的标准<br>特征：</p>
+</blockquote>
+<ul>
+<li>通过 module + export 去外暴露接口</li>
+<li>通过 require 去调用其他模块</li>
+</ul>
+<p>模块的<br>dep.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入部分</span></span><br><span class="line"><span class="keyword">const</span> dependencyModule=<span class="built_in">require</span>(<span class="string">&#x27;..dependencyModule&#x27;</span>)</span><br><span class="line"><span class="comment">// 核心逻辑</span></span><br><span class="line"><span class="keyword">let</span> count =<span class="number">0</span>;</span><br><span class="line">  <span class="comment">// dependencyModule,dependencyModule2..</span></span><br><span class="line">  <span class="comment">// 代码块01</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">increase</span> = (<span class="params"></span>) =&gt; ++count;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码块02</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reset</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 暴露接口部分</span></span><br><span class="line"><span class="comment">//type1</span></span><br><span class="line"><span class="keyword">export</span>.<span class="property">increase</span> = increase;</span><br><span class="line"><span class="keyword">export</span>.<span class="property">reset</span> = reset;</span><br><span class="line"></span><br><span class="line"><span class="comment">// type2</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>=&#123;</span><br><span class="line">  increase,</span><br><span class="line">  reset</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;&#x2F; 引入并使用</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; increase, reset &#125; = <span class="built_in">require</span>(<span class="string">&#x27;dep.js&#x27;</span>)</span><br><span class="line"><span class="title function_">increase</span>()</span><br><span class="line"><span class="title function_">reset</span>()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>优点：<br>Cjs 服务侧的角度解决了依赖全局污染的问题 + 完全在写法上也实现了主观感受上的模块化</li>
+<li>缺点：<br>针对服务端 &#x3D;&gt; 异步</li>
+</ul>
+</blockquote>
+<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h4><blockquote>
+<p>通过异步加载 + 允许定制回调函数<br>经典的实现框架：<strong>require.js</strong></p>
+</blockquote>
+<p>新增定义方式</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 通过define定义一个模块，然后用require去加载</span></span><br><span class="line"><span class="title function_">define</span>(id, [depends], callback)</span><br><span class="line"><span class="title function_">requiere</span>([<span class="variable language_">module</span>], callback)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">define</span>(<span class="string">&#x27;amdModule&#x27;</span>, [<span class="string">&#x27;dependencyModule1&#x27;</span>, <span class="string">&#x27;dependencyModule2&#x27;</span>], <span class="function">(<span class="params">dependencyModule1, dependencyModule2</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// 业务逻辑</span></span><br><span class="line">	<span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line">	<span class="comment">// dependencyModule,dependencyModule2..</span></span><br><span class="line">	<span class="comment">// 代码块01</span></span><br><span class="line">	<span class="keyword">const</span> <span class="title function_">increase</span> = (<span class="params"></span>) =&gt; ++count</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 代码块02</span></span><br><span class="line">	<span class="keyword">const</span> <span class="title function_">reset</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">		count = <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">require</span>([<span class="string">&#x27;amdModule&#x27;</span>], <span class="function">(<span class="params">amdModule</span>) =&gt;</span> &#123;</span><br><span class="line">	amdModule.<span class="title function_">increase</span>()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>面试题</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">define</span>(<span class="string">&#x27;amdModule&#x27;</span>, [], <span class="function">(<span class="params"><span class="built_in">require</span></span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> dependencyModule1 = <span class="built_in">require</span>(<span class="string">&#x27;./dependencyModule1&#x27;</span>)</span><br><span class="line">	<span class="keyword">const</span> dependencyModule2 = <span class="built_in">require</span>(<span class="string">&#x27;./dependencyModule2&#x27;</span>)</span><br><span class="line">	<span class="comment">// 逻辑...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>面试</strong>：区分 Cjs 和 AMD？手写兼容 Cjs 和 AMD 的模块</p>
+<p><strong>UMD</strong><br>优点：解决了服务、客户端异步动态依赖问题<br>缺点：引入成本，未考虑按需加载</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="title function_">define</span>(<span class="string">&quot;amdModule&quot;</span>, [<span class="string">&quot;dependencyModule1&quot;</span>, <span class="string">&quot;dependencyModule2&quot;</span>], <span class="function">(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  dependencyModule1,</span></span></span><br><span class="line"><span class="params"><span class="function">  dependencyModule2</span></span></span><br><span class="line"><span class="params"><span class="function"></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 业务逻辑</span></span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">// dependencyModule,dependencyModule2..</span></span><br><span class="line">  <span class="comment">// 代码块01</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">increase</span> = (<span class="params"></span>) =&gt; ++count;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 代码块02</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">reset</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">export</span>.<span class="property">increase</span> =increase;</span><br><span class="line">  <span class="keyword">export</span>.<span class="property">reset</span> = reset;</span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    increase,</span><br><span class="line">    reset</span><br><span class="line">  &#125;</span><br><span class="line">&#125;))(</span><br><span class="line">  <span class="comment">// 目标：一次去定位区分Cjs和AMD</span></span><br><span class="line">  <span class="comment">// 1. Cjs factory</span></span><br><span class="line">  <span class="comment">// 2. module module.exports</span></span><br><span class="line">  <span class="comment">// 3. define</span></span><br><span class="line">  <span class="keyword">typeof</span> <span class="variable language_">module</span> === <span class="string">&#x27;Object&#x27;</span> &amp;&amp; <span class="variable language_">module</span>.<span class="property">exports</span> &amp;&amp; <span class="keyword">typeof</span> define !== <span class="string">&#x27;function&#x27;</span> ? <span class="comment">//是Cjs</span></span><br><span class="line">              <span class="function"><span class="params">factory</span> =&gt;</span> <span class="variable language_">module</span>.<span class="property">exports</span> =&gt; <span class="title function_">factory</span>(<span class="built_in">require</span>,<span class="built_in">exports</span>,<span class="variable language_">module</span>)</span><br><span class="line">            : <span class="comment">//是AMD</span></span><br><span class="line">              define</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="CMD-规范"><a href="#CMD-规范" class="headerlink" title="CMD 规范"></a>CMD 规范</h4><blockquote>
+<p>按需加载<br>主要应用框架：sea.js</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 依赖就近</span></span><br><span class="line"><span class="title function_">define</span>(<span class="string">&#x27;module&#x27;</span>, <span class="function">(<span class="params"><span class="built_in">require</span>, <span class="built_in">exports</span>, <span class="variable language_">module</span></span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> $ = <span class="built_in">require</span>(<span class="string">&#x27;map&#x27;</span>)</span><br><span class="line">	<span class="comment">// ...代码块1</span></span><br><span class="line">	<span class="keyword">if</span> (xxx) &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> depends2 = <span class="built_in">require</span>(<span class="string">&#x27;./dependencyModule2&#x27;</span>)</span><br><span class="line">	<span class="comment">// 代码块2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>优点</strong>:</p>
+<ul>
+<li>按需加载，依赖就近</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>1.依赖打包</li>
+<li>2.扩大了模块内体积</li>
+</ul>
+<h4 id="完全体-ESM-ES-Module"><a href="#完全体-ESM-ES-Module" class="headerlink" title="完全体 ESM &#x3D;&gt; ES Module"></a>完全体 ESM &#x3D;&gt; ES Module</h4><blockquote>
+<p><strong>走进新时代</strong><br>新增定义：<br>引入 - import<br>导出 - export</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入区域</span></span><br><span class="line"><span class="keyword">import</span> dependencyModule1 <span class="keyword">from</span> <span class="string">&#x27;./dependencyModule1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 逻辑处理</span></span><br><span class="line"><span class="comment">// ....</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	increase,</span><br><span class="line">	reset,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>追问：<br>处理动态异步依赖</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// es方式</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">moduleDependency</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">	<span class="comment">// ..模块处理</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">await</span> dependencyModule1.<span class="title function_">init</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//原生</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">&#x27;./dependencyModule.js&#x27;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">dynamicEsModule</span>) =&gt;</span> &#123;</span><br><span class="line">	dynamicEsModule.<span class="title function_">init</span>()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>优点</p>
+<ul>
+<li>通过一种最统一的形态整合了所有 js 的模块化</li>
+</ul>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fetch = <span class="title function_">ajax</span>(method, url, params)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fetch = ajax.<span class="title function_">get</span>(url)</span><br><span class="line"><span class="comment">// ajax.post(url)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="title function_">fetch</span>(params)</span><br><span class="line"><span class="comment">// == ajax.get(url)(params)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fetch = <span class="title function_">ajax</span>(method)(url)(params)</span><br><span class="line"></span><br><span class="line"><span class="title function_">send</span>(request, fetch)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>培训课</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Promise规范及应用</title>
     <url>/posts/7303.html</url>
     <content><![CDATA[<h1 id="2023-x2F-12-x2F-11-Promise-规范及应用"><a href="#2023-x2F-12-x2F-11-Promise-规范及应用" class="headerlink" title="2023&#x2F;12&#x2F;11 Promise 规范及应用"></a>2023&#x2F;12&#x2F;11 Promise 规范及应用</h1><ul>
