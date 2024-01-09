@@ -9,6 +9,21 @@ categories:
   - 培训课
 ---
 
+<!-- more -->
+
+- [vue 进阶](#vue-进阶)
+  - [特征一：模块化 =\> vue-template-compiler （编译态把 template 转换成 render()）](#特征一模块化--vue-template-compiler-编译态把-template-转换成-render)
+    - [插槽 - 面试考察点 =\> 对比形式](#插槽---面试考察点--对比形式)
+      - [默认插槽](#默认插槽)
+      - [具名插槽](#具名插槽)
+      - [作用域插槽](#作用域插槽)
+    - [模板的二次加工](#模板的二次加工)
+    - [jsx 更自由的 all in js](#jsx-更自由的-all-in-js)
+  - [特征二：组件化](#特征二组件化)
+    - [混入 mixin - 逻辑混入](#混入-mixin---逻辑混入)
+    - [继承拓展 extends - 逻辑上的共同拓展](#继承拓展-extends---逻辑上的共同拓展)
+    - [插件系统](#插件系统)
+
 # vue 进阶
 
 ## 特征一：模块化 => vue-template-compiler （编译态把 template 转换成 render()）
@@ -105,4 +120,31 @@ new Vue({
 
 ### 混入 mixin - 逻辑混入
 
-- 1. 应用：核心逻辑 功能的继承
+- 1. 应用：公共逻辑功能的继承
+- 2. 面试：合并策略 生命周期
+  - 变量补充形式上 => 额外补充、不会覆盖
+  - 生命周期 => minxin 在引用该 mixin 组件之前执行
+  - 同样引用的两个 mixin => 根据引用顺序安排加载顺序
+
+### 继承拓展 extends - 逻辑上的共同拓展
+
+- 1. 核心逻辑的继承
+- 2. 合并策略
+  - 不会覆盖
+  - 生命周期 => 不论是业务代码还是 mixin 都在 extents 生命周期之后
+  - 只有一个
+
+### 插件系统
+
+```js
+import element from 'element'
+
+//Vue.use(element)
+createApp(app).use(element, {
+	isA: true,
+})
+// => install:(()=>{})
+
+// vue.prototype.$abc => this.$abc
+// app.globalProperties.$abc
+```
