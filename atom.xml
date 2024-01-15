@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2024-01-08T00:46:38.946Z</updated>
+  <updated>2024-01-15T07:12:16.512Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>vue基础v5</title>
-    <link href="https://jjbond.cn/posts/45434.html"/>
-    <id>https://jjbond.cn/posts/45434.html</id>
-    <published>2024-01-06T12:07:53.000Z</published>
-    <updated>2024-01-08T00:46:38.946Z</updated>
+    <title>vue进阶</title>
+    <link href="https://jjbond.cn/posts/10922.html"/>
+    <id>https://jjbond.cn/posts/10922.html</id>
+    <published>2024-01-08T06:21:25.000Z</published>
+    <updated>2024-01-15T07:12:16.512Z</updated>
     
     
       
@@ -31,14 +31,21 @@
     <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#vue-%E5%9F%BA%E7%A1%80&quot;&gt;vue 基础&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#%E7%90%86%E8%AE%BA&quot;&gt;理论&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#vue-%E8%BF%9B%E9%98%B6&quot;&gt;vue 进阶&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a</summary>
         
       
     
     
     
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="Vue" scheme="https://jjbond.cn/tags/Vue/"/>
     
   </entry>
   
@@ -73,7 +80,7 @@
     <updated>2023-12-12T11:07:11.854Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;2023-x2F-12-x2F-11-Promise-规范及应用&quot;&gt;&lt;a href=&quot;#2023-x2F-12-x2F-11-Promise-规范及应用&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&lt;/h1&gt;&lt;ul&gt;
+    <summary type="html">&lt;h1 id=&quot;2023-12-11-Promise-规范及应用&quot;&gt;&lt;a href=&quot;#2023-12-11-Promise-规范及应用&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#20231211-promise-%E8%A7%84%E8%8C%83%E5%8F%8A%E5%BA%94%E7%94%A8&quot;&gt;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#1-%E5%BC%82%E6%AD%A5%E7%9A%84%E9%80%BB%E8%BE%91&quot;&gt;1 异步的逻辑&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;#2-%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8F%91%E5%B1%95&quot;&gt;2 异步的发展&lt;/a&gt;&lt;ul&gt;
@@ -135,7 +142,7 @@
     <updated>2023-12-04T06:50:05.370Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;2023-x2F-12-x2F-4-OOP与继承&quot;&gt;&lt;a href=&quot;#2023-x2F-12-x2F-4-OOP与继承&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&lt;/h1&gt;&lt;ul&gt;
+    <summary type="html">&lt;h1 id=&quot;2023-12-4-OOP与继承&quot;&gt;&lt;a href=&quot;#2023-12-4-OOP与继承&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;器：工具，JS，VUE，React…&lt;/li&gt;
 &lt;li&gt;术：用前端做了什么项目。React设计了什么，针对了什么问题，解决了什么&lt;/li&gt;
 &lt;li&gt;道：知识体系 -&amp;gt; 以道驭术&lt;/li&gt;
@@ -162,7 +169,7 @@
     <updated>2023-12-04T06:48:31.247Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域&quot;&gt;&lt;a href=&quot;#2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&quot;&gt;&lt;/a&gt;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;面试时必知必会&lt;/strong&gt;  &lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;2023-11-26-this指针-闭包-作用域&quot;&gt;&lt;a href=&quot;#2023-11-26-this指针-闭包-作用域&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&quot;&gt;&lt;/a&gt;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;面试时必知必会&lt;/strong&gt;  &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;JS&lt;/li&gt;
 &lt;li&gt;布局&lt;/li&gt;
@@ -229,9 +236,9 @@
     <category term="自动化脚本" scheme="https://jjbond.cn/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/"/>
     
     
-    <category term="python" scheme="https://jjbond.cn/tags/python/"/>
-    
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="python" scheme="https://jjbond.cn/tags/python/"/>
     
   </entry>
   

@@ -7,101 +7,122 @@
 ]]></content>
   </entry>
   <entry>
-    <title>vue基础v5</title>
-    <url>/posts/45434.html</url>
+    <title>vue进阶</title>
+    <url>/posts/10922.html</url>
     <content><![CDATA[<span id="more"></span>
 
 <ul>
-<li><a href="#vue-%E5%9F%BA%E7%A1%80">vue 基础</a><ul>
-<li><a href="#%E7%90%86%E8%AE%BA">理论</a><ul>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9-mvvm-%E7%9A%84%E4%BA%86%E8%A7%A3">面试题：对 MVVM 的了解</a></li>
+<li><a href="#vue-%E8%BF%9B%E9%98%B6">vue 进阶</a><ul>
+<li><a href="#%E7%89%B9%E5%BE%81%E4%B8%80%E6%A8%A1%E5%9D%97%E5%8C%96--vue-template-compiler-%E7%BC%96%E8%AF%91%E6%80%81%E6%8A%8A-template-%E8%BD%AC%E6%8D%A2%E6%88%90-render">特征一：模块化 &#x3D;&gt; vue-template-compiler （编译态把 template 转换成 render()）</a><ul>
+<li><a href="#%E6%8F%92%E6%A7%BD---%E9%9D%A2%E8%AF%95%E8%80%83%E5%AF%9F%E7%82%B9--%E5%AF%B9%E6%AF%94%E5%BD%A2%E5%BC%8F">插槽 - 面试考察点 &#x3D;&gt; 对比形式</a><ul>
+<li><a href="#%E9%BB%98%E8%AE%A4%E6%8F%92%E6%A7%BD">默认插槽</a></li>
+<li><a href="#%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD">具名插槽</a></li>
+<li><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD">作用域插槽</a></li>
 </ul>
 </li>
-<li><a href="#%E5%86%99%E6%B3%95">写法</a><ul>
-<li><a href="#vue-%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-mvvm-%E5%BC%80%E5%8F%91">vue 如何利用 mvvm 开发?</a></li>
+<li><a href="#%E6%A8%A1%E6%9D%BF%E7%9A%84%E4%BA%8C%E6%AC%A1%E5%8A%A0%E5%B7%A5">模板的二次加工</a></li>
+<li><a href="#jsx-%E6%9B%B4%E8%87%AA%E7%94%B1%E7%9A%84-all-in-js">jsx 更自由的 all in js</a></li>
 </ul>
 </li>
-<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a><ul>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98vue-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">面试题：vue 的生命周期</a></li>
-</ul>
-</li>
-<li><a href="#%E7%9B%91%E5%90%AC">监听</a><ul>
-<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98computed-%E5%92%8C-watch">面试题：computed 和 watch</a></li>
-</ul>
-</li>
-<li><a href="#%E6%8C%87%E4%BB%A4--%E6%9D%A1%E4%BB%B6">指令 &amp; 条件</a><ul>
-<li><a href="#%E6%9D%A1%E4%BB%B6">条件</a></li>
-<li><a href="#v-for--v-if-%E5%9C%A8%E5%90%8C%E4%B8%80%E8%8A%82%E7%82%B9%E4%BD%BF%E7%94%A8%E6%97%B6">v-for &amp; v-if 在同一节点使用时</a></li>
-<li><a href="#v-model-v-once-v-text-v-html-v-bind">v-model v-once v-text v-html v-bind</a></li>
-<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4">自定义指令</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%8B%E4%BB%B6---v-on">事件 - v-on</a><ul>
-<li><a href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6">修饰符</a></li>
-<li><a href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%AE%BE%E8%AE%A1---%E4%B8%BA%E4%BD%95-vue-%E6%8A%8A%E4%BA%8B%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%9C%A8%E6%A8%A1%E6%9D%BF%E4%B8%8A%E8%80%8C%E4%B8%8D%E6%98%AF-js-%E4%B8%AD">事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BB%84%E4%BB%B6%E5%8C%96">组件化</a><ul>
-<li><a href="#%E4%B8%80%E8%88%AC%E7%BB%84%E4%BB%B6--%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6--%E6%8F%92%E4%BB%B6">一般组件 + 动态组件 &#x3D;&gt; 插件</a></li>
+<li><a href="#%E7%89%B9%E5%BE%81%E4%BA%8C%E7%BB%84%E4%BB%B6%E5%8C%96">特征二：组件化</a><ul>
+<li><a href="#%E6%B7%B7%E5%85%A5-mixin---%E9%80%BB%E8%BE%91%E6%B7%B7%E5%85%A5">混入 mixin - 逻辑混入</a></li>
+<li><a href="#%E7%BB%A7%E6%89%BF%E6%8B%93%E5%B1%95-extends---%E9%80%BB%E8%BE%91%E4%B8%8A%E7%9A%84%E5%85%B1%E5%90%8C%E6%8B%93%E5%B1%95">继承拓展 extends - 逻辑上的共同拓展</a></li>
+<li><a href="#%E6%8F%92%E4%BB%B6%E7%B3%BB%E7%BB%9F">插件系统</a></li>
+<li><a href="#vue-3---compositionapi">Vue 3 - compositionAPI</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="vue-基础"><a href="#vue-基础" class="headerlink" title="vue 基础"></a>vue 基础</h2><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><h4 id="面试题：对-MVVM-的了解"><a href="#面试题：对-MVVM-的了解" class="headerlink" title="面试题：对 MVVM 的了解"></a>面试题：对 MVVM 的了解</h4><ul>
-<li>Web 应用发展史<ol>
-<li>语义化模板</li>
-<li>MVC - model view controller</li>
-<li>MVVM - model view viewModel<ol>
-<li>数据本身会通过 model 挂在在 viewModel，vm 会劫持数据并同步至渲染层</li>
-<li>视图层发生外部变化，会同样回调给 vw，返回给 model</li>
+<h1 id="vue-进阶"><a href="#vue-进阶" class="headerlink" title="vue 进阶"></a>vue 进阶</h1><h2 id="特征一：模块化-vue-template-compiler-（编译态把-template-转换成-render-）"><a href="#特征一：模块化-vue-template-compiler-（编译态把-template-转换成-render-）" class="headerlink" title="特征一：模块化 &#x3D;&gt; vue-template-compiler （编译态把 template 转换成 render()）"></a>特征一：模块化 &#x3D;&gt; vue-template-compiler （编译态把 template 转换成 render()）</h2><h3 id="插槽-面试考察点-对比形式"><a href="#插槽-面试考察点-对比形式" class="headerlink" title="插槽 - 面试考察点 &#x3D;&gt; 对比形式"></a>插槽 - 面试考察点 &#x3D;&gt; 对比形式</h3><h4 id="默认插槽"><a href="#默认插槽" class="headerlink" title="默认插槽"></a>默认插槽</h4><p>组件外部维护参数与结构，内部安排位置摆放</p>
+<ul>
+<li>追问 &#x3D;&gt; 默认插槽的实现方式》 &#x3D;&gt; 插槽聚合（渲染在一个地方 顺序渲染）</li>
+<li>追问 &#x3D;&gt; 多个插槽会以何种形态渲染（合并） &#x3D;&gt; 如何放在不同的地方?</li>
+</ul>
+<h4 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h4><p>用 name 表示当前身份，从而在组件内部区分</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template v-<span class="attr">slot</span>:header&gt;&#123;&#123;header&#125;&#125;&lt;/template&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">template</span> #<span class="attr">header</span>&gt;</span>&#123;&#123;header&#125;&#125;<span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="comment">// 子组件</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;header&quot;</span>/&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>具名插槽可以在指定位置分开布局 &#x3D;&gt; 原理：name 索引了一段单个解析的命名空间，node 独立由这个单个解析空间进行渲染</li>
+<li>追问 &#x3D;&gt; 以 node 渲染为单位 &#x3D;&gt; 混合式传参？</li>
+</ul>
+<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;template slot=<span class="string">&quot;content&quot;</span> slot-scope=<span class="string">&quot;&#123;slotProps&#125;&quot;</span>&gt;&#123;&#123;slotProps&#125;&#125; - &#123;&#123;others&#125;&#125;&lt;/template&gt;</span><br><span class="line"><span class="comment">// 子组件</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">slot</span> <span class="attr">name</span>=<span class="string">&quot;content&quot;</span> <span class="attr">:slotProps</span>=<span class="string">&#123;&#123;slotProps&#125;&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">return</span>&#123;</span><br><span class="line">    <span class="attr">slotProps</span>:<span class="string">&#x27;slot props&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>外部可以做结构勾勒和参数合并，内部也可以提供参数混合</p>
+<ul>
+<li>父子参数共同向 slot 传递</li>
+</ul>
+<h3 id="模板的二次加工"><a href="#模板的二次加工" class="headerlink" title="模板的二次加工"></a>模板的二次加工</h3><ol>
+<li>watch | computed &#x3D;&gt; 配置里声明和书写</li>
+<li>其余方法：<br>a. 函数 - 过滤器 | 独立管道符 &#x3D;&gt; 管道符和函数有什么区别？| 管道符能拿到实例嘛？ (<strong>不能！</strong>)<br>b. v-html &#x3D;&gt; 递归调用渲染 node &#x3D;&gt; 安全性风险<br>c. 利用组件形式</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 过滤器</span></span><br><span class="line"><span class="comment">// template</span></span><br><span class="line">&lt;p&gt;&#123;&#123;money | moneyFilter&#125;&#125;&lt;/p&gt;</span><br><span class="line"><span class="comment">// script</span></span><br><span class="line"><span class="title function_">data</span>(<span class="params"></span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">filters</span>:&#123;</span><br><span class="line">  <span class="title function_">moneyFilter</span>(<span class="params">param</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">    <span class="keyword">return</span> param &gt; <span class="number">99</span> ? <span class="number">99</span> : param</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="jsx-更自由的-all-in-js"><a href="#jsx-更自由的-all-in-js" class="headerlink" title="jsx 更自由的 all in js"></a>jsx 更自由的 all in js</h3><ul>
+<li>面试题：<ol>
+<li>语法糖的实现</li>
+<li>jsx 的优点和劣势<ol>
+<li>vue 编译：（_beforeMount_）template &#x3D;&gt; render() &#x3D;&gt; （_Mounted_）vm.render()</li>
+<li>template 编译，带有 dom 渲染优化，性能节约</li>
+<li>直接写 render 函数不受 vue 语法限制，不依赖于 vue 的 api</li>
 </ol>
 </li>
 </ol>
 </li>
 </ul>
-<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><h4 id="vue-如何利用-mvvm-开发"><a href="#vue-如何利用-mvvm-开发" class="headerlink" title="vue 如何利用 mvvm 开发?"></a>vue 如何利用 mvvm 开发?</h4><p>数据双向绑定</p>
-<ol>
-<li>利用花括号，构筑了数据与 vm 的双向绑定关系 &#x3D;》 buildTemplate | compile</li>
-<li>通过视图绑定监听事件来处理数据 &#x3D;》v-model &#x3D;&#x3D;&#x3D; :value @input &#x3D;&gt; 节点处理流程</li>
+<h2 id="特征二：组件化"><a href="#特征二：组件化" class="headerlink" title="特征二：组件化"></a>特征二：组件化</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Vue</span>.<span class="title function_">component</span>(<span class="string">&#x27;component&#x27;</span>, &#123;</span><br><span class="line">	<span class="attr">template</span>: <span class="string">&#x27;&lt;h1&gt;&lt;/h1&gt;&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">	<span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><ol>
+<li>抽象复用</li>
 </ol>
-<p><strong>buildTemplate &#x3D;》 render()</strong></p>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h4 id="面试题：vue-的生命周期"><a href="#面试题：vue-的生命周期" class="headerlink" title="面试题：vue 的生命周期"></a>面试题：vue 的生命周期</h4><p>创建阶段: beforeCreate &#x3D;&gt; created &#x3D;&gt; beforeMount &#x3D;&gt; mounted</p>
-<p>更新阶段: beforeUpdate &#x3D;&gt; updated</p>
-<p>销毁阶段: beforeDestroy &#x3D;》 destroyed</p>
-<p><font color=LightSkyBlue>beforeCreate</font>： new Vue() - 创建实例阶段<br><font color=LightSkyBlue>created</font>: data | props | method | computed - 数据创建</p>
-<p><font color=orange>beforeMount</font>: vDom(虚拟节点) - 数据操作以及虚拟 dom 的变化 但不能涉及 dom<br><font color=orange>mounted</font>: Dom 更新</p>
-<p><font color=CadetBlue>beforeUpdate</font>： vDom - 完成更新，dom 还未更新<br><font color=CadetBlue>updated</font>： dom 完成更新 &#x3D;》 谨慎做更新数据操作</p>
-<p><font color=Green>beforeDestroy</font>：实例尚未销毁 - 清空 eventBus setTimeOut<br><font color=Green>destroyed</font>：完全销毁</p>
-<p>补充：key &#x3D;》 diff &#x3D;》 dom diff &#x3D;》 节点 id</p>
-<h3 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h3><h4 id="面试题：computed-和-watch"><a href="#面试题：computed-和-watch" class="headerlink" title="面试题：computed 和 watch"></a>面试题：computed 和 watch</h4><p>相同点：</p>
-<ol>
-<li><strong>基于 vue 的依赖收集机制</strong>进行采集</li>
-<li>都是被依赖的变化所触发，从而进行处理回调</li>
+</li>
+<li><ol start="2">
+<li>精简 &amp; 聚合</li>
 </ol>
-<p>不同点：</p>
-<ol>
-<li>入&#x2F;出：computed 多入单出，watch 单入多出</li>
-<li>性能：computed 存在缓存，不收调用次数的性能损耗；watch 只在监听的值变化时，不包含生成 immediate</li>
-<li>computed 关注结果，watch 关注过程</li>
+</li>
+</ul>
+<h3 id="混入-mixin-逻辑混入"><a href="#混入-mixin-逻辑混入" class="headerlink" title="混入 mixin - 逻辑混入"></a>混入 mixin - 逻辑混入</h3><ul>
+<li><ol>
+<li>应用：公共逻辑功能的继承</li>
 </ol>
-<p>问：computed 缓存和响应式如何实现的?</p>
-<p>完整过程：</p>
-<ol>
-<li>流程：new Vue() &#x3D;&gt; 初始化 computed(initState) &#x3D;&gt; createComputedGetter(key) &#x3D;&gt; mount</li>
-<li>劫持：getter 属性变化区分是否是最新状态 dirty</li>
-<li>target depend &lt;&#x3D;&#x3D;&gt; 原值和依赖之间的关系链</li>
+</li>
+<li><ol start="2">
+<li>面试：合并策略 生命周期</li>
 </ol>
-<h3 id="指令-条件"><a href="#指令-条件" class="headerlink" title="指令 &amp; 条件"></a>指令 &amp; 条件</h3><h4 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h4><p>v-if | v-show<br>v-else | v-else-if</p>
-<p>v-for</p>
-<h4 id="v-for-v-if-在同一节点使用时"><a href="#v-for-v-if-在同一节点使用时" class="headerlink" title="v-for &amp; v-if 在同一节点使用时"></a>v-for &amp; v-if 在同一节点使用时</h4><p>vue2.x v-for 会优先作用<br>vue3.x v-if 总是优先于 v-for</p>
-<h4 id="v-model-v-once-v-text-v-html-v-bind"><a href="#v-model-v-once-v-text-v-html-v-bind" class="headerlink" title="v-model v-once v-text v-html v-bind"></a>v-model v-once v-text v-html v-bind</h4><h4 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h4><h3 id="事件-v-on"><a href="#事件-v-on" class="headerlink" title="事件 - v-on"></a>事件 - v-on</h3><h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>.stop .prevent .once .capture .self .passive</p>
-<h4 id="事件的设计-为何-vue-把事件设计在模板上而不是-js-中"><a href="#事件的设计-为何-vue-把事件设计在模板上而不是-js-中" class="headerlink" title="事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中"></a>事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</h4><ol>
-<li>模板定位视图绑定的触发源 + 触发源寻找触发事件的逻辑 —— 方便定位</li>
-<li>js 与视图绑定解耦 —— 更便于测试隔离</li>
-<li>vm 销毁，自动解绑事件 —— 便于回收</li>
+<ul>
+<li>变量补充形式上 &#x3D;&gt; 额外补充、不会覆盖</li>
+<li>生命周期 &#x3D;&gt; minxin 在引用该 mixin 组件之前执行</li>
+<li>同样引用的两个 mixin &#x3D;&gt; 根据引用顺序安排加载顺序</li>
+</ul>
+</li>
+</ul>
+<h3 id="继承拓展-extends-逻辑上的共同拓展"><a href="#继承拓展-extends-逻辑上的共同拓展" class="headerlink" title="继承拓展 extends - 逻辑上的共同拓展"></a>继承拓展 extends - 逻辑上的共同拓展</h3><ul>
+<li><ol>
+<li>核心逻辑的继承</li>
 </ol>
-<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><h4 id="一般组件-动态组件-插件"><a href="#一般组件-动态组件-插件" class="headerlink" title="一般组件 + 动态组件 &#x3D;&gt; 插件"></a>一般组件 + 动态组件 &#x3D;&gt; 插件</h4>]]></content>
+</li>
+<li><ol start="2">
+<li>合并策略</li>
+</ol>
+<ul>
+<li>不会覆盖</li>
+<li>生命周期 &#x3D;&gt; 不论是业务代码还是 mixin 都在 extents 生命周期之后</li>
+<li>只有一个</li>
+</ul>
+</li>
+</ul>
+<h3 id="插件系统"><a href="#插件系统" class="headerlink" title="插件系统"></a>插件系统</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> element <span class="keyword">from</span> <span class="string">&#x27;element&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Vue.use(element)</span></span><br><span class="line"><span class="title function_">createApp</span>(app).<span class="title function_">use</span>(element, &#123;</span><br><span class="line">	<span class="attr">isA</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// =&gt; install:(()=&gt;&#123;&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// vue.prototype.$abc =&gt; this.$abc</span></span><br><span class="line"><span class="comment">// app.globalProperties.$abc</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Vue-3-compositionAPI"><a href="#Vue-3-compositionAPI" class="headerlink" title="Vue 3 - compositionAPI"></a>Vue 3 - compositionAPI</h3>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>培训课</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Vue</tag>
+      </tags>
   </entry>
   <entry>
     <title>JS模块化</title>
@@ -254,7 +275,7 @@
   <entry>
     <title>Promise规范及应用</title>
     <url>/posts/7303.html</url>
-    <content><![CDATA[<h1 id="2023-x2F-12-x2F-11-Promise-规范及应用"><a href="#2023-x2F-12-x2F-11-Promise-规范及应用" class="headerlink" title="2023&#x2F;12&#x2F;11 Promise 规范及应用"></a>2023&#x2F;12&#x2F;11 Promise 规范及应用</h1><ul>
+    <content><![CDATA[<h1 id="2023-12-11-Promise-规范及应用"><a href="#2023-12-11-Promise-规范及应用" class="headerlink" title="2023&#x2F;12&#x2F;11 Promise 规范及应用"></a>2023&#x2F;12&#x2F;11 Promise 规范及应用</h1><ul>
 <li><a href="#20231211-promise-%E8%A7%84%E8%8C%83%E5%8F%8A%E5%BA%94%E7%94%A8">2023&#x2F;12&#x2F;11 Promise 规范及应用</a><ul>
 <li><a href="#1-%E5%BC%82%E6%AD%A5%E7%9A%84%E9%80%BB%E8%BE%91">1 异步的逻辑</a></li>
 <li><a href="#2-%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8F%91%E5%B1%95">2 异步的发展</a><ul>
@@ -314,7 +335,7 @@
 
 <h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>* <span class="title function_">gen</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> res = <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = <span class="title function_">gen</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="title function_">next</span>(<span class="string">&quot;over&quot;</span>));</span><br></pre></td></tr></table></figure>
 
-<h3 id="async-x2F-await"><a href="#async-x2F-await" class="headerlink" title="async &#x2F; await"></a>async &#x2F; await</h3><p>异步编程的改进,提供一种不阻塞主线程的情况下,使用同步代码执行异步的逻辑</p>
+<h3 id="async-await"><a href="#async-await" class="headerlink" title="async &#x2F; await"></a>async &#x2F; await</h3><p>异步编程的改进,提供一种不阻塞主线程的情况下,使用同步代码执行异步的逻辑</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">post</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(&#123; <span class="attr">data</span>: [], url &#125;);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getData</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; <span class="keyword">await</span> <span class="title function_">post</span>(<span class="string">&quot;xxx/xxx&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">run</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;starting&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="title function_">getData</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">run</span>();</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-Promise-深入理解"><a href="#3-Promise-深入理解" class="headerlink" title="3 Promise 深入理解"></a>3 Promise 深入理解</h2><h3 id="3-1-初探-Promise"><a href="#3-1-初探-Promise" class="headerlink" title="3.1 初探 Promise"></a>3.1 初探 Promise</h3><h4 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h4><blockquote>
@@ -500,7 +521,7 @@
   <entry>
     <title>OOP与继承</title>
     <url>/posts/3835.html</url>
-    <content><![CDATA[<h1 id="2023-x2F-12-x2F-4-OOP与继承"><a href="#2023-x2F-12-x2F-4-OOP与继承" class="headerlink" title="2023&#x2F;12&#x2F;4 OOP与继承"></a>2023&#x2F;12&#x2F;4 OOP与继承</h1><ul>
+    <content><![CDATA[<h1 id="2023-12-4-OOP与继承"><a href="#2023-12-4-OOP与继承" class="headerlink" title="2023&#x2F;12&#x2F;4 OOP与继承"></a>2023&#x2F;12&#x2F;4 OOP与继承</h1><ul>
 <li>器：工具，JS，VUE，React…</li>
 <li>术：用前端做了什么项目。React设计了什么，针对了什么问题，解决了什么</li>
 <li>道：知识体系 -&gt; 以道驭术</li>
@@ -569,7 +590,7 @@
 <h3 id="组合寄生式继承"><a href="#组合寄生式继承" class="headerlink" title="组合寄生式继承"></a>组合寄生式继承</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Parent</span>(<span class="params">name</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getName</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params">name</span>)&#123;</span><br><span class="line">    <span class="title class_">Parent</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>,name)</span><br><span class="line">    <span class="comment">//调用Parent函数，并传递当前对象作为参数，以继承Parent函数的属性和方    法。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Child.prototype = Object.create(Parent,prototype)</span></span><br><span class="line"><span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title function_">inherit</span>(<span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>)</span><br><span class="line"><span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Child</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img data-src="https://ooo.0x0.ooo/2023/12/04/OAnbrC.jpg" alt="OAnbrC.jpg"></p>
-<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="组合寄生和class的区别？"><a href="#组合寄生和class的区别？" class="headerlink" title="组合寄生和class的区别？"></a>组合寄生和class的区别？</h3><blockquote>
+<h2 id="Q-A"><a href="#Q-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="组合寄生和class的区别？"><a href="#组合寄生和class的区别？" class="headerlink" title="组合寄生和class的区别？"></a>组合寄生和class的区别？</h3><blockquote>
 <p>Loose模式应该差不多,主要是以下区别:<br>Class继承，会继承静态属性：<br>子类中，必须在constructor中调用super，因为子类自己的this对象，必须先通过父类的构造函数完成</p>
 </blockquote>
 ]]></content>
@@ -585,7 +606,7 @@
   <entry>
     <title>this指针/闭包/作用域</title>
     <url>/posts/4503.html</url>
-    <content><![CDATA[<h1 id="2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域"><a href="#2023-x2F-11-x2F-26-this指针-x2F-闭包-x2F-作用域" class="headerlink" title="2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域"></a>2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域</h1><p><strong>面试时必知必会</strong>  </p>
+    <content><![CDATA[<h1 id="2023-11-26-this指针-闭包-作用域"><a href="#2023-11-26-this指针-闭包-作用域" class="headerlink" title="2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域"></a>2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域</h1><p><strong>面试时必知必会</strong>  </p>
 <ol>
 <li>JS</li>
 <li>布局</li>
@@ -626,7 +647,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="作用域-amp-上下文"><a href="#作用域-amp-上下文" class="headerlink" title="作用域 &amp; 上下文"></a>作用域 &amp; 上下文</h2><h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p><strong>面试题</strong>  </p>
+<h2 id="作用域-上下文"><a href="#作用域-上下文" class="headerlink" title="作用域 &amp; 上下文"></a>作用域 &amp; 上下文</h2><h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p><strong>面试题</strong>  </p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    <span class="keyword">let</span> a= <span class="string">&#x27;global&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">course</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> b = <span class="string">&#x27;bbb&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="title function_">session</span>()</span><br><span class="line">        fuction <span class="title function_">session</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="keyword">let</span> c = <span class="string">&#x27;ccc&#x27;</span></span><br><span class="line"></span><br><span class="line">            <span class="title function_">teacher</span>()</span><br><span class="line">            fuction <span class="title function_">teacher</span>(<span class="params"></span>)&#123;</span><br><span class="line">                <span class="comment">// let d = &#x27;ddd&#x27;</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">//变量提升,提升范围在当前作用域下</span></span><br><span class="line">                <span class="comment">//var存在声明提升和赋值提升，可以提前访问，结果为undefined</span></span><br><span class="line">                <span class="comment">//let仅仅存在声明提升，不会给它初始化，更不会给他赋值，暂时性死区,真正赋值才会初始化</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(d)</span><br><span class="line">                <span class="keyword">var</span> d = <span class="string">&#x27;yy&#x27;</span></span><br><span class="line"></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(d);<span class="comment">//作用域生效</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(b);<span class="comment">//作用域向上查找</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">course</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment">// **************</span></span><br><span class="line">    <span class="comment">//提升优先级 =&gt; 函数需要变量</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xxx)</span><br><span class="line">    <span class="keyword">var</span> xxx =<span class="number">123</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">xxx</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;functionXXX&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xxx)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打印结果：</span></span><br><span class="line">    <span class="comment">// ƒ xxx()&#123;</span></span><br><span class="line">    <span class="comment">//     console.log(&#x27;functionXXX&#x27;)</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 123</span></span><br><span class="line">    <span class="comment">//等价于</span></span><br><span class="line">    <span class="comment">//1.var xxx</span></span><br><span class="line">    <span class="comment">//2.function xxx()&#123;&#125;</span></span><br><span class="line">    <span class="comment">//3.console.log(xxx)//xxx()</span></span><br><span class="line">    <span class="comment">//4.xxx=123</span></span><br><span class="line">    <span class="comment">//5.console.log(xxx)//123</span></span><br><span class="line">    <span class="comment">//变量和函数同时提升时 </span></span><br><span class="line">    <span class="comment">//提升维度：变量优先  执行维度：函数优先</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ********************</span></span><br><span class="line">    <span class="comment">// 结论：函数是天然的作用域隔离方案 =&gt; 模块化基础</span></span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 1. 对于作用域链 我们可以用创建态去定位链条中的某一环  </span></span><br><span class="line"><span class="string">- 2. 手动取消链条环甚至全局作用域的时候，可以利用块级作用域做性能优化 =&gt; 性能优化</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### this 上下文 context  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- this是在执行过程中动态读取的上下文所决定的</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">考察重点 - 各**使用态**中的指针指向</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#### 函数直接调用 - this指向是window  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;函数内部this&#x27;</span>,<span class="variable language_">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">foo</span>()<span class="comment">//打印window</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="隐式绑定-this指向调用堆栈的上一级"><a href="#隐式绑定-this指向调用堆栈的上一级" class="headerlink" title="隐式绑定 - this指向调用堆栈的上一级"></a>隐式绑定 - this指向调用堆栈的上一级</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;隐式绑定&#x27;</span>,<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="number">1</span>,</span><br><span class="line">    fn</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="property">fn</span> = fn</span><br><span class="line">obj.<span class="title function_">fn</span>()<span class="comment">//打印这个obj,既 &#123;a:1,fn:f&#125;</span></span><br></pre></td></tr></table></figure>
@@ -690,7 +711,7 @@
 
 <h4 id="事件处理（异步）的闭包"><a href="#事件处理（异步）的闭包" class="headerlink" title="事件处理（异步）的闭包"></a>事件处理（异步）的闭包</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> lis = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&#x27;li&#x27;</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;lis.<span class="property">length</span>;i++)&#123;</span><br><span class="line">    (<span class="keyword">function</span>(<span class="params">i</span>)&#123;</span><br><span class="line">        lis[i].<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(i)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="追问-立即执行函数-x2F-立即执行嵌套-x3D-gt-拥有独立作用域"><a href="#追问-立即执行函数-x2F-立即执行嵌套-x3D-gt-拥有独立作用域" class="headerlink" title="追问:立即执行函数 &#x2F; 立即执行嵌套 &#x3D;&gt; 拥有独立作用域"></a>追问:立即执行函数 &#x2F; 立即执行嵌套 &#x3D;&gt; 拥有独立作用域</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">immediateA</span>(<span class="params">a</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">function</span> <span class="title function_">immediateB</span>(<span class="params">b</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    &#125;)(<span class="number">1</span>);</span><br><span class="line">&#125;)(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="追问-立即执行函数-立即执行嵌套-拥有独立作用域"><a href="#追问-立即执行函数-立即执行嵌套-拥有独立作用域" class="headerlink" title="追问:立即执行函数 &#x2F; 立即执行嵌套 &#x3D;&gt; 拥有独立作用域"></a>追问:立即执行函数 &#x2F; 立即执行嵌套 &#x3D;&gt; 拥有独立作用域</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="title function_">immediateA</span>(<span class="params">a</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">function</span> <span class="title function_">immediateB</span>(<span class="params">b</span>)&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    &#125;)(<span class="number">1</span>);</span><br><span class="line">&#125;)(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>推动了js的模块化发展</li>
@@ -710,7 +731,7 @@
     <title>什么是Nginx?</title>
     <url>/posts/36796.html</url>
     <content><![CDATA[<h1 id="什么是Nginx？"><a href="#什么是Nginx？" class="headerlink" title="什么是Nginx？"></a>什么是Nginx？</h1><p><strong>Nginx</strong>(engine x) 是一个高性能的HTTP和反向代理Web服务器，同时也提供IMAP&#x2F;POP3&#x2F;SMTP服务。<br><strong>特点</strong>是1.占有内存少 2.并发能力强<br><strong>Nginx</strong>几乎可以做到7*24h不间断运行，能在不间断服务下进行软件版本的升级，其代码完全由C语言从头写成，官方数据表示能同时支持5w个并发连接数的响应。</p>
-<h1 id="正向代理-x2F-反向代理"><a href="#正向代理-x2F-反向代理" class="headerlink" title="正向代理&#x2F;反向代理"></a>正向代理&#x2F;反向代理</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>代理客户端的，安装在自己电脑上的，如<strong>VPN</strong></p>
+<h1 id="正向代理-反向代理"><a href="#正向代理-反向代理" class="headerlink" title="正向代理&#x2F;反向代理"></a>正向代理&#x2F;反向代理</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>代理客户端的，安装在自己电脑上的，如<strong>VPN</strong></p>
 <h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>代理服务端的，客户端只用访问同一域名，客户无感知浏览服务资源</p>
 <h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><p><strong>Nginx</strong>提供2种负载均衡策略——内置策略和扩展策略。<br>内置策略主要有轮询、加权轮询、Ip hash等。</p>
 ]]></content>
@@ -753,8 +774,8 @@
         <category>自动化脚本</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>Web</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
