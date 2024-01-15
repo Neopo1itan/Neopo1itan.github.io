@@ -3,7 +3,7 @@ title: vue进阶
 date: 2024-01-08 14:21:25
 tags:
   - Web
-  - JavaScript
+  - Vue
 categories:
   - 前端开发
   - 培训课
@@ -23,6 +23,7 @@ categories:
     - [混入 mixin - 逻辑混入](#混入-mixin---逻辑混入)
     - [继承拓展 extends - 逻辑上的共同拓展](#继承拓展-extends---逻辑上的共同拓展)
     - [插件系统](#插件系统)
+    - [Vue 3 - compositionAPI](#vue-3---compositionapi)
 
 # vue 进阶
 
@@ -148,3 +149,5 @@ createApp(app).use(element, {
 // vue.prototype.$abc => this.$abc
 // app.globalProperties.$abc
 ```
+
+### Vue 3 - compositionAPI

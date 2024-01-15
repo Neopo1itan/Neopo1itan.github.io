@@ -6,7 +6,7 @@ date: 2024-01-06 20:07:53
 tags:
 
 - Web
-- JavaScript
+- Vue
   categories:
 - 前端开发
 - 培训课
