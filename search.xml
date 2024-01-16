@@ -7,6 +7,61 @@
 ]]></content>
   </entry>
   <entry>
+    <title>vue2.x 源码</title>
+    <url>/posts/5805.html</url>
+    <content><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><blockquote>
+<p><strong>面试</strong>：观察者模式 &amp; 发布订阅<br>观察者模式：(观察者，被观察者) 中心一对多 + 系统单点的灵活和拓展<br>发布订阅：(发布者，订阅者，发布订阅中心) 调度中心 &#x3D;&gt; 将注册列表<em>遍历</em>然后发布给订阅者</p>
+</blockquote>
+<p>view -&gt; listner&#x2F;binding&#x2F;处理内容 -&gt; model</p>
+<blockquote>
+<p><strong>追问</strong>：要实现这些方式，如何双向绑定</p>
+</blockquote>
+<pre><code>数据监听器Observe     &lt;----     mvvm
+            |                    |
+            |                    |
+            V                    |
+通知数据变化Dep                   |
+            | ↑                  |
+            | 添加订阅            |
+            V |                  |
+连接双方的桥梁watcher&lt;---   代码生成(指令归纳)
+            |          |         |
+            |   绑定函数/订阅数据  |
+         更新视图       |         |
+            |           -------- |
+            V                    V
+           view   &lt;—更新视图—  compiler
+</code></pre>
+<p>源码 -&gt; 原理 -&gt; 他人源码思路</p>
+<span id="more"></span>
+
+<ul>
+<li><a href="#%E5%BC%95%E8%A8%80">引言</a></li>
+<li><a href="#vue2-%E6%BA%90%E7%A0%81">vue2 源码</a><ul>
+<li><a href="#%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84">源码结构</a><ul>
+<li><a href="#compiler">compiler</a></li>
+<li><a href="#core">core</a></li>
+<li><a href="#platforms">platforms</a></li>
+<li><a href="#shared">shared</a></li>
+<li><a href="#types">types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="vue2-源码"><a href="#vue2-源码" class="headerlink" title="vue2 源码"></a>vue2 源码</h1><h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><h3 id="compiler"><a href="#compiler" class="headerlink" title="compiler"></a>compiler</h3><h3 id="core"><a href="#core" class="headerlink" title="core"></a>core</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line"><span class="comment">// 初始化全局入口</span></span><br><span class="line"><span class="title function_">initGlobalAPI</span>(<span class="variable constant_">VUE</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="platforms"><a href="#platforms" class="headerlink" title="platforms"></a>platforms</h3><h3 id="shared"><a href="#shared" class="headerlink" title="shared"></a>shared</h3><h3 id="types"><a href="#types" class="headerlink" title="types"></a>types</h3>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>培训课</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue进阶</title>
     <url>/posts/10922.html</url>
     <content><![CDATA[<span id="more"></span>

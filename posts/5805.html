@@ -22,21 +22,21 @@
     var CONFIG = {"hostname":"jjbond.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":false,"sidebar_rss":{"text":"RSS","icon":"fa fa-rss","color":"burlywood","link":"atom.xml"}},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="简介本文运用dayjs和selenium-webdriver两个包来编写自动秒杀taobao商品的脚本，功能单一简单。">
+  <meta name="description" content="引言 面试：观察者模式 &amp; 发布订阅观察者模式：(观察者，被观察者) 中心一对多 + 系统单点的灵活和拓展发布订阅：(发布者，订阅者，发布订阅中心) 调度中心 &#x3D;&gt; 将注册列表遍历然后发布给订阅者  view -&gt; listner&#x2F;binding&#x2F;处理内容 -&gt; model  追问：要实现这些方式，如何双向绑定  数据监听器Observe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用nodejs编写一个淘宝秒杀脚本">
-<meta property="og:url" content="https://jjbond.cn/posts/958.html">
+<meta property="og:title" content="vue2.x 源码">
+<meta property="og:url" content="https://jjbond.cn/posts/5805.html">
 <meta property="og:site_name" content="吉吉邦德">
-<meta property="og:description" content="简介本文运用dayjs和selenium-webdriver两个包来编写自动秒杀taobao商品的脚本，功能单一简单。">
+<meta property="og:description" content="引言 面试：观察者模式 &amp; 发布订阅观察者模式：(观察者，被观察者) 中心一对多 + 系统单点的灵活和拓展发布订阅：(发布者，订阅者，发布订阅中心) 调度中心 &#x3D;&gt; 将注册列表遍历然后发布给订阅者  view -&gt; listner&#x2F;binding&#x2F;处理内容 -&gt; model  追问：要实现这些方式，如何双向绑定  数据监听器Observe">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-13T09:11:38.000Z">
-<meta property="article:modified_time" content="2023-08-01T03:57:26.074Z">
+<meta property="article:published_time" content="2024-01-15T07:09:23.000Z">
+<meta property="article:modified_time" content="2024-01-16T07:41:11.873Z">
 <meta property="article:author" content="右眼">
 <meta property="article:tag" content="Web">
-<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://jjbond.cn/posts/958.html">
+<link rel="canonical" href="https://jjbond.cn/posts/5805.html">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>用nodejs编写一个淘宝秒杀脚本 | 吉吉邦德</title>
+  <title>vue2.x 源码 | 吉吉邦德</title>
 
   <!-- 球形气泡标签云 -->
   <script type="text/javascript" src="/js/bubble.js"></script>
@@ -202,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/958.html">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/5805.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -215,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          用nodejs编写一个淘宝秒杀脚本
+          vue2.x 源码
         </h1>
 
         <div class="post-meta">
@@ -226,14 +226,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-07-13 17:11:38" itemprop="dateCreated datePublished" datetime="2023-07-13T17:11:38+08:00">2023-07-13</time>
+              <time title="创建时间：2024-01-15 15:09:23" itemprop="dateCreated datePublished" datetime="2024-01-15T15:09:23+08:00">2024-01-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-01 11:57:26" itemprop="dateModified" datetime="2023-08-01T11:57:26+08:00">2023-08-01</time>
+                <time title="修改时间：2024-01-16 15:41:11" itemprop="dateModified" datetime="2024-01-16T15:41:11+08:00">2024-01-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +241,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/" itemprop="url" rel="index"><span itemprop="name">自动化脚本</span></a>
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
                 </span>
             </span>
 
@@ -251,14 +255,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
+              <span>450</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -270,35 +274,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文运用dayjs和selenium-webdriver两个包来编写自动秒杀taobao商品的脚本，功能单一简单。</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><blockquote>
+<p><strong>面试</strong>：观察者模式 &amp; 发布订阅<br>观察者模式：(观察者，被观察者) 中心一对多 + 系统单点的灵活和拓展<br>发布订阅：(发布者，订阅者，发布订阅中心) 调度中心 &#x3D;&gt; 将注册列表<em>遍历</em>然后发布给订阅者</p>
+</blockquote>
+<p>view -&gt; listner&#x2F;binding&#x2F;处理内容 -&gt; model</p>
+<blockquote>
+<p><strong>追问</strong>：要实现这些方式，如何双向绑定</p>
+</blockquote>
+<pre><code>数据监听器Observe     &lt;----     mvvm
+            |                    |
+            |                    |
+            V                    |
+通知数据变化Dep                   |
+            | ↑                  |
+            | 添加订阅            |
+            V |                  |
+连接双方的桥梁watcher&lt;---   代码生成(指令归纳)
+            |          |         |
+            |   绑定函数/订阅数据  |
+         更新视图       |         |
+            |           -------- |
+            V                    V
+           view   &lt;—更新视图—  compiler
+</code></pre>
+<p>源码 -&gt; 原理 -&gt; 他人源码思路</p>
 <span id="more"></span>
-<p>脚本的流程如下：</p>
-<ol>
-<li>打开浏览器<code>chrome</code>，最大化并跳转到taobao.com</li>
-<li>打开登录页，人工扫码登陆</li>
-<li>登陆成功跳转到购物车界面</li>
-<li>自动点击全选按钮</li>
-<li>自动点击结算按钮</li>
-</ol>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>打开命令行工具，安装该脚本所需要的两个包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//因为作者设置了打赏，需要在末尾加入--no-fund</span><br><span class="line">npm i dayjs --save --no-fund</span><br><span class="line">npm i selenium-webdriver --save --no fund</span><br></pre></td></tr></table></figure>
 
-<p>安装完成后，新建一个<code>.js</code>文件，名称任意，加入如下代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dayjs = <span class="built_in">require</span>(<span class="string">&quot;dayjs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">By</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;selenium-webdriver&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> selenium = <span class="built_in">require</span>(<span class="string">&quot;selenium-webdriver&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> driver = <span class="keyword">new</span> selenium.<span class="title class_">Builder</span>().<span class="title function_">forBrowser</span>(<span class="string">&quot;chrome&quot;</span>).<span class="title function_">build</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最大化浏览器</span></span><br><span class="line">driver.<span class="title function_">manage</span>().<span class="title function_">window</span>().<span class="title function_">maximize</span>();</span><br><span class="line">driver.<span class="title function_">get</span>(<span class="string">&quot;https://www.taobao.com&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sleep</span> = (<span class="params">time</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, time * <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 登录</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">login</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> loginText = driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">linkText</span>(<span class="string">&quot;亲，请登录&quot;</span>));</span><br><span class="line">  <span class="keyword">if</span> (loginText) loginText.<span class="title function_">click</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;请在20秒内完成扫码&quot;</span>);</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">20</span>);</span><br><span class="line">  driver.<span class="title function_">get</span>(<span class="string">&quot;https://cart.taobao.com/cart.htm&quot;</span>);</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">3</span>);</span><br><span class="line">  <span class="comment">//   点击全选按钮</span></span><br><span class="line">  <span class="keyword">if</span> (driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">id</span>(<span class="string">&quot;J_SelectAll1&quot;</span>)))</span><br><span class="line">    driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">id</span>(<span class="string">&quot;J_SelectAll1&quot;</span>)).<span class="title function_">click</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;登录成功：&quot;</span>, <span class="title function_">dayjs</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>));</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">0.4</span>);</span><br><span class="line">  <span class="title function_">buy</span>(<span class="string">&quot;20xx-xx-xx xx:xx:xx&quot;</span>);<span class="comment">//此处修改开售时间</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 秒杀</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">buy</span> = <span class="keyword">async</span> (<span class="params">buyTime</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> now = <span class="title function_">dayjs</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (now === buyTime) &#123;</span><br><span class="line">      <span class="keyword">if</span> (driver.<span class="title function_">findElement</span>(&#123; <span class="attr">id</span>: <span class="string">&quot;J_Go&quot;</span> &#125;))</span><br><span class="line">        driver.<span class="title function_">findElement</span>(&#123; <span class="attr">id</span>: <span class="string">&quot;J_Go&quot;</span> &#125;).<span class="title function_">click</span>();</span><br><span class="line">      <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">0.4</span>);</span><br><span class="line">      <span class="title function_">submit</span>();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 提交订单</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">submit</span> = <span class="keyword">async</span> (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">linkText</span>(<span class="string">&quot;提交订单&quot;</span>)))</span><br><span class="line">    driver.<span class="title function_">findElement</span>(<span class="title class_">By</span>.<span class="title function_">linkText</span>(<span class="string">&quot;提交订单&quot;</span>)).<span class="title function_">click</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;抢购时间：&quot;</span>, <span class="title function_">dayjs</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()).<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD HH:mm:ss&quot;</span>));</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">sleep</span>(<span class="number">1000</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">login</span>();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><a href="#%E5%BC%95%E8%A8%80">引言</a></li>
+<li><a href="#vue2-%E6%BA%90%E7%A0%81">vue2 源码</a><ul>
+<li><a href="#%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84">源码结构</a><ul>
+<li><a href="#compiler">compiler</a></li>
+<li><a href="#core">core</a></li>
+<li><a href="#platforms">platforms</a></li>
+<li><a href="#shared">shared</a></li>
+<li><a href="#types">types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="vue2-源码"><a href="#vue2-源码" class="headerlink" title="vue2 源码"></a>vue2 源码</h1><h2 id="源码结构"><a href="#源码结构" class="headerlink" title="源码结构"></a>源码结构</h2><h3 id="compiler"><a href="#compiler" class="headerlink" title="compiler"></a>compiler</h3><h3 id="core"><a href="#core" class="headerlink" title="core"></a>core</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.ts</span></span><br><span class="line"><span class="comment">// 初始化全局入口</span></span><br><span class="line"><span class="title function_">initGlobalAPI</span>(<span class="variable constant_">VUE</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>在该脚本文件所在位置打开命令行工具，输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//xxx.js为刚才保存的脚本文件，名字自定</span><br><span class="line">node xxx.js //回车</span><br></pre></td></tr></table></figure>
-
-<p>脚本自动运行，扫码登陆后就在你设置好的时间开始帮你秒杀商品。</p>
-<blockquote>
-<p>附 python代码</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.chrome.service <span class="keyword">import</span> Service</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择chromedriver.exe路径</span></span><br><span class="line">s = Service(<span class="string">r&quot;D:\Google\Chrome\Application\chromedriver.exe&quot;</span>)</span><br><span class="line">driver = webdriver.Chrome(service=s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">driver.get(<span class="string">&quot;https://www.taobao.com&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> driver.find_element(By.LINK_TEXT, <span class="string">&quot;亲，请登录&quot;</span>):</span><br><span class="line">driver.find_element(By.LINK_TEXT, <span class="string">&quot;亲，请登录&quot;</span>).click()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">30</span>):</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;在&quot;</span> + <span class="built_in">str</span>(<span class="number">30</span> - i) + <span class="string">&quot;秒内完成扫码&quot;</span>)</span><br><span class="line">time.sleep(<span class="number">1</span>)</span><br><span class="line">now = datetime.datetime.now()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;login success:&#x27;</span>, now.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S.%f&#x27;</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 购物车结算</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getcar</span>():</span><br><span class="line">driver.get(<span class="string">&quot;https://cart.taobao.com/cart.htm&quot;</span>)</span><br><span class="line">time.sleep(<span class="number">3</span>)</span><br><span class="line"><span class="comment"># 点击购物车里全选按钮</span></span><br><span class="line"><span class="keyword">if</span> driver.find_element(By.ID, <span class="string">&quot;J_SelectAll1&quot;</span>):</span><br><span class="line">driver.find_element(By.ID, <span class="string">&quot;J_SelectAll1&quot;</span>).click()</span><br><span class="line">time.sleep(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sub_order</span>(<span class="params">ordertime</span>):</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">now = datetime.datetime.now().strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S.%f&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(now)</span><br><span class="line"><span class="keyword">if</span> now &gt;= ordertime:</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line"><span class="comment"># 点击结算按钮</span></span><br><span class="line"><span class="keyword">if</span> driver.find_element(By.ID, <span class="string">&quot;J_Go&quot;</span>):</span><br><span class="line">driver.find_element(By.ID, <span class="string">&quot;J_Go&quot;</span>).click()</span><br><span class="line">now = datetime.datetime.now()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;standby success:&#x27;</span>, now.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S.%f&#x27;</span>))</span><br><span class="line"><span class="comment"># 点击提交订单</span></span><br><span class="line"><span class="keyword">if</span> driver.find_element(By.CLASS_NAME, <span class="string">&#x27;go-btn&#x27;</span>):</span><br><span class="line">driver.find_element(By.CLASS_NAME, <span class="string">&quot;go-btn&quot;</span>).click()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;order success:&#x27;</span> + <span class="built_in">str</span>(now))</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line"><span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">login()</span><br><span class="line">getcar()</span><br><span class="line">sub_order(<span class="string">&#x27;2023-08-01 11:28:50.000000&#x27;</span>) <span class="comment">#输入要抢购的时间即可</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>参考链接:<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/tardis/bd/art/609639709?source_id=1001">https://www.zhihu.com/tardis/bd/art/609639709?source_id=1001</a></p>
-</blockquote>
-
+<h3 id="platforms"><a href="#platforms" class="headerlink" title="platforms"></a>platforms</h3><h3 id="shared"><a href="#shared" class="headerlink" title="shared"></a>shared</h3><h3 id="types"><a href="#types" class="headerlink" title="types"></a>types</h3>
     </div>
 
     
@@ -322,7 +340,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://jjbond.cn/posts/958.html" title="用nodejs编写一个淘宝秒杀脚本">https://jjbond.cn/posts/958.html</a>
+    <a href="https://jjbond.cn/posts/5805.html" title="vue2.x 源码">https://jjbond.cn/posts/5805.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -335,7 +353,7 @@
           
           <div class="post-tags">
               <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
-              <a href="/tags/nodejs/" rel="tag"><i class="fa fa-tag"></i> nodejs</a>
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
           </div>
 
         
@@ -344,13 +362,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/13078.html" rel="prev" title="用React Hooks搭建一个电影搜索App">
-      <i class="fa fa-chevron-left"></i> 用React Hooks搭建一个电影搜索App
+    <a href="/posts/10922.html" rel="prev" title="vue进阶">
+      <i class="fa fa-chevron-left"></i> vue进阶
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/33264.html" rel="next" title="用Python编写一个jd秒杀脚本">
-      用Python编写一个jd秒杀脚本 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -414,7 +429,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">运行</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue2-%E6%BA%90%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">vue2 源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">源码结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#compiler"><span class="nav-number">2.1.1.</span> <span class="nav-text">compiler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#core"><span class="nav-number">2.1.2.</span> <span class="nav-text">core</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#platforms"><span class="nav-number">2.1.3.</span> <span class="nav-text">platforms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shared"><span class="nav-number">2.1.4.</span> <span class="nav-text">shared</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#types"><span class="nav-number">2.1.5.</span> <span class="nav-text">types</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
