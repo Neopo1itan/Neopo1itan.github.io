@@ -32,6 +32,7 @@ date: 2024-01-16 15:33:05
   - [数据劫持优化](#数据劫持优化)
 - [模板编译](#模板编译)
 - [基于 proxy 的响应式](#基于-proxy-的响应式)
+- [手写 defineReactive](#手写-definereactive)
 
 ## vue3 的优化
 
@@ -88,3 +89,155 @@ proxy => 底层优化
    1. 依赖的 set()被触发 => Reflect.set()修改对应属性 => 获取到 targetMap 订阅方(depsMap) => 链条传递 => 触发渲染
 
 - 主响应式入口/core/packages/reactivity/src/index.ts
+
+## 手写 defineReactive
+
+```js
+class Vue {
+	constructor(options) {
+		const data = options.data
+		this._data = data
+
+		//数据劫持
+		_proxy(this, '_data', data)
+
+		//核心逻辑
+		observe(data)
+
+		new Watch(
+			this,
+			function () {
+				return data.name + '创建响应式'
+			},
+			function () {
+				console.log('watch cb:', this.value)
+			}
+		)
+	}
+}
+
+const _proxy = function (vm, sourceKey, data) {
+	const keys = Object.keys(data)
+
+	keys.forEach((key) => {
+		Object.defineProperty(vm, key, {
+			get() {
+				return vm[sourceKey][key]
+			},
+			set(val) {
+				vm[sourceKey][key] = val
+			},
+		})
+	})
+}
+
+const observe = function (data) {
+	const ob = new Observe(data)
+}
+
+class Observe {
+	constructor(data) {
+		this.walk(data)
+	}
+	walk(data) {
+		Object.keys(data).forEach((key) => {
+			let val = obj[key]
+			const dep = new Dep()
+
+			Object.defineProperty(obj, key, {
+				get() {
+					console.log('依赖收集')
+					dep.depend()
+					return val
+				},
+				set(newVal) {
+					console.log('派发更新')
+					val = newVal
+					dep.notify()
+				},
+			})
+		})
+	}
+}
+
+class Dep {
+	constructor() {
+		this.id = Dep.uid++
+		this.subs = []
+	}
+
+	addSub(sub) {
+		this.subs.push(sub)
+	}
+	depend() {
+		if (Dep.target) {
+			Dep.target.addDep(this)
+		}
+	}
+	notify() {
+		this.subs.forEach((sub) => sub.update())
+	}
+	removeSub(sub) {
+		const subIndex = this.subs.indexOf(sub)
+		this.subs.splices(subIndex, 1)
+	}
+}
+
+Dep.uid = 0
+Dep.target = null
+
+class Watch {
+	constructor(vm, render, cb) {
+		this.vm = vm
+		this.render = render
+		this.cb = cb
+
+		this.deps = []
+		this.depsIds = new Set()
+		this.newDeps = []
+		this.newDepsIds = new Set()
+
+		this.value = this.get()
+		this.cb(this.value)
+	}
+
+	get() {
+		Dep.taget = this
+		//重置
+		this.newDeps = []
+		this.newDepsIds = new Set()
+
+		const value = this.render()
+
+		Dep.target = null
+		this.deps.forEach((oldDep) => {
+			const notExistInNewDeps = !this.newDepsIds.has(oldDep.id)
+			if (notExistInNewDeps) {
+				oldDep.removeSub(this)
+			}
+		})
+
+		this.deps = this.newDeps
+		this.depsIds = this.newDepsIds
+
+		return value
+	}
+
+	addDep(dep) {
+		const depId = dep.id
+		if (!this.newDepsIds.has(depId)) {
+			this.newDeps.push(dep)
+			this.newDepsIds.add(depId)
+
+			if (!this.depsIds.has(depId)) {
+				dep.addSub(this)
+			}
+		}
+	}
+
+	update() {
+		this.value = this.get()
+		this.cb(this.value)
+	}
+}
+```
