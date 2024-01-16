@@ -1,14 +1,13 @@
 ---
-
-title: vue 源码(上)
-date: 2024-01-15 15:09:23
+title: vue2.x 源码
 tags:
-- Web
-- Vue
-  categories:
-- 前端开发
-- 培训课
-
+  - Web
+  - Vue
+categories:
+  - 前端开发
+  - 培训课
+abbrlink: 5805
+date: 2024-01-15 15:09:23
 ---
 
 # 引言
