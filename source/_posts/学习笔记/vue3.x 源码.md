@@ -1,15 +1,13 @@
 ---
-
 title: vue3.x 源码
-date: 2024-01-16 15:33:05
 tags:
-
-- Web
-- Vue
-  categories:
-- 前端开发
-- 培训课
-
+  - Web
+  - Vue
+categories:
+  - 前端开发
+  - 培训课
+abbrlink: 54268
+date: 2024-01-16 15:33:05
 ---
 
 ## vue2 存在的问题
