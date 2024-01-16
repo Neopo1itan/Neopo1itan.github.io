@@ -7,6 +7,82 @@
 ]]></content>
   </entry>
   <entry>
+    <title>vue3.x 源码</title>
+    <url>/posts/54268.html</url>
+    <content><![CDATA[<h2 id="vue2-存在的问题"><a href="#vue2-存在的问题" class="headerlink" title="vue2 存在的问题"></a>vue2 存在的问题</h2><ul>
+<li>代码结构：以整体的包为形式存在</li>
+<li>性能优化的空间：ObjectDefineProperty 对象的方法，要对数组进行操作的话需要再自己封装一层，且所有值都是响应式的(性能损耗)</li>
+<li>选项式的配置模式：不好维护庞大的项目，可维护性</li>
+<li>浏览器真的需要老版本吗</li>
+</ul>
+<h2 id="vue3-的问题"><a href="#vue3-的问题" class="headerlink" title="vue3 的问题"></a>vue3 的问题</h2><ul>
+<li>太多的 <strong>breaking changes</strong> 太多不兼容的内容</li>
+<li>生态影响</li>
+<li>发布节奏太快<span id="more"></span></li>
+<li><a href="#vue2-%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98">vue2 存在的问题</a></li>
+<li><a href="#vue3-%E7%9A%84%E9%97%AE%E9%A2%98">vue3 的问题</a></li>
+<li><a href="#vue3-%E7%9A%84%E4%BC%98%E5%8C%96">vue3 的优化</a><ul>
+<li><a href="#%E7%BB%93%E6%9E%84%E4%B8%8A%E7%9A%84%E4%BC%98%E5%8C%96---monorepo">结构上的优化 - monorepo</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD%E4%B8%8A%E7%9A%84%E4%BC%98%E5%8C%96">性能上的优化</a></li>
+<li><a href="#%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96">编译优化</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8A%AB%E6%8C%81%E4%BC%98%E5%8C%96">数据劫持优化</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91">模板编译</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-proxy-%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F">基于 proxy 的响应式</a></li>
+</ul>
+<h2 id="vue3-的优化"><a href="#vue3-的优化" class="headerlink" title="vue3 的优化"></a>vue3 的优化</h2><h3 id="结构上的优化-monorepo"><a href="#结构上的优化-monorepo" class="headerlink" title="结构上的优化 - monorepo"></a>结构上的优化 - monorepo</h3><p>原子结构 可独立拆分引用 &#x3D;&gt; 可做业务上的拆分</p>
+<h3 id="性能上的优化"><a href="#性能上的优化" class="headerlink" title="性能上的优化"></a>性能上的优化</h3><ul>
+<li><p>移除了很多使用率低的 api</p>
+</li>
+<li><p><strong>tree-shaking</strong> &#x3D;&gt; 产物打包优化</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> components <span class="keyword">from</span> <span class="string">&#x27;components&#x27;</span></span><br><span class="line"><span class="comment">//components.input</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; input &#125; <span class="keyword">from</span> <span class="string">&#x27;components&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; ref, computed, watch &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编译优化"><a href="#编译优化" class="headerlink" title="编译优化"></a>编译优化</h3><p>compile 阶段对静态的模板进行分析 &#x3D;&gt; 分析树 &lt;&#x3D; PatchFlag</p>
+<h3 id="数据劫持优化"><a href="#数据劫持优化" class="headerlink" title="数据劫持优化"></a>数据劫持优化</h3><p><strong>vue2.x</strong><br><em>object.defineProperty</em></p>
+<ol>
+<li>无法检测对象属性的增加和删除 &#x3D;&gt; $set $delete</li>
+<li>数组 &#x3D;&gt; push pop…</li>
+<li>层级较深 &#x3D;&gt; 递归遍历</li>
+</ol>
+<p><strong>vue3.x</strong><br>proxy &#x3D;&gt; 底层优化</p>
+<h2 id="模板编译"><a href="#模板编译" class="headerlink" title="模板编译"></a>模板编译</h2><ol>
+<li>词法分析阶段(baseParse)：template &#x3D;&gt; AST(抽象语法树)</li>
+<li>指令和语法的转化阶段(transform)：AST &#x3D;&gt; 解析不同的节点进行区分 &#x3D;&gt; 不同类型的转换</li>
+<li>可执行函数的生成阶段(generator)：转化后 AST 生成渲染函数</li>
+</ol>
+<ul>
+<li>主编译入口：core&#x2F;packages&#x2F;compiler-core&#x2F;src&#x2F;index.ts</li>
+</ul>
+<h2 id="基于-proxy-的响应式"><a href="#基于-proxy-的响应式" class="headerlink" title="基于 proxy 的响应式"></a>基于 proxy 的响应式</h2><ol>
+<li>数据劫持 | 数据响应：检测数据变化 &#x3D;&gt; 函数监听化执行</li>
+<li>依赖收集 (effect)<ul>
+<li>当前 vm 实例上挂载 effect &#x3D;&gt; 当前 activeEffect 切换为 effect &#x3D;&gt; 在 effect 上创建 deps 等属性用于传递依赖</li>
+<li>结合 1+2 变量访问 &#x3D;&gt; 触发对应的 get() &#x3D;&gt; 创建 deps 对象(targetMap) &#x3D;&gt; tagetMap 中的 Deps 可以作为属性进行添加(depsMap)</li>
+<li>depsMap 会被添加 activeEffect - 被收集的订阅方 activeEffect 中也同时存在 deps 数组中用于存放关联方的 depsMap - 订阅者</li>
+</ul>
+</li>
+<li>派发更新 ref<ol>
+<li>依赖的 set()被触发 &#x3D;&gt; Reflect.set()修改对应属性 &#x3D;&gt; 获取到 targetMap 订阅方(depsMap) &#x3D;&gt; 链条传递 &#x3D;&gt; 触发渲染</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>主响应式入口&#x2F;core&#x2F;packages&#x2F;reactivity&#x2F;src&#x2F;index.ts</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>培训课</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue2.x 源码</title>
     <url>/posts/5805.html</url>
     <content><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><blockquote>

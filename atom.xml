@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2024-01-16T09:01:59.221Z</updated>
+  <updated>2024-01-16T09:08:20.281Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue3.x 源码</title>
+    <link href="https://jjbond.cn/posts/54268.html"/>
+    <id>https://jjbond.cn/posts/54268.html</id>
+    <published>2024-01-16T07:33:05.000Z</published>
+    <updated>2024-01-16T09:08:20.281Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;vue2-存在的问题&quot;&gt;&lt;a href=&quot;#vue2-存在的问题&quot; class=&quot;headerlink&quot; title=&quot;vue2 存在的问题&quot;&gt;&lt;/a&gt;vue2 存在的问题&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;代码结构：以整体的包为形式存在&lt;/li&gt;
+&lt;li&gt;性能优化的空间：ObjectDefineProperty 对象的方法，要对数组进行操作的话需要再自己封装一层，且所有值都是响应式的(性能损耗)&lt;/li&gt;
+&lt;li&gt;选项式的配置模式：不好维护庞大的项目，可维护性&lt;/li&gt;
+&lt;li&gt;浏览器真的需要老版本吗&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;vue3-的问题&quot;&gt;&lt;a href=&quot;#vue3-的问题&quot; class=&quot;headerlink&quot; title=&quot;vue3 的问题&quot;&gt;&lt;/a&gt;vue3 的问题&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;太多的 &lt;strong&gt;breaking changes&lt;/strong&gt; 太多不兼容的内容&lt;/li&gt;
+&lt;li&gt;生态影响&lt;/li&gt;
+&lt;li&gt;发布节奏太快</summary>
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="Vue" scheme="https://jjbond.cn/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>vue2.x 源码</title>
