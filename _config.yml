@@ -14,7 +14,7 @@ timezone: Asia/Shanghai
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://jjbond.cn
 permalink: posts/:abbrlink.html
-abbrlink: 
+abbrlink:
   alg: crc16 #算法
   rep: dec #进制
 permalink_defaults:
@@ -104,14 +104,14 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-- type: git
-  # repo: git@github.com:Neopo1itan/youyan.github.io.git
-  repo: git@github.com:Neopo1itan/Neopo1itan.github.io.git
-  branch: main
-- type: baidu_url_submitter
-- type: git
-  repo: git@gitee.com:youyangitee/youyangitee.git
-  branch: master
+  - type: git
+    # repo: git@github.com:Neopo1itan/youyan.github.io.git
+    repo: git@github.com:Neopo1itan/Neopo1itan.github.io.git
+    branch: main
+  - type: git
+    repo: git@gitee.com:youyangitee/youyangitee.git
+    branch: master
+  - type: baidu_url_submitter
 
 # 懒加载
 lazyload:
@@ -127,7 +127,7 @@ feed:
   path: atom.xml
   limit: 20
   hub:
-  content: 
+  content:
   content_limit: 140
   content_limit_delim: ' '
   order_by: -date
@@ -167,7 +167,7 @@ css_minifier:
   enable: true
   exclude:
     - '*.min.css'
-    
+
 # js压缩
 js_minifier:
   enable: true
@@ -194,15 +194,15 @@ image_minifier:
 service_worker:
   maximumFileSizeToCacheInBytes: 5242880
   staticFileGlobs:
-  - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
+    - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
   stripPrefix: public
   verbose: true
 
 #标签云
 tag_cloud:
-    textFont: Trebuchet MS, Helvetica
-    textColor: '#4da5ff'
-    textHeight: 25
-    outlineColor: '#E2E1D1'
-    maxSpeed: 0.1
-    pauseOnSelected: true # true 意味着当选中对应 tag 时,停止转动
+  textFont: Trebuchet MS, Helvetica
+  textColor: '#4da5ff'
+  textHeight: 25
+  outlineColor: '#E2E1D1'
+  maxSpeed: 0.1
+  pauseOnSelected: true # true 意味着当选中对应 tag 时,停止转动
