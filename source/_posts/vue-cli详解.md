@@ -1,16 +1,13 @@
 ---
-
 title: vue-cli 详解
 abbrlink: 38044
 date: 2024-01-25 16:40:22
 tags:
-
-- Web
-- Vue
-  categories:
-- 前端开发
-- 培训课
-
+  - Web
+  - Vue
+categories:
+  - 前端开发
+  - 培训课
 ---
 
 > **vue-cli**
