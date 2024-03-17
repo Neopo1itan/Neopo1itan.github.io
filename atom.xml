@@ -39,6 +39,40 @@
   </entry>
   
   <entry>
+    <title>vue-cli 详解</title>
+    <link href="https://jjbond.cn/posts/38044.html"/>
+    <id>https://jjbond.cn/posts/38044.html</id>
+    <published>2024-01-25T08:40:22.000Z</published>
+    <updated>2024-03-17T05:53:54.550Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;vue-cli&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基础:用于生成项目文件体系的搭建 + 用户交互&lt;/li&gt;
+&lt;li&gt;metadata 配置(元数据)&lt;/li&gt;
+&lt;li&gt;parser &amp;amp;</summary>
+        
+      
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="Vue" scheme="https://jjbond.cn/tags/Vue/"/>
+    
+  </entry>
+  
+  <entry>
     <title>vue3.x 源码</title>
     <link href="https://jjbond.cn/posts/54268.html"/>
     <id>https://jjbond.cn/posts/54268.html</id>
@@ -132,6 +166,40 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;#vue-%E8%BF%9B%E9%98%B6&quot;&gt;vue 进阶&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="Vue" scheme="https://jjbond.cn/tags/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue 基础 v5</title>
+    <link href="https://jjbond.cn/posts/45434.html"/>
+    <id>https://jjbond.cn/posts/45434.html</id>
+    <published>2024-01-06T12:07:53.000Z</published>
+    <updated>2024-03-17T05:45:09.735Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#vue-%E5%9F%BA%E7%A1%80&quot;&gt;vue 基础&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E7%90%86%E8%AE%BA&quot;&gt;理论&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a</summary>
         
       

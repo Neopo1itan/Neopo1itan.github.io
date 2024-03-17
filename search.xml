@@ -13,6 +13,48 @@
 ]]></content>
   </entry>
   <entry>
+    <title>vue-cli 详解</title>
+    <url>/posts/38044.html</url>
+    <content><![CDATA[<blockquote>
+<p><strong>vue-cli</strong></p>
+<ul>
+<li>基础:用于生成项目文件体系的搭建 + 用户交互</li>
+<li>metadata 配置(元数据)</li>
+<li>parser &amp; render</li>
+</ul>
+</blockquote>
+<h2 id="vue-cli-2-x-x"><a href="#vue-cli-2-x-x" class="headerlink" title="vue-cli_2.x.x"></a>vue-cli_2.x.x</h2><h3 id="bin-vue-init-前置工作"><a href="#bin-vue-init-前置工作" class="headerlink" title="&#x2F;bin&#x2F;vue-init 前置工作"></a>&#x2F;bin&#x2F;vue-init 前置工作</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 下载远程仓库 =&gt; 远程拉去github内的配置</span></span><br><span class="line"><span class="keyword">const</span> download = <span class="built_in">require</span>(<span class="string">&#x27;download-git-repo&#x27;</span>)</span><br><span class="line"><span class="comment">// 命令行处理工具</span></span><br><span class="line"><span class="keyword">const</span> program = <span class="built_in">require</span>(<span class="string">&#x27;commander&#x27;</span>)</span><br><span class="line"><span class="comment">// node下的文件操作系统中的existsSync - 监测是否存在该路径</span></span><br><span class="line"><span class="keyword">const</span> exists = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>).<span class="property">existsSync</span></span><br><span class="line"><span class="comment">// node自带的拼接路径的模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="comment">// 命令行中的加载效果</span></span><br><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">&#x27;ora&#x27;</span>)</span><br><span class="line"><span class="comment">// 获取用户根目录</span></span><br><span class="line"><span class="keyword">const</span> home = <span class="built_in">require</span>(<span class="string">&#x27;user-home&#x27;</span>)</span><br><span class="line"><span class="comment">// 绝对路径替换为波浪号</span></span><br><span class="line"><span class="keyword">const</span> tildify = <span class="built_in">require</span>(<span class="string">&#x27;tildify&#x27;</span>)</span><br><span class="line"><span class="comment">// 高亮</span></span><br><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">&#x27;chalk&#x27;</span>)</span><br><span class="line"><span class="comment">// **important** 用户与脚本命令行的交互 | 面试</span></span><br><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">&#x27;inquirer&#x27;</span>)</span><br><span class="line"><span class="comment">// rm -rf js版本</span></span><br><span class="line"><span class="keyword">const</span> rm = <span class="built_in">require</span>(<span class="string">&#x27;rimraf&#x27;</span>).<span class="property">sync</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="面试题：如何使用本地模板，预设模板-而不是-github？"><a href="#面试题：如何使用本地模板，预设模板-而不是-github？" class="headerlink" title="面试题：如何使用本地模板，预设模板 而不是 github？"></a>面试题：如何使用本地模板，预设模板 而不是 github？</h4><p>使用 <strong>–offline</strong></p>
+<h4 id="如何获取用户参数"><a href="#如何获取用户参数" class="headerlink" title="如何获取用户参数"></a>如何获取用户参数</h4><blockquote>
+<p>vue init webpack zhaowa-app</p>
+</blockquote>
+<p>program.args[0] &#x3D;&gt; ‘webpack’<br>&#x2F;&#x2F; 是否包含斜杠 &#x3D;&gt; 路径层级 &#x3D;&gt;非默认预制模板<br>const hasSlash &#x3D; template.indexOf(‘&#x2F;‘)&gt;-1</p>
+<p>&#x2F;&#x2F; 项目名称<br>rawName &#x3D; program.args[1]</p>
+<p>&#x2F;&#x2F;输入是否为空 &#x3D;&gt; 是否以当前文件目录作为项目根目录<br>const inPlace &#x3D; !rawName || ‘.’</p>
+<p>&#x2F;&#x2F;调整当前目录作为构建目录的根路径<br>const name &#x3D; inPlace ….</p>
+<p>&#x2F;&#x2F;本地目录模板仓库路径拼接 &#x2F;zhaowa&#x2F;.vue-templates&#x2F;webpack<br>const tmp &#x3D; path.join(home,’…’)</p>
+<h3 id="lib-generate-js"><a href="#lib-generate-js" class="headerlink" title="&#x2F;lib&#x2F;generate.js"></a>&#x2F;lib&#x2F;generate.js</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 静态网页文件生成器</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Metalsmith</span></span><br><span class="line"><span class="comment">// 模板引擎</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Handlebars</span></span><br><span class="line"><span class="comment">// 多条件匹配工具</span></span><br><span class="line"><span class="keyword">const</span> multimatch</span><br></pre></td></tr></table></figure>
+
+<h3 id="lib-ask-js"><a href="#lib-ask-js" class="headerlink" title="&#x2F;lib&#x2F;ask.js"></a>&#x2F;lib&#x2F;ask.js</h3><p>解析传进来的模板有哪些要询问的</p>
+<p>inquirer.prompt</p>
+<h3 id="lib-filter-js-过滤不需要的"><a href="#lib-filter-js-过滤不需要的" class="headerlink" title="&#x2F;lib&#x2F;filter.js 过滤不需要的"></a>&#x2F;lib&#x2F;filter.js 过滤不需要的</h3><h2 id="vue-cli-3-x-x"><a href="#vue-cli-3-x-x" class="headerlink" title="vue-cli_3.x.x"></a>vue-cli_3.x.x</h2><h3 id="lib-create-js"><a href="#lib-create-js" class="headerlink" title="&#x2F;lib&#x2F;create.js"></a>&#x2F;lib&#x2F;create.js</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> creator = <span class="keyword">new</span> <span class="title class_">Creator</span>(name, targetDir, <span class="title function_">getPromptModules</span>())</span><br><span class="line"><span class="keyword">await</span> creator.<span class="title function_">create</span>(options)</span><br></pre></td></tr></table></figure>
+
+<h3 id="lib-Creator-js"><a href="#lib-Creator-js" class="headerlink" title="&#x2F;lib&#x2F;Creator.js"></a>&#x2F;lib&#x2F;Creator.js</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">class</span> <span class="title class_">Creator</span> <span class="keyword">extends</span> <span class="title class_ inherited__">EventEmitter</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>用户创建指令 -&gt; 创建参数解析 -&gt; 加载模板(远端&#x2F;本地) – prompts –&gt; 处理文件路径 -&gt; 文件层级处理 -&gt; 文件模板渲染(plugins) -&gt; 产出包</p>
+<p>如何书写 node 脚本工具</p>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>培训课</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>vue3.x 源码</title>
     <url>/posts/54268.html</url>
     <content><![CDATA[<h2 id="vue2-存在的问题"><a href="#vue2-存在的问题" class="headerlink" title="vue2 存在的问题"></a>vue2 存在的问题</h2><ul>
@@ -254,6 +296,111 @@
 <h3 id="插件系统"><a href="#插件系统" class="headerlink" title="插件系统"></a>插件系统</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> element <span class="keyword">from</span> <span class="string">&#x27;element&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Vue.use(element)</span></span><br><span class="line"><span class="title function_">createApp</span>(app).<span class="title function_">use</span>(element, &#123;</span><br><span class="line">	<span class="attr">isA</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// =&gt; install:(()=&gt;&#123;&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// vue.prototype.$abc =&gt; this.$abc</span></span><br><span class="line"><span class="comment">// app.globalProperties.$abc</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="Vue-3-compositionAPI"><a href="#Vue-3-compositionAPI" class="headerlink" title="Vue 3 - compositionAPI"></a>Vue 3 - compositionAPI</h3>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>培训课</category>
+      </categories>
+      <tags>
+        <tag>Web</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue 基础 v5</title>
+    <url>/posts/45434.html</url>
+    <content><![CDATA[<span id="more"></span>
+
+<ul>
+<li><a href="#vue-%E5%9F%BA%E7%A1%80">vue 基础</a><ul>
+<li><a href="#%E7%90%86%E8%AE%BA">理论</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9-mvvm-%E7%9A%84%E4%BA%86%E8%A7%A3">面试题：对 MVVM 的了解</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%99%E6%B3%95">写法</a><ul>
+<li><a href="#vue-%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-mvvm-%E5%BC%80%E5%8F%91">vue 如何利用 mvvm 开发?</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98vue-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">面试题：vue 的生命周期</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%91%E5%90%AC">监听</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98computed-%E5%92%8C-watch">面试题：computed 和 watch</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8C%87%E4%BB%A4--%E6%9D%A1%E4%BB%B6">指令 &amp; 条件</a><ul>
+<li><a href="#%E6%9D%A1%E4%BB%B6">条件</a></li>
+<li><a href="#v-for--v-if-%E5%9C%A8%E5%90%8C%E4%B8%80%E8%8A%82%E7%82%B9%E4%BD%BF%E7%94%A8%E6%97%B6">v-for &amp; v-if 在同一节点使用时</a></li>
+<li><a href="#v-model-v-once-v-text-v-html-v-bind">v-model v-once v-text v-html v-bind</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4">自定义指令</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E4%BB%B6---v-on">事件 - v-on</a><ul>
+<li><a href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6">修饰符</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%AE%BE%E8%AE%A1---%E4%B8%BA%E4%BD%95-vue-%E6%8A%8A%E4%BA%8B%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%9C%A8%E6%A8%A1%E6%9D%BF%E4%B8%8A%E8%80%8C%E4%B8%8D%E6%98%AF-js-%E4%B8%AD">事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E4%BB%B6%E5%8C%96">组件化</a><ul>
+<li><a href="#%E4%B8%80%E8%88%AC%E7%BB%84%E4%BB%B6--%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6--%E6%8F%92%E4%BB%B6">一般组件 + 动态组件 &#x3D;&gt; 插件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="vue-基础"><a href="#vue-基础" class="headerlink" title="vue 基础"></a>vue 基础</h2><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><h4 id="面试题：对-MVVM-的了解"><a href="#面试题：对-MVVM-的了解" class="headerlink" title="面试题：对 MVVM 的了解"></a>面试题：对 MVVM 的了解</h4><ul>
+<li>Web 应用发展史<ol>
+<li>语义化模板</li>
+<li>MVC - model view controller</li>
+<li>MVVM - model view viewModel<ol>
+<li>数据本身会通过 model 挂在在 viewModel，vm 会劫持数据并同步至渲染层</li>
+<li>视图层发生外部变化，会同样回调给 vw，返回给 model</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><h4 id="vue-如何利用-mvvm-开发"><a href="#vue-如何利用-mvvm-开发" class="headerlink" title="vue 如何利用 mvvm 开发?"></a>vue 如何利用 mvvm 开发?</h4><p>数据双向绑定</p>
+<ol>
+<li>利用花括号，构筑了数据与 vm 的双向绑定关系 &#x3D;》 buildTemplate | compile</li>
+<li>通过视图绑定监听事件来处理数据 &#x3D;》v-model &#x3D;&#x3D;&#x3D; :value @input &#x3D;&gt; 节点处理流程</li>
+</ol>
+<p><strong>buildTemplate &#x3D;》 render()</strong></p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h4 id="面试题：vue-的生命周期"><a href="#面试题：vue-的生命周期" class="headerlink" title="面试题：vue 的生命周期"></a>面试题：vue 的生命周期</h4><p>创建阶段: beforeCreate &#x3D;&gt; created &#x3D;&gt; beforeMount &#x3D;&gt; mounted</p>
+<p>更新阶段: beforeUpdate &#x3D;&gt; updated</p>
+<p>销毁阶段: beforeDestroy &#x3D;》 destroyed</p>
+<p><font color=LightSkyBlue>beforeCreate</font>： new Vue() - 创建实例阶段<br><font color=LightSkyBlue>created</font>: data | props | method | computed - 数据创建</p>
+<p><font color=orange>beforeMount</font>: vDom(虚拟节点) - 数据操作以及虚拟 dom 的变化 但不能涉及 dom<br><font color=orange>mounted</font>: Dom 更新</p>
+<p><font color=CadetBlue>beforeUpdate</font>： vDom - 完成更新，dom 还未更新<br><font color=CadetBlue>updated</font>： dom 完成更新 &#x3D;》 谨慎做更新数据操作</p>
+<p><font color=Green>beforeDestroy</font>：实例尚未销毁 - 清空 eventBus setTimeOut<br><font color=Green>destroyed</font>：完全销毁</p>
+<p>补充：key &#x3D;》 diff &#x3D;》 dom diff &#x3D;》 节点 id</p>
+<h3 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h3><h4 id="面试题：computed-和-watch"><a href="#面试题：computed-和-watch" class="headerlink" title="面试题：computed 和 watch"></a>面试题：computed 和 watch</h4><p>相同点：</p>
+<ol>
+<li><strong>基于 vue 的依赖收集机制</strong>进行采集</li>
+<li>都是被依赖的变化所触发，从而进行处理回调</li>
+</ol>
+<p>不同点：</p>
+<ol>
+<li>入&#x2F;出：computed 多入单出，watch 单入多出</li>
+<li>性能：computed 存在缓存，不收调用次数的性能损耗；watch 只在监听的值变化时，不包含生成 immediate</li>
+<li>computed 关注结果，watch 关注过程</li>
+</ol>
+<p>问：computed 缓存和响应式如何实现的?</p>
+<p>完整过程：</p>
+<ol>
+<li>流程：new Vue() &#x3D;&gt; 初始化 computed(initState) &#x3D;&gt; createComputedGetter(key) &#x3D;&gt; mount</li>
+<li>劫持：getter 属性变化区分是否是最新状态 dirty</li>
+<li>target depend &lt;&#x3D;&#x3D;&gt; 原值和依赖之间的关系链</li>
+</ol>
+<h3 id="指令-条件"><a href="#指令-条件" class="headerlink" title="指令 &amp; 条件"></a>指令 &amp; 条件</h3><h4 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h4><p>v-if | v-show<br>v-else | v-else-if</p>
+<p>v-for</p>
+<h4 id="v-for-v-if-在同一节点使用时"><a href="#v-for-v-if-在同一节点使用时" class="headerlink" title="v-for &amp; v-if 在同一节点使用时"></a>v-for &amp; v-if 在同一节点使用时</h4><p>vue2.x v-for 会优先作用<br>vue3.x v-if 总是优先于 v-for</p>
+<h4 id="v-model-v-once-v-text-v-html-v-bind"><a href="#v-model-v-once-v-text-v-html-v-bind" class="headerlink" title="v-model v-once v-text v-html v-bind"></a>v-model v-once v-text v-html v-bind</h4><h4 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h4><h3 id="事件-v-on"><a href="#事件-v-on" class="headerlink" title="事件 - v-on"></a>事件 - v-on</h3><h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>.stop .prevent .once .capture .self .passive</p>
+<h4 id="事件的设计-为何-vue-把事件设计在模板上而不是-js-中"><a href="#事件的设计-为何-vue-把事件设计在模板上而不是-js-中" class="headerlink" title="事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中"></a>事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</h4><ol>
+<li>模板定位视图绑定的触发源 + 触发源寻找触发事件的逻辑 —— 方便定位</li>
+<li>js 与视图绑定解耦 —— 更便于测试隔离</li>
+<li>vm 销毁，自动解绑事件 —— 便于回收</li>
+</ol>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><h4 id="一般组件-动态组件-插件"><a href="#一般组件-动态组件-插件" class="headerlink" title="一般组件 + 动态组件 &#x3D;&gt; 插件"></a>一般组件 + 动态组件 &#x3D;&gt; 插件</h4>]]></content>
       <categories>
         <category>前端开发</category>
         <category>培训课</category>
