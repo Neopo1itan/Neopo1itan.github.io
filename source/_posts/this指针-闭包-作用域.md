@@ -1,9 +1,7 @@
 ---
 title: this指针/闭包/作用域
 categories:
-
-- 前端开发
-- 培训课
+- JS
 tags:
 - Web
 - JavaScript

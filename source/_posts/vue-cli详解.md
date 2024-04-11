@@ -6,8 +6,7 @@ tags:
   - Web
   - Vue
 categories:
-  - 前端开发
-  - 培训课
+  - Vue
 ---
 
 > **vue-cli**

@@ -1,8 +1,7 @@
 ---
 title: Promise规范及应用
 tags:
-  - Web
-  - JavaScript
+  - JS
 categories:
   - 前端开发
   - 培训课
@@ -49,18 +48,18 @@ date: 2023-12-08 08:58:28
 
 ```js
 setTimeout(function () {
-  console.log(1);
-}, 0);
+	console.log(1)
+}, 0)
 
 new Promise(function (resolve) {
-  console.log(2);
-  resolve();
-  console.log(3);
+	console.log(2)
+	resolve()
+	console.log(3)
 }).then(function () {
-  console.log(4);
-});
+	console.log(4)
+})
 
-console.log(5);
+console.log(5)
 
 //2
 //3
@@ -100,11 +99,11 @@ foo(res)=>{
 > 在 node 中大量的:
 >
 > ```js
-> fs.readFile("a.text", "utf-8", function (err, data) {
->   fs.readFile("a.text", "utf-8", function (err, data) {
->     fs.readFile("a.text", "utf-8", function (err, data) {});
->   });
-> });
+> fs.readFile('a.text', 'utf-8', function (err, data) {
+> 	fs.readFile('a.text', 'utf-8', function (err, data) {
+> 		fs.readFile('a.text', 'utf-8', function (err, data) {})
+> 	})
+> })
 > ```
 
 ### Promise
@@ -112,18 +111,18 @@ foo(res)=>{
 应用 -> fetch,webpack
 
 ```js
-export const getData = () => post("xxx/xxxx");
+export const getData = () => post('xxx/xxxx')
 
 getData().then((res) => {
-  this.dataList = res.data;
-});
+	this.dataList = res.data
+})
 
 function post(url) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({ data: [], url });
-    }, 1000);
-  });
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve({ data: [], url })
+		}, 1000)
+	})
 }
 ```
 
@@ -131,17 +130,17 @@ function post(url) {
 
 ```js
 function* gen() {
-  yield 1;
-  yield 1;
-  let res = yield 3;
-  return res;
+	yield 1
+	yield 1
+	let res = yield 3
+	return res
 }
 
-let result = gen();
-console.log(result.next());
-console.log(result.next());
-console.log(result.next());
-console.log(result.next("over"));
+let result = gen()
+console.log(result.next())
+console.log(result.next())
+console.log(result.next())
+console.log(result.next('over'))
 ```
 
 ### async / await
@@ -150,21 +149,21 @@ console.log(result.next("over"));
 
 ```js
 async function post(url) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({ data: [], url });
-    }, 1000);
-  });
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			resolve({ data: [], url })
+		}, 1000)
+	})
 }
 
-const getData = async () => await post("xxx/xxx");
+const getData = async () => await post('xxx/xxx')
 
 const run = async () => {
-  console.log("starting");
-  const result = await getData();
-  console.log(result);
-};
-run();
+	console.log('starting')
+	const result = await getData()
+	console.log(result)
+}
+run()
 ```
 
 ## 3 Promise 深入理解
@@ -197,73 +196,73 @@ run();
 
 ```js
 function Lpromise(execute) {
-  this.status = "pending";
-  this.value = null;
-  this.reason = null;
-  this.onFulfilled = null;
-  this.onRejected = null;
+	this.status = 'pending'
+	this.value = null
+	this.reason = null
+	this.onFulfilled = null
+	this.onRejected = null
 
-  const resolve = (value) => {
-    // pending才是可变状态
-    if (this.status === "pending") {
-      this.status = "fulfilled";
-      this.value = value;
-    }
-  };
+	const resolve = (value) => {
+		// pending才是可变状态
+		if (this.status === 'pending') {
+			this.status = 'fulfilled'
+			this.value = value
+		}
+	}
 
-  const reject = (reason) => {
-    // pending才是可变状态
-    if (this.status === "pending") {
-      this.status = "rejected";
-      this.reason = reason;
-    }
-  };
+	const reject = (reason) => {
+		// pending才是可变状态
+		if (this.status === 'pending') {
+			this.status = 'rejected'
+			this.reason = reason
+		}
+	}
 
-  execute(resolve, reject);
+	execute(resolve, reject)
 }
 
 Lpromise.prototype.then = function (onFulfilled, onRejected) {
-  onFulfilled =
-    typeof onFulfilled === "function"
-      ? onFulfilled
-      : (data) => {
-          return data;
-        };
-  onRejected =
-    typeof onRejected === "function"
-      ? onRejected
-      : (error) => {
-          throw error;
-        };
-  if (this.status === "fulfilled") {
-    onFulfilled(this.value);
-  }
-  if (this.status === "rejected") {
-    onRejected(this.reason);
-  }
-};
+	onFulfilled =
+		typeof onFulfilled === 'function'
+			? onFulfilled
+			: (data) => {
+					return data
+			  }
+	onRejected =
+		typeof onRejected === 'function'
+			? onRejected
+			: (error) => {
+					throw error
+			  }
+	if (this.status === 'fulfilled') {
+		onFulfilled(this.value)
+	}
+	if (this.status === 'rejected') {
+		onRejected(this.reason)
+	}
+}
 ```
 
 #### 测试
 
 ```js
 new Lpromise((resolve, reject) => {
-  resolve("hello");
+	resolve('hello')
 }).then((res) => {
-  console.log(res);
-});
+	console.log(res)
+})
 ```
 
 #### 问题
 
 ```js
 new Lpromise((resolve, reject) => {
-  setTimeout(() => {
-    resolve("hello");
-  }, 1000);
+	setTimeout(() => {
+		resolve('hello')
+	}, 1000)
 }).then((res) => {
-  console.log(res);
-});
+	console.log(res)
+})
 ```
 
 没有输出了  
@@ -281,60 +280,60 @@ new Lpromise((resolve, reject) => {
 
 ```js
 function Lpromise(execute) {
-  this.status = "pending";
-  this.value = null;
-  this.reason = null;
-  this.onFulfilledArray = [];
-  this.onRejectedArray = [];
+	this.status = 'pending'
+	this.value = null
+	this.reason = null
+	this.onFulfilledArray = []
+	this.onRejectedArray = []
 
-  const resolve = (value) => {
-    //queueMicrotask 方法用于将一个微任务添加到微任务队列中。微任务是异步执行的任务，它们在宏任务之间插入。
-    queueMicrotask(() => {
-      if (this.status === "pending") {
-        this.status = "fulfilled";
-        this.value = value;
-        this.onFulfilledArray.forEach((fn) => fn(value));
-      }
-    });
-  };
+	const resolve = (value) => {
+		//queueMicrotask 方法用于将一个微任务添加到微任务队列中。微任务是异步执行的任务，它们在宏任务之间插入。
+		queueMicrotask(() => {
+			if (this.status === 'pending') {
+				this.status = 'fulfilled'
+				this.value = value
+				this.onFulfilledArray.forEach((fn) => fn(value))
+			}
+		})
+	}
 
-  const reject = (reason) => {
-    queueMicrotask(() => {
-      if (this.status === "pending") {
-        this.status = "rejected";
-        this.reason = reason;
-        this.onRejectedArray.forEach((fn) => fn(reason));
-      }
-    });
-  };
+	const reject = (reason) => {
+		queueMicrotask(() => {
+			if (this.status === 'pending') {
+				this.status = 'rejected'
+				this.reason = reason
+				this.onRejectedArray.forEach((fn) => fn(reason))
+			}
+		})
+	}
 
-  execute(resolve, reject);
+	execute(resolve, reject)
 }
 
 Lpromise.prototype.then = function (onFulfilled, onRejected) {
-  onFulfilled =
-    typeof onFulfilled === "function"
-      ? onFulfilled
-      : (data) => {
-          return data;
-        };
-  onRejected =
-    typeof onRejected === "function"
-      ? onRejected
-      : (error) => {
-          throw error;
-        };
-  if (this.status === "fulfilled") {
-    onFulfilled(this.value);
-  }
-  if (this.status === "rejected") {
-    onRejected(this.reason);
-  }
-  if (this.status === "pending") {
-    this.onFulfilledArray.push(onFulfilled);
-    this.onRejectedArray.push(onRejected);
-  }
-};
+	onFulfilled =
+		typeof onFulfilled === 'function'
+			? onFulfilled
+			: (data) => {
+					return data
+			  }
+	onRejected =
+		typeof onRejected === 'function'
+			? onRejected
+			: (error) => {
+					throw error
+			  }
+	if (this.status === 'fulfilled') {
+		onFulfilled(this.value)
+	}
+	if (this.status === 'rejected') {
+		onRejected(this.reason)
+	}
+	if (this.status === 'pending') {
+		this.onFulfilledArray.push(onFulfilled)
+		this.onRejectedArray.push(onRejected)
+	}
+}
 ```
 
 ![OAVYUi.png](https://ooo.0x0.ooo/2023/12/11/OAVYUi.png)
@@ -359,107 +358,107 @@ Lpromise.prototype.then = function (onFulfilled, onRejected) {
 
 ```js
 function Lpromise(execute) {
-  this.status = "pending";
-  this.value = null;
-  this.reason = null;
-  this.onFulfilledArray = [];
-  this.onRejectedArray = [];
+	this.status = 'pending'
+	this.value = null
+	this.reason = null
+	this.onFulfilledArray = []
+	this.onRejectedArray = []
 
-  const resolve = (value) => {
-    //queueMicrotask 方法用于将一个微任务添加到微任务队列中。微任务是异步执行的任务，它们在宏任务之间插入。
-    queueMicrotask(() => {
-      if (this.status === "pending") {
-        this.status = "fulfilled";
-        this.value = value;
-        this.onFulfilledArray.forEach((fn) => fn(value));
-      }
-    });
-  };
+	const resolve = (value) => {
+		//queueMicrotask 方法用于将一个微任务添加到微任务队列中。微任务是异步执行的任务，它们在宏任务之间插入。
+		queueMicrotask(() => {
+			if (this.status === 'pending') {
+				this.status = 'fulfilled'
+				this.value = value
+				this.onFulfilledArray.forEach((fn) => fn(value))
+			}
+		})
+	}
 
-  const reject = (reason) => {
-    queueMicrotask(() => {
-      if (this.status === "pending") {
-        this.status = "rejected";
-        this.reason = reason;
-        this.onRejectedArray.forEach((fn) => fn(reason));
-      }
-    });
-  };
-  // try catch
-  execute(resolve, reject);
+	const reject = (reason) => {
+		queueMicrotask(() => {
+			if (this.status === 'pending') {
+				this.status = 'rejected'
+				this.reason = reason
+				this.onRejectedArray.forEach((fn) => fn(reason))
+			}
+		})
+	}
+	// try catch
+	execute(resolve, reject)
 }
 
 Lpromise.prototype.then = function (onFulfilled, onRejected) {
-  onFulfilled =
-    typeof onFulfilled === "function"
-      ? onFulfilled
-      : (data) => {
-          return data;
-        };
-  onRejected =
-    typeof onRejected === "function"
-      ? onRejected
-      : (error) => {
-          throw error;
-        };
+	onFulfilled =
+		typeof onFulfilled === 'function'
+			? onFulfilled
+			: (data) => {
+					return data
+			  }
+	onRejected =
+		typeof onRejected === 'function'
+			? onRejected
+			: (error) => {
+					throw error
+			  }
 
-  // 实现链式then
-  let promise2;
+	// 实现链式then
+	let promise2
 
-  if (this.status === "fulfilled") {
-    // old:onFulfilled(this.value);
-    // 返回新的Promise
-    return (promise2 = new LPromise((resolve, reject) => {
-      queueMicroMask(() => {
-        try {
-          // promise1中的onfulfilled返回了一个值，是then返回的promise2中需要resolve的
-          let result = onFulfilled(this.value);
-          resolve(result);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    }));
-  }
-  if (this.status === "rejected") {
-    // old:onRejected(this.reason);
-    // 返回新的Promise
-    return (promise2 = new LPromise((resolve, reject) => {
-      queueMicroMask(() => {
-        try {
-          let result = onRejected(this.reason);
-          resolve(result);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    }));
-  }
-  if (this.status === "pending") {
-    // old
-    // this.onFulfilledArray.push(onFulfilled);
-    // this.onRejectedArray.push(onRejected);
-    return (promise2 = new LPromise((resolve, reject) => {
-      this.onFulfilledArray.push(() => {
-        try {
-          let result = onFulfilled(this.value);
-          resolve(result);
-        } catch (e) {
-          reject(e);
-        }
-      });
+	if (this.status === 'fulfilled') {
+		// old:onFulfilled(this.value);
+		// 返回新的Promise
+		return (promise2 = new LPromise((resolve, reject) => {
+			queueMicroMask(() => {
+				try {
+					// promise1中的onfulfilled返回了一个值，是then返回的promise2中需要resolve的
+					let result = onFulfilled(this.value)
+					resolve(result)
+				} catch (e) {
+					reject(e)
+				}
+			})
+		}))
+	}
+	if (this.status === 'rejected') {
+		// old:onRejected(this.reason);
+		// 返回新的Promise
+		return (promise2 = new LPromise((resolve, reject) => {
+			queueMicroMask(() => {
+				try {
+					let result = onRejected(this.reason)
+					resolve(result)
+				} catch (e) {
+					reject(e)
+				}
+			})
+		}))
+	}
+	if (this.status === 'pending') {
+		// old
+		// this.onFulfilledArray.push(onFulfilled);
+		// this.onRejectedArray.push(onRejected);
+		return (promise2 = new LPromise((resolve, reject) => {
+			this.onFulfilledArray.push(() => {
+				try {
+					let result = onFulfilled(this.value)
+					resolve(result)
+				} catch (e) {
+					reject(e)
+				}
+			})
 
-      this.onRejectedArray.push(() => {
-        try {
-          let result = onRejected(this.reason);
-          resolve(result);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    }));
-  }
-};
+			this.onRejectedArray.push(() => {
+				try {
+					let result = onRejected(this.reason)
+					resolve(result)
+				} catch (e) {
+					reject(e)
+				}
+			})
+		}))
+	}
+}
 ```
 
 #### 选读：resolvePromise 规范
@@ -486,167 +485,165 @@ Lpromise.prototype.then = function (onFulfilled, onRejected) {
 
 ```js
 const resolvePromise = (promise2, result, resolve, reject) => {
-  // 当 result 和 promise2 相等时，也就是说 onfulfilled 返回 promise2 时，进行 reject
-  if (result === promise2) {
-    reject(new TypeError("error due to circular reference"));
-  }
+	// 当 result 和 promise2 相等时，也就是说 onfulfilled 返回 promise2 时，进行 reject
+	if (result === promise2) {
+		reject(new TypeError('error due to circular reference'))
+	}
 
-  // 是否已经执行过 onfulfilled 或者 onrejected
-  let consumed = false;
-  let thenable;
+	// 是否已经执行过 onfulfilled 或者 onrejected
+	let consumed = false
+	let thenable
 
-  if (result instanceof LPromise) {
-    if (result.status === "pending") {
-      result.then(function (data) {
-        resolvePromise(promise2, data, resolve, reject);
-      }, reject);
-    } else {
-      result.then(resolve, reject);
-    }
-    return;
-  }
+	if (result instanceof LPromise) {
+		if (result.status === 'pending') {
+			result.then(function (data) {
+				resolvePromise(promise2, data, resolve, reject)
+			}, reject)
+		} else {
+			result.then(resolve, reject)
+		}
+		return
+	}
 
-  let isComplexResult = (target) =>
-    (typeof target === "function" || typeof target === "object") &&
-    target !== null;
+	let isComplexResult = (target) => (typeof target === 'function' || typeof target === 'object') && target !== null
 
-  // 如果返回的是疑似 Promise 类型
-  if (isComplexResult(result)) {
-    try {
-      thenable = result.then;
-      // 如果返回的是 Promise 类型，具有 then 方法
-      if (typeof thenable === "function") {
-        thenable.call(
-          result,
-          function (data) {
-            if (consumed) {
-              return;
-            }
-            consumed = true;
+	// 如果返回的是疑似 Promise 类型
+	if (isComplexResult(result)) {
+		try {
+			thenable = result.then
+			// 如果返回的是 Promise 类型，具有 then 方法
+			if (typeof thenable === 'function') {
+				thenable.call(
+					result,
+					function (data) {
+						if (consumed) {
+							return
+						}
+						consumed = true
 
-            return resolvePromise(promise2, data, resolve, reject);
-          },
-          function (error) {
-            if (consumed) {
-              return;
-            }
-            consumed = true;
+						return resolvePromise(promise2, data, resolve, reject)
+					},
+					function (error) {
+						if (consumed) {
+							return
+						}
+						consumed = true
 
-            return reject(error);
-          }
-        );
-      } else {
-        resolve(result);
-      }
-    } catch (e) {
-      if (consumed) {
-        return;
-      }
-      consumed = true;
-      return reject(e);
-    }
-  } else {
-    resolve(result);
-  }
-};
+						return reject(error)
+					}
+				)
+			} else {
+				resolve(result)
+			}
+		} catch (e) {
+			if (consumed) {
+				return
+			}
+			consumed = true
+			return reject(e)
+		}
+	} else {
+		resolve(result)
+	}
+}
 
 function LPromise(execute) {
-  this.status = "pending";
-  this.value = null;
-  this.reason = null;
+	this.status = 'pending'
+	this.value = null
+	this.reason = null
 
-  this.onFulfilledArray = [];
-  this.onRejectedArray = [];
+	this.onFulfilledArray = []
+	this.onRejectedArray = []
 
-  const resolve = (value) => {
-    queueMicrotask(() => {
-      if (this.status === "pending") {
-        this.value = value;
-        this.status = "fulfilled";
-        this.onFulfilledArray.forEach((func) => func(value));
-      }
-    });
-  };
+	const resolve = (value) => {
+		queueMicrotask(() => {
+			if (this.status === 'pending') {
+				this.value = value
+				this.status = 'fulfilled'
+				this.onFulfilledArray.forEach((func) => func(value))
+			}
+		})
+	}
 
-  const reject = (reason) => {
-    queueMicrotask(() => {
-      if (this.status === "pending") {
-        this.reason = reason;
-        this.status = "rejected";
-        this.onRejectedArray.forEach((func) => func(reason));
-      }
-    });
-  };
-  // try catch
-  execute(resolve, reject);
+	const reject = (reason) => {
+		queueMicrotask(() => {
+			if (this.status === 'pending') {
+				this.reason = reason
+				this.status = 'rejected'
+				this.onRejectedArray.forEach((func) => func(reason))
+			}
+		})
+	}
+	// try catch
+	execute(resolve, reject)
 }
 
 LPromise.prototype.then = function (onFulfilled, onRejected) {
-  onFulfilled =
-    typeof onFulfilled === "function"
-      ? onFulfilled
-      : (data) => {
-          return data;
-        };
-  onRejected =
-    typeof onRejected === "function"
-      ? onRejected
-      : (error) => {
-          throw error;
-        };
+	onFulfilled =
+		typeof onFulfilled === 'function'
+			? onFulfilled
+			: (data) => {
+					return data
+			  }
+	onRejected =
+		typeof onRejected === 'function'
+			? onRejected
+			: (error) => {
+					throw error
+			  }
 
-  let promise2;
+	let promise2
 
-  if (this.status === "fulfilled") {
-    return (promise2 = new LPromise((resolve, reject) => {
-      queueMicrotask(() => {
-        try {
-          // promise1 中 onfulfilled 返回了一个值，这个值需要被 promise2 进行 resolve ，才能出现在下一个 then(res)
-          let x = onFulfilled(this.value);
-          resolvePromise(promise2, x, resolve, reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    }));
-  }
+	if (this.status === 'fulfilled') {
+		return (promise2 = new LPromise((resolve, reject) => {
+			queueMicrotask(() => {
+				try {
+					// promise1 中 onfulfilled 返回了一个值，这个值需要被 promise2 进行 resolve ，才能出现在下一个 then(res)
+					let x = onFulfilled(this.value)
+					resolvePromise(promise2, x, resolve, reject)
+				} catch (e) {
+					reject(e)
+				}
+			})
+		}))
+	}
 
-  if (this.status === "rejected") {
-    return (promise2 = new LPromise((resolve, reject) => {
-      queueMicrotask(() => {
-        try {
-          // promise1 中 onfulfilled 返回了一个值，这个值需要被 promise2 进行 resolve ，才能出现在下一个 then(res)
-          let x = onRejected(this.reason);
-          resolvePromise(promise2, x, resolve, reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    }));
-  }
+	if (this.status === 'rejected') {
+		return (promise2 = new LPromise((resolve, reject) => {
+			queueMicrotask(() => {
+				try {
+					// promise1 中 onfulfilled 返回了一个值，这个值需要被 promise2 进行 resolve ，才能出现在下一个 then(res)
+					let x = onRejected(this.reason)
+					resolvePromise(promise2, x, resolve, reject)
+				} catch (e) {
+					reject(e)
+				}
+			})
+		}))
+	}
 
-  if (this.status === "pending") {
-    return (promise2 = new LPromise((resolve, reject) => {
-      this.onFulfilledArray.push(() => {
-        try {
-          let x = onFulfilled(this.value);
-          resolvePromise(promise2, x, resolve, reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-      this.onRejectedArray.push(() => {
-        try {
-          // promise1 中 onfulfilled 返回了一个值，这个值需要被 promise2 进行 resolve ，才能出现在下一个 then(res)
-          let x = onRejected(this.reason);
-          resolvePromise(promise2, x, resolve, reject);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    }));
-  }
-};
+	if (this.status === 'pending') {
+		return (promise2 = new LPromise((resolve, reject) => {
+			this.onFulfilledArray.push(() => {
+				try {
+					let x = onFulfilled(this.value)
+					resolvePromise(promise2, x, resolve, reject)
+				} catch (e) {
+					reject(e)
+				}
+			})
+			this.onRejectedArray.push(() => {
+				try {
+					// promise1 中 onfulfilled 返回了一个值，这个值需要被 promise2 进行 resolve ，才能出现在下一个 then(res)
+					let x = onRejected(this.reason)
+					resolvePromise(promise2, x, resolve, reject)
+				} catch (e) {
+					reject(e)
+				}
+			})
+		}))
+	}
+}
 ```
 
 ### 3.4 Promise 的一些理解
@@ -657,16 +654,16 @@ LPromise.prototype.then = function (onFulfilled, onRejected) {
 
 ```js
 const promiseArrGenerator = (num) =>
-  new Array(num).fill(0).map(
-    (item, index) => () =>
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve(index);
-        }, Math.random() * 1000);
-      })
-  );
+	new Array(num).fill(0).map(
+		(item, index) => () =>
+			new Promise((resolve, reject) => {
+				setTimeout(() => {
+					resolve(index)
+				}, Math.random() * 1000)
+			})
+	)
 
-let arr = promiseArrGenerator(100);
+let arr = promiseArrGenerator(100)
 
 // arr.map((fn) => {
 //     fn().then(console.log)
@@ -676,17 +673,17 @@ let arr = promiseArrGenerator(100);
 // 设计一个 promise Chain 链式调用
 
 const promiseChain = (arr) => {
-  arr.reduce(
-    (proChain, pro) =>
-      proChain.then((res) => {
-        ~res && console.log(res);
-        return pro();
-      }),
-    Promise.resolve(-1)
-  );
-};
+	arr.reduce(
+		(proChain, pro) =>
+			proChain.then((res) => {
+				~res && console.log(res)
+				return pro()
+			}),
+		Promise.resolve(-1)
+	)
+}
 
-promiseChain(arr);
+promiseChain(arr)
 ```
 
 #### 手动触发
@@ -695,24 +692,24 @@ promiseChain(arr);
 
 ```js
 const engine = (cb) => {
-  let _resolve;
+	let _resolve
 
-  new Promise((resolve, reject) => {
-    _resolve = resolve;
-  }).then((res) => {
-    cb();
-  });
+	new Promise((resolve, reject) => {
+		_resolve = resolve
+	}).then((res) => {
+		cb()
+	})
 
-  return {
-    start: () => {
-      _resolve();
-    },
-  };
-};
+	return {
+		start: () => {
+			_resolve()
+		},
+	}
+}
 
 let e = engine(() => {
-  console.log("engine");
-});
+	console.log('engine')
+})
 
-e.start();
+e.start()
 ```

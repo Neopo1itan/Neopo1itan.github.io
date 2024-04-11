@@ -1,8 +1,7 @@
 ---
 title: JS模块化
 categories:
-  - 前端开发
-  - 培训课
+  - JS
 tags:
   - Web
   - JavaScript

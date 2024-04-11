@@ -4,8 +4,7 @@ tags:
   - Web
   - Vue
 categories:
-  - 前端开发
-  - 培训课
+  - Vue
 abbrlink: 5805
 date: 2024-01-15 15:09:23
 ---
