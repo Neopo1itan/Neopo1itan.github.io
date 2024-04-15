@@ -6,7 +6,7 @@
   <link href="https://jjbond.cn/atom.xml" rel="self"/>
   
   <link href="https://jjbond.cn/"/>
-  <updated>2024-01-25T08:40:22.020Z</updated>
+  <updated>2024-04-15T07:42:55.078Z</updated>
   <id>https://jjbond.cn/</id>
   
   <author>
@@ -17,15 +17,104 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>vue-cli详解</title>
+    <title>函数式编程</title>
+    <link href="https://jjbond.cn/posts/62985.html"/>
+    <id>https://jjbond.cn/posts/62985.html</id>
+    <published>2024-04-11T06:10:04.000Z</published>
+    <updated>2024-04-15T07:42:55.078Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;函数式编程&quot;&gt;&lt;a href=&quot;#函数式编程&quot; class=&quot;headerlink&quot; title=&quot;函数式编程&quot;&gt;&lt;/a&gt;函数式编程&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="JS" scheme="https://jjbond.cn/categories/JS/"/>
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="JavaScript" scheme="https://jjbond.cn/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浏览器 Browser</title>
+    <link href="https://jjbond.cn/posts/15523.html"/>
+    <id>https://jjbond.cn/posts/15523.html</id>
+    <published>2024-03-25T06:48:56.000Z</published>
+    <updated>2024-04-15T07:42:55.079Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h2&gt;&lt;p&gt;JavaScript 在浏览器下一般三部分组成：&lt;br&gt;ECMAscript DOM BOM&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;W3C&lt;/strong&gt; 是非标准化组织，制定浏览器规范&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ECMAscript&lt;/strong&gt;：是一种标准，用来标准化 JavaScript 语言，es6、es7 都是其标准化的产物。在浏览器中以 V8，JSCore 等引擎解析。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MDN&lt;/strong&gt;：Mozilla Developer Network 规范文档&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://jjbond.cn/posts/63534.html"/>
+    <id>https://jjbond.cn/posts/63534.html</id>
+    <published>2024-03-17T05:27:33.000Z</published>
+    <updated>2024-04-15T07:42:55.075Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;test&lt;/p&gt;
+</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vue-cli 详解</title>
     <link href="https://jjbond.cn/posts/38044.html"/>
     <id>https://jjbond.cn/posts/38044.html</id>
     <published>2024-01-25T08:40:22.000Z</published>
-    <updated>2024-01-25T08:40:22.020Z</updated>
+    <updated>2024-04-15T07:42:55.076Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;vue-cli&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基础:用于生成项目文件体系的搭建 + 用户交互&lt;/li&gt;
+&lt;li&gt;metadata 配置(元数据)&lt;/li&gt;
+&lt;li&gt;parser &amp;amp;</summary>
+        
+      
     
     
     
+    <category term="Vue" scheme="https://jjbond.cn/categories/Vue/"/>
     
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="Vue" scheme="https://jjbond.cn/tags/Vue/"/>
     
   </entry>
   
@@ -34,7 +123,7 @@
     <link href="https://jjbond.cn/posts/54268.html"/>
     <id>https://jjbond.cn/posts/54268.html</id>
     <published>2024-01-16T07:33:05.000Z</published>
-    <updated>2024-01-25T09:20:04.210Z</updated>
+    <updated>2024-04-15T07:42:55.077Z</updated>
     
     
     <summary type="html">&lt;h2 id=&quot;vue2-存在的问题&quot;&gt;&lt;a href=&quot;#vue2-存在的问题&quot; class=&quot;headerlink&quot; title=&quot;vue2 存在的问题&quot;&gt;&lt;/a&gt;vue2 存在的问题&lt;/h2&gt;&lt;ul&gt;
@@ -50,9 +139,7 @@
     
     
     
-    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    <category term="Vue" scheme="https://jjbond.cn/categories/Vue/"/>
     
     
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
@@ -66,7 +153,7 @@
     <link href="https://jjbond.cn/posts/5805.html"/>
     <id>https://jjbond.cn/posts/5805.html</id>
     <published>2024-01-15T07:09:23.000Z</published>
-    <updated>2024-01-16T09:01:59.221Z</updated>
+    <updated>2024-04-15T07:42:55.077Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h1&gt;&lt;blockquote&gt;
@@ -96,9 +183,7 @@
     
     
     
-    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    <category term="Vue" scheme="https://jjbond.cn/categories/Vue/"/>
     
     
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
@@ -112,7 +197,7 @@
     <link href="https://jjbond.cn/posts/10922.html"/>
     <id>https://jjbond.cn/posts/10922.html</id>
     <published>2024-01-08T06:21:25.000Z</published>
-    <updated>2024-01-15T09:30:39.222Z</updated>
+    <updated>2024-04-15T07:42:55.078Z</updated>
     
     
       
@@ -129,9 +214,39 @@
     
     
     
-    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    <category term="Vue" scheme="https://jjbond.cn/categories/Vue/"/>
     
-    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    
+    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
+    
+    <category term="Vue" scheme="https://jjbond.cn/tags/Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vue 基础 v5</title>
+    <link href="https://jjbond.cn/posts/45434.html"/>
+    <id>https://jjbond.cn/posts/45434.html</id>
+    <published>2024-01-06T12:07:53.000Z</published>
+    <updated>2024-04-15T07:42:55.077Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;span id=&quot;more&quot;&gt;&lt;/span&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#vue-%E5%9F%BA%E7%A1%80&quot;&gt;vue 基础&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#%E7%90%86%E8%AE%BA&quot;&gt;理论&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Vue" scheme="https://jjbond.cn/categories/Vue/"/>
     
     
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
@@ -145,16 +260,14 @@
     <link href="https://jjbond.cn/posts/58364.html"/>
     <id>https://jjbond.cn/posts/58364.html</id>
     <published>2024-01-05T08:55:59.000Z</published>
-    <updated>2024-01-08T00:46:38.946Z</updated>
+    <updated>2024-04-15T07:42:55.073Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;JS-模块化&quot;&gt;&lt;a href=&quot;#JS-模块化&quot; class=&quot;headerlink&quot; title=&quot;JS 模块化&quot;&gt;&lt;/a&gt;JS 模块化&lt;/h1&gt;&lt;p&gt;本节课是基础和工程化之间的&lt;strong&gt;模块化&lt;/strong&gt;&lt;br&gt;基础 &amp;#x3D;&amp;gt; &lt;em&gt;模块化&lt;/em&gt; &amp;#x3D;&amp;gt; 工程化&lt;/p&gt;</summary>
     
     
     
-    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    <category term="JS" scheme="https://jjbond.cn/categories/JS/"/>
     
     
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
@@ -168,7 +281,7 @@
     <link href="https://jjbond.cn/posts/7303.html"/>
     <id>https://jjbond.cn/posts/7303.html</id>
     <published>2023-12-08T00:58:28.000Z</published>
-    <updated>2023-12-12T11:07:11.854Z</updated>
+    <updated>2024-04-15T07:42:55.075Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;2023-12-11-Promise-规范及应用&quot;&gt;&lt;a href=&quot;#2023-12-11-Promise-规范及应用&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;11 Promise 规范及应用&lt;/h1&gt;&lt;ul&gt;
@@ -219,9 +332,7 @@
     <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
     
     
-    <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
-    
-    <category term="JavaScript" scheme="https://jjbond.cn/tags/JavaScript/"/>
+    <category term="JS" scheme="https://jjbond.cn/tags/JS/"/>
     
   </entry>
   
@@ -230,20 +341,18 @@
     <link href="https://jjbond.cn/posts/3835.html"/>
     <id>https://jjbond.cn/posts/3835.html</id>
     <published>2023-12-04T01:06:37.000Z</published>
-    <updated>2023-12-04T06:50:05.370Z</updated>
+    <updated>2024-04-15T07:42:55.074Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;2023-12-4-OOP与继承&quot;&gt;&lt;a href=&quot;#2023-12-4-OOP与继承&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;4 OOP与继承&lt;/h1&gt;&lt;ul&gt;
+    <summary type="html">&lt;h1 id=&quot;2023-12-4-OOP-与继承&quot;&gt;&lt;a href=&quot;#2023-12-4-OOP-与继承&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;12&amp;#x2F;4 OOP 与继承&quot;&gt;&lt;/a&gt;2023&amp;#x2F;12&amp;#x2F;4 OOP 与继承&lt;/h1&gt;&lt;ul&gt;
 &lt;li&gt;器：工具，JS，VUE，React…&lt;/li&gt;
-&lt;li&gt;术：用前端做了什么项目。React设计了什么，针对了什么问题，解决了什么&lt;/li&gt;
+&lt;li&gt;术：用前端做了什么项目。React 设计了什么，针对了什么问题，解决了什么&lt;/li&gt;
 &lt;li&gt;道：知识体系 -&amp;gt; 以道驭术&lt;/li&gt;
 &lt;/ul&gt;</summary>
     
     
     
-    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    <category term="JS" scheme="https://jjbond.cn/categories/JS/"/>
     
     
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>
@@ -257,7 +366,7 @@
     <link href="https://jjbond.cn/posts/4503.html"/>
     <id>https://jjbond.cn/posts/4503.html</id>
     <published>2023-11-25T03:26:38.000Z</published>
-    <updated>2023-12-04T06:48:31.247Z</updated>
+    <updated>2024-04-15T07:42:55.075Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;2023-11-26-this指针-闭包-作用域&quot;&gt;&lt;a href=&quot;#2023-11-26-this指针-闭包-作用域&quot; class=&quot;headerlink&quot; title=&quot;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&quot;&gt;&lt;/a&gt;2023&amp;#x2F;11&amp;#x2F;26 this指针&amp;#x2F;闭包&amp;#x2F;作用域&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;面试时必知必会&lt;/strong&gt;  &lt;/p&gt;
@@ -276,9 +385,7 @@
     
     
     
-    <category term="前端开发" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    <category term="培训课" scheme="https://jjbond.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/"/>
+    <category term="JS" scheme="https://jjbond.cn/categories/JS/"/>
     
     
     <category term="Web" scheme="https://jjbond.cn/tags/Web/"/>

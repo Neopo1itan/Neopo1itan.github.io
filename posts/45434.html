@@ -22,17 +22,21 @@
     var CONFIG = {"hostname":"jjbond.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":false,"sidebar_rss":{"text":"RSS","icon":"fa fa-rss","color":"burlywood","link":"atom.xml"}},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="任何时间 任何地点超级侦探 认真办案">
-<meta property="og:type" content="website">
-<meta property="og:title" content="吉吉邦德">
-<meta property="og:url" content="https://jjbond.cn/archives/index.html">
+  <meta name="description" content="vue 基础 理论 面试题：对 MVVM 的了解   写法 vue 如何利用 mvvm 开发?   生命周期 面试题：vue 的生命周期   监听 面试题：computed 和 watch   指令 &amp; 条件 条件 v-for &amp; v-if 在同一节点使用时 v-model v-once v-text v-html v-bind 自定义指令   事件 - v-on 修饰符 事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue 基础 v5">
+<meta property="og:url" content="https://jjbond.cn/posts/45434.html">
 <meta property="og:site_name" content="吉吉邦德">
-<meta property="og:description" content="任何时间 任何地点超级侦探 认真办案">
+<meta property="og:description" content="vue 基础 理论 面试题：对 MVVM 的了解   写法 vue 如何利用 mvvm 开发?   生命周期 面试题：vue 的生命周期   监听 面试题：computed 和 watch   指令 &amp; 条件 条件 v-for &amp; v-if 在同一节点使用时 v-model v-once v-text v-html v-bind 自定义指令   事件 - v-on 修饰符 事">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-06T12:07:53.000Z">
+<meta property="article:modified_time" content="2024-04-15T07:42:55.077Z">
 <meta property="article:author" content="右眼">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://jjbond.cn/archives/">
+<link rel="canonical" href="https://jjbond.cn/posts/45434.html">
 
 
 <script id="page-configurations">
@@ -40,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 吉吉邦德</title>
+  <title>vue 基础 v5 | 吉吉邦德</title>
 
   <!-- 球形气泡标签云 -->
   <script type="text/javascript" src="/js/bubble.js"></script>
@@ -191,262 +195,243 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 17 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/45434.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue 基础 v5
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-06 20:07:53" itemprop="dateCreated datePublished" datetime="2024-01-06T20:07:53+08:00">2024-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2024</h1>
+        <span id="more"></span>
+
+<ul>
+<li><a href="#vue-%E5%9F%BA%E7%A1%80">vue 基础</a><ul>
+<li><a href="#%E7%90%86%E8%AE%BA">理论</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9-mvvm-%E7%9A%84%E4%BA%86%E8%A7%A3">面试题：对 MVVM 的了解</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%99%E6%B3%95">写法</a><ul>
+<li><a href="#vue-%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-mvvm-%E5%BC%80%E5%8F%91">vue 如何利用 mvvm 开发?</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98vue-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">面试题：vue 的生命周期</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%91%E5%90%AC">监听</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98computed-%E5%92%8C-watch">面试题：computed 和 watch</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8C%87%E4%BB%A4--%E6%9D%A1%E4%BB%B6">指令 &amp; 条件</a><ul>
+<li><a href="#%E6%9D%A1%E4%BB%B6">条件</a></li>
+<li><a href="#v-for--v-if-%E5%9C%A8%E5%90%8C%E4%B8%80%E8%8A%82%E7%82%B9%E4%BD%BF%E7%94%A8%E6%97%B6">v-for &amp; v-if 在同一节点使用时</a></li>
+<li><a href="#v-model-v-once-v-text-v-html-v-bind">v-model v-once v-text v-html v-bind</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4">自定义指令</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E4%BB%B6---v-on">事件 - v-on</a><ul>
+<li><a href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6">修饰符</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%AE%BE%E8%AE%A1---%E4%B8%BA%E4%BD%95-vue-%E6%8A%8A%E4%BA%8B%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%9C%A8%E6%A8%A1%E6%9D%BF%E4%B8%8A%E8%80%8C%E4%B8%8D%E6%98%AF-js-%E4%B8%AD">事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E4%BB%B6%E5%8C%96">组件化</a><ul>
+<li><a href="#%E4%B8%80%E8%88%AC%E7%BB%84%E4%BB%B6--%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6--%E6%8F%92%E4%BB%B6">一般组件 + 动态组件 &#x3D;&gt; 插件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="vue-基础"><a href="#vue-基础" class="headerlink" title="vue 基础"></a>vue 基础</h2><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><h4 id="面试题：对-MVVM-的了解"><a href="#面试题：对-MVVM-的了解" class="headerlink" title="面试题：对 MVVM 的了解"></a>面试题：对 MVVM 的了解</h4><ul>
+<li>Web 应用发展史<ol>
+<li>语义化模板</li>
+<li>MVC - model view controller</li>
+<li>MVVM - model view viewModel<ol>
+<li>数据本身会通过 model 挂在在 viewModel，vm 会劫持数据并同步至渲染层</li>
+<li>视图层发生外部变化，会同样回调给 vw，返回给 model</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><h4 id="vue-如何利用-mvvm-开发"><a href="#vue-如何利用-mvvm-开发" class="headerlink" title="vue 如何利用 mvvm 开发?"></a>vue 如何利用 mvvm 开发?</h4><p>数据双向绑定</p>
+<ol>
+<li>利用花括号，构筑了数据与 vm 的双向绑定关系 &#x3D;》 buildTemplate | compile</li>
+<li>通过视图绑定监听事件来处理数据 &#x3D;》v-model &#x3D;&#x3D;&#x3D; :value @input &#x3D;&gt; 节点处理流程</li>
+</ol>
+<p><strong>buildTemplate &#x3D;》 render()</strong></p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h4 id="面试题：vue-的生命周期"><a href="#面试题：vue-的生命周期" class="headerlink" title="面试题：vue 的生命周期"></a>面试题：vue 的生命周期</h4><p>创建阶段: beforeCreate &#x3D;&gt; created &#x3D;&gt; beforeMount &#x3D;&gt; mounted</p>
+<p>更新阶段: beforeUpdate &#x3D;&gt; updated</p>
+<p>销毁阶段: beforeDestroy &#x3D;》 destroyed</p>
+<p><font color=LightSkyBlue>beforeCreate</font>： new Vue() - 创建实例阶段<br><font color=LightSkyBlue>created</font>: data | props | method | computed - 数据创建</p>
+<p><font color=orange>beforeMount</font>: vDom(虚拟节点) - 数据操作以及虚拟 dom 的变化 但不能涉及 dom<br><font color=orange>mounted</font>: Dom 更新</p>
+<p><font color=CadetBlue>beforeUpdate</font>： vDom - 完成更新，dom 还未更新<br><font color=CadetBlue>updated</font>： dom 完成更新 &#x3D;》 谨慎做更新数据操作</p>
+<p><font color=Green>beforeDestroy</font>：实例尚未销毁 - 清空 eventBus setTimeOut<br><font color=Green>destroyed</font>：完全销毁</p>
+<p>补充：key &#x3D;》 diff &#x3D;》 dom diff &#x3D;》 节点 id</p>
+<h3 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h3><h4 id="面试题：computed-和-watch"><a href="#面试题：computed-和-watch" class="headerlink" title="面试题：computed 和 watch"></a>面试题：computed 和 watch</h4><p>相同点：</p>
+<ol>
+<li><strong>基于 vue 的依赖收集机制</strong>进行采集</li>
+<li>都是被依赖的变化所触发，从而进行处理回调</li>
+</ol>
+<p>不同点：</p>
+<ol>
+<li>入&#x2F;出：computed 多入单出，watch 单入多出</li>
+<li>性能：computed 存在缓存，不收调用次数的性能损耗；watch 只在监听的值变化时，不包含生成 immediate</li>
+<li>computed 关注结果，watch 关注过程</li>
+</ol>
+<p>问：computed 缓存和响应式如何实现的?</p>
+<p>完整过程：</p>
+<ol>
+<li>流程：new Vue() &#x3D;&gt; 初始化 computed(initState) &#x3D;&gt; createComputedGetter(key) &#x3D;&gt; mount</li>
+<li>劫持：getter 属性变化区分是否是最新状态 dirty</li>
+<li>target depend &lt;&#x3D;&#x3D;&gt; 原值和依赖之间的关系链</li>
+</ol>
+<h3 id="指令-条件"><a href="#指令-条件" class="headerlink" title="指令 &amp; 条件"></a>指令 &amp; 条件</h3><h4 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h4><p>v-if | v-show<br>v-else | v-else-if</p>
+<p>v-for</p>
+<h4 id="v-for-v-if-在同一节点使用时"><a href="#v-for-v-if-在同一节点使用时" class="headerlink" title="v-for &amp; v-if 在同一节点使用时"></a>v-for &amp; v-if 在同一节点使用时</h4><p>vue2.x v-for 会优先作用<br>vue3.x v-if 总是优先于 v-for</p>
+<h4 id="v-model-v-once-v-text-v-html-v-bind"><a href="#v-model-v-once-v-text-v-html-v-bind" class="headerlink" title="v-model v-once v-text v-html v-bind"></a>v-model v-once v-text v-html v-bind</h4><h4 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h4><h3 id="事件-v-on"><a href="#事件-v-on" class="headerlink" title="事件 - v-on"></a>事件 - v-on</h3><h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>.stop .prevent .once .capture .self .passive</p>
+<h4 id="事件的设计-为何-vue-把事件设计在模板上而不是-js-中"><a href="#事件的设计-为何-vue-把事件设计在模板上而不是-js-中" class="headerlink" title="事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中"></a>事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</h4><ol>
+<li>模板定位视图绑定的触发源 + 触发源寻找触发事件的逻辑 —— 方便定位</li>
+<li>js 与视图绑定解耦 —— 更便于测试隔离</li>
+<li>vm 销毁，自动解绑事件 —— 便于回收</li>
+</ol>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><h4 id="一般组件-动态组件-插件"><a href="#一般组件-动态组件-插件" class="headerlink" title="一般组件 + 动态组件 &#x3D;&gt; 插件"></a>一般组件 + 动态组件 &#x3D;&gt; 插件</h4>
     </div>
 
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-04-11T14:10:04+08:00"
-              content="2024-04-11">
-          04-11
-        </time>
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">-------------本文结束<i class="fa fa-bolt"></i>感谢阅读-------------</div>
+    
+</div>
       </div>
+    
+        
 
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/62985.html" itemprop="url">
-            
-              <span itemprop="name">函数式编程</span>
-            
-          </a>
-      </h2>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>右眼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jjbond.cn/posts/45434.html" title="vue 基础 v5">https://jjbond.cn/posts/45434.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
-    </header>
-  </article>
 
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          </div>
 
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-03-25T14:48:56+08:00"
-              content="2024-03-25">
-          03-25
-        </time>
-      </div>
+        
 
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/15523.html" itemprop="url">
-            
-              <span itemprop="name">浏览器 Browser</span>
-            
-          </a>
-      </h2>
 
-    </header>
-  </article>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-03-17T13:27:33+08:00"
-              content="2024-03-17">
-          03-17
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/63534.html" itemprop="url">
-            
-              <span itemprop="name">test</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-01-25T16:40:22+08:00"
-              content="2024-01-25">
-          01-25
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/38044.html" itemprop="url">
-            
-              <span itemprop="name">vue-cli 详解</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-01-16T15:33:05+08:00"
-              content="2024-01-16">
-          01-16
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/54268.html" itemprop="url">
-            
-              <span itemprop="name">vue3.x 源码</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-01-15T15:09:23+08:00"
-              content="2024-01-15">
-          01-15
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/5805.html" itemprop="url">
-            
-              <span itemprop="name">vue2.x 源码</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-01-08T14:21:25+08:00"
-              content="2024-01-08">
-          01-08
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/10922.html" itemprop="url">
-            
-              <span itemprop="name">vue进阶</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-01-06T20:07:53+08:00"
-              content="2024-01-06">
-          01-06
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/45434.html" itemprop="url">
-            
-              <span itemprop="name">vue 基础 v5</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2024-01-05T16:55:59+08:00"
-              content="2024-01-05">
-          01-05
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/58364.html" itemprop="url">
-            
-              <span itemprop="name">JS模块化</span>
-            
-          </a>
-      </h2>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <h1 class="collection-header">2023</h1>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/58364.html" rel="prev" title="JS模块化">
+      <i class="fa fa-chevron-left"></i> JS模块化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/10922.html" rel="next" title="vue进阶">
+      vue进阶 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-  <article class="my-post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="my-post-header">
-
-      <div class="my-post-meta">
-        <time class="my-post-time" itemprop="dateCreated"
-              datetime="2023-12-08T08:58:28+08:00"
-              content="2023-12-08">
-          12-08
-        </time>
-      </div>
-
-      <h2 class="my-post-title">
-          <a class="my-post-title-link" href="/posts/7303.html" itemprop="url">
-            
-              <span itemprop="name">Promise规范及应用</span>
-            
-          </a>
-      </h2>
-
-    </header>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
           </div>
           
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODY4My8zNTE0NQ=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -493,6 +478,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">vue 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">理论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9A%E5%AF%B9-MVVM-%E7%9A%84%E4%BA%86%E8%A7%A3"><span class="nav-number">1.1.1.</span> <span class="nav-text">面试题：对 MVVM 的了解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">写法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue-%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-mvvm-%E5%BC%80%E5%8F%91"><span class="nav-number">1.2.1.</span> <span class="nav-text">vue 如何利用 mvvm 开发?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.3.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9Avue-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">面试题：vue 的生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E5%90%AC"><span class="nav-number">1.4.</span> <span class="nav-text">监听</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98%EF%BC%9Acomputed-%E5%92%8C-watch"><span class="nav-number">1.4.1.</span> <span class="nav-text">面试题：computed 和 watch</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">指令 &amp; 条件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.5.1.</span> <span class="nav-text">条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-for-v-if-%E5%9C%A8%E5%90%8C%E4%B8%80%E8%8A%82%E7%82%B9%E4%BD%BF%E7%94%A8%E6%97%B6"><span class="nav-number">1.5.2.</span> <span class="nav-text">v-for &amp; v-if 在同一节点使用时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-model-v-once-v-text-v-html-v-bind"><span class="nav-number">1.5.3.</span> <span class="nav-text">v-model v-once v-text v-html v-bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4"><span class="nav-number">1.5.4.</span> <span class="nav-text">自定义指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6-v-on"><span class="nav-number">1.6.</span> <span class="nav-text">事件 - v-on</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.6.1.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%AE%BE%E8%AE%A1-%E4%B8%BA%E4%BD%95-vue-%E6%8A%8A%E4%BA%8B%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%9C%A8%E6%A8%A1%E6%9D%BF%E4%B8%8A%E8%80%8C%E4%B8%8D%E6%98%AF-js-%E4%B8%AD"><span class="nav-number">1.6.2.</span> <span class="nav-text">事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%8C%96"><span class="nav-number">1.7.</span> <span class="nav-text">组件化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E7%BB%84%E4%BB%B6-%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6-%E6%8F%92%E4%BB%B6"><span class="nav-number">1.7.1.</span> <span class="nav-text">一般组件 + 动态组件 &#x3D;&gt; 插件</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -765,6 +751,21 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
     </div>
 

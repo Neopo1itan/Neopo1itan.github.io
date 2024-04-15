@@ -125,17 +125,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-regular fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-regular fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-regular fa-shapes fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-regular fa-shapes fa-fw"></i>分类<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-regular fa-inbox fa-fw"></i>归档<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-regular fa-inbox fa-fw"></i>归档<span class="badge">17</span></a>
 
   </li>
         <li class="menu-item menu-item-rss">
@@ -282,7 +282,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/38044.html">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/62985.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -296,7 +296,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/38044.html" class="post-title-link" itemprop="url">vue-cli详解</a>
+            <a href="/posts/62985.html" class="post-title-link" itemprop="url">函数式编程</a>
         </h2>
 
         <div class="post-meta">
@@ -307,7 +307,23 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-01-25 16:40:22" itemprop="dateCreated datePublished" datetime="2024-01-25T16:40:22+08:00">2024-01-25</time>
+              <time title="创建时间：2024-04-11 14:10:04" itemprop="dateCreated datePublished" datetime="2024-04-11T14:10:04+08:00">2024-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
+                </span>
             </span>
 
           <br>
@@ -316,7 +332,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -335,7 +351,347 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><ul>
+<li><a href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B">函数式编程</a><ul>
+<li><a href="#%E8%B5%B7%E6%BA%90">起源</a></li>
+<li><a href="#%E5%8E%9F%E7%90%86%E7%89%B9%E7%82%B9">原理特点</a><ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E5%8E%9F%E7%90%86">什么是函数式原理</a></li>
+<li><a href="#%E7%90%86%E8%AE%BA%E6%80%9D%E6%83%B3">理论思想</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91">实际开发</a><ul>
+<li><a href="#1%E7%BA%AF%E5%87%BD%E6%95%B0%E6%94%B9%E9%80%A0">1.纯函数改造</a></li>
+<li><a href="#2%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%BB%84%E8%A3%85-%E5%8A%A0%E5%B7%A5%E7%BB%84%E8%A3%85">2.流水线组装-加工&amp;组装</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E6%96%B9%E5%BA%93">常见的三方库</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>历程：<br>命令式(脚本) &#x3D;&gt; 面向对象式<br>命令式(脚本) &#x3D;&gt; 函数式</p>
+<p>解决代码复用的问题</p>
+<h2 id="原理特点"><a href="#原理特点" class="headerlink" title="原理特点"></a>原理特点</h2><h3 id="什么是函数式原理"><a href="#什么是函数式原理" class="headerlink" title="什么是函数式原理"></a>什么是函数式原理</h3><ul>
+<li><p>加法结合律 | 因式分解 | 完全平方工时</p>
+</li>
+<li><p>水源 &#x3D;&gt; 组合（水管 + 走线） &#x3D;&gt; 花洒</p>
+</li>
+</ul>
+<h3 id="理论思想"><a href="#理论思想" class="headerlink" title="理论思想"></a>理论思想</h3><ol>
+<li>一等公民——函数 &#x3D;&gt; 1.逻辑功能最终实现的落脚点 2.实现函数+拼接流程</li>
+<li>声明式编程</li>
+<li>惰性执行-衔接性，性能节约</li>
+</ol>
+<h2 id="实际开发"><a href="#实际开发" class="headerlink" title="实际开发"></a>实际开发</h2><h3 id="1-纯函数改造"><a href="#1-纯函数改造" class="headerlink" title="1.纯函数改造"></a>1.纯函数改造</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> _class = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;objective&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 函数内部引入了外部变量</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">score</span> = (<span class="params">str</span>) =&gt; _class.<span class="property">name</span> + <span class="string">&#x27;:&#x27;</span> + str</span><br><span class="line"><span class="comment">// 直接修改了输入参数</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeClass</span> = (<span class="params">obj, name</span>) =&gt; (obj.<span class="property">name</span> = name)</span><br><span class="line"></span><br><span class="line"><span class="comment">/***** ↓ 修改后 ↓ *****/</span></span><br><span class="line"><span class="keyword">const</span> _class = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;objective&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">score</span> = (<span class="params">obj, str</span>) =&gt; obj.<span class="property">name</span> + <span class="string">&#x27;:&#x27;</span> + str</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeClass</span> = (<span class="params">obj, name</span>) =&gt; (&#123; ...obj, name &#125;)</span><br><span class="line"></span><br><span class="line"><span class="title function_">changeClass</span>(_class, <span class="string">&#x27;functional&#x27;</span>)</span><br><span class="line"><span class="title function_">score</span>(_class, <span class="string">&#x27;good&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-流水线组装-加工-组装"><a href="#2-流水线组装-加工-组装" class="headerlink" title="2.流水线组装-加工&amp;组装"></a>2.流水线组装-加工&amp;组装</h3><ol>
+<li>加工 - 科里化</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// f(x,y,z) =&gt; f(x)(y)(z)</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">add</span> = x =&gt; <span class="function"><span class="params">y</span> =&gt;</span> <span class="function"><span class="params">z</span>=&gt;</span> <span class="keyword">return</span> x+y+z;</span><br><span class="line"><span class="title function_">add</span>(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>) <span class="comment">// 6</span></span><br><span class="line"><span class="comment">// 要实现 体系=加工+组装，单个加工输入输出应该单值化 =&gt; 单元函数</span></span><br><span class="line"><span class="keyword">const</span> fetch = <span class="title function_">ajax</span>(method,url,params);</span><br><span class="line"><span class="keyword">const</span> fetch = ajax.<span class="title function_">get</span>(method);</span><br><span class="line"><span class="keyword">const</span> request = <span class="title function_">fetch</span>(url);</span><br><span class="line">组合(fetch,request);</span><br></pre></td></tr></table></figure>
+
+<h4 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h4><p>手写构造可拆分传参的累加函数<br>add(1)(2)(3)(4)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造科里化结构</span></span><br><span class="line"><span class="comment">// 输入 处理外层arguments =&gt; 类数组处理</span></span><br><span class="line"><span class="comment">// 传入参数无线拓展 =&gt; 返回函数本身</span></span><br><span class="line"><span class="comment">// 主功能 =&gt; 累加</span></span><br><span class="line"><span class="comment">// 输出 支持从函数到产出的转换</span></span><br><span class="line"><span class="keyword">const</span> add = <span class="keyword">function</span> (<span class="params">...nums</span>) &#123;</span><br><span class="line">	<span class="comment">// input</span></span><br><span class="line">	<span class="keyword">let</span> args = <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">slice</span>.<span class="title function_">call</span>(<span class="variable language_">arguments</span>)</span><br><span class="line">	<span class="comment">// 内层</span></span><br><span class="line">	<span class="keyword">let</span> inner = <span class="keyword">function</span> (<span class="params">...nums</span>) &#123;</span><br><span class="line">		args.<span class="title function_">push</span>(...<span class="variable language_">arguments</span>)</span><br><span class="line">		<span class="keyword">return</span> inner</span><br><span class="line">	&#125;</span><br><span class="line">	inner.<span class="property">toString</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> args.<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> prev + cur</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> inner</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>流水线 - 组装函数</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">compose</span> = (<span class="params">f, g</span>) =&gt; <span class="function">(<span class="params">x</span>) =&gt;</span> <span class="title function_">f</span>(<span class="title function_">g</span>(x))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sum1</span> = (<span class="params">x</span>) =&gt; x + <span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sum2</span> = (<span class="params">x</span>) =&gt; x + <span class="number">2</span></span><br><span class="line"><span class="keyword">const</span> sum12 = <span class="title function_">compose</span>(sum1, sum2)</span><br><span class="line"><span class="title function_">sum12</span>(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见的三方库"><a href="#常见的三方库" class="headerlink" title="常见的三方库"></a>常见的三方库</h2><p>lodash</p>
+<p>rxjs</p>
+
+      
+    </div>
+
+    
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/15523.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
+            <a href="/posts/15523.html" class="post-title-link" itemprop="url">浏览器 Browser</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-25 14:48:56" itemprop="dateCreated datePublished" datetime="2024-03-25T14:48:56+08:00">2024-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>JavaScript 在浏览器下一般三部分组成：<br>ECMAscript DOM BOM</p>
+<p><strong>W3C</strong> 是非标准化组织，制定浏览器规范</p>
+<p><strong>ECMAscript</strong>：是一种标准，用来标准化 JavaScript 语言，es6、es7 都是其标准化的产物。在浏览器中以 V8，JSCore 等引擎解析。</p>
+<p><strong>MDN</strong>：Mozilla Developer Network 规范文档</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/15523.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/63534.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/63534.html" class="post-title-link" itemprop="url">test</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-17 13:27:33" itemprop="dateCreated datePublished" datetime="2024-03-17T13:27:33+08:00">2024-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>test</p>
+
+      
+    </div>
+
+    
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/38044.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/38044.html" class="post-title-link" itemprop="url">vue-cli 详解</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-25 16:40:22" itemprop="dateCreated datePublished" datetime="2024-01-25T16:40:22+08:00">2024-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><strong>vue-cli</strong></p>
+<ul>
+<li>基础:用于生成项目文件体系的搭建 + 用户交互</li>
+<li>metadata 配置(元数据)</li>
+<li>parser &amp; render</li>
+</ul>
+</blockquote>
+<h2 id="vue-cli-2-x-x"><a href="#vue-cli-2-x-x" class="headerlink" title="vue-cli_2.x.x"></a>vue-cli_2.x.x</h2><h3 id="bin-vue-init-前置工作"><a href="#bin-vue-init-前置工作" class="headerlink" title="&#x2F;bin&#x2F;vue-init 前置工作"></a>&#x2F;bin&#x2F;vue-init 前置工作</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下载远程仓库 =&gt; 远程拉去github内的配置</span></span><br><span class="line"><span class="keyword">const</span> download = <span class="built_in">require</span>(<span class="string">&#x27;download-git-repo&#x27;</span>)</span><br><span class="line"><span class="comment">// 命令行处理工具</span></span><br><span class="line"><span class="keyword">const</span> program = <span class="built_in">require</span>(<span class="string">&#x27;commander&#x27;</span>)</span><br><span class="line"><span class="comment">// node下的文件操作系统中的existsSync - 监测是否存在该路径</span></span><br><span class="line"><span class="keyword">const</span> exists = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>).<span class="property">existsSync</span></span><br><span class="line"><span class="comment">// node自带的拼接路径的模块</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="comment">// 命令行中的加载效果</span></span><br><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">&#x27;ora&#x27;</span>)</span><br><span class="line"><span class="comment">// 获取用户根目录</span></span><br><span class="line"><span class="keyword">const</span> home = <span class="built_in">require</span>(<span class="string">&#x27;user-home&#x27;</span>)</span><br><span class="line"><span class="comment">// 绝对路径替换为波浪号</span></span><br><span class="line"><span class="keyword">const</span> tildify = <span class="built_in">require</span>(<span class="string">&#x27;tildify&#x27;</span>)</span><br><span class="line"><span class="comment">// 高亮</span></span><br><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">&#x27;chalk&#x27;</span>)</span><br><span class="line"><span class="comment">// **important** 用户与脚本命令行的交互 | 面试</span></span><br><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">&#x27;inquirer&#x27;</span>)</span><br><span class="line"><span class="comment">// rm -rf js版本</span></span><br><span class="line"><span class="keyword">const</span> rm = <span class="built_in">require</span>(<span class="string">&#x27;rimraf&#x27;</span>).<span class="property">sync</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="面试题：如何使用本地模板，预设模板-而不是-github？"><a href="#面试题：如何使用本地模板，预设模板-而不是-github？" class="headerlink" title="面试题：如何使用本地模板，预设模板 而不是 github？"></a>面试题：如何使用本地模板，预设模板 而不是 github？</h4><p>使用 <strong>–offline</strong></p>
+<h4 id="如何获取用户参数"><a href="#如何获取用户参数" class="headerlink" title="如何获取用户参数"></a>如何获取用户参数</h4><blockquote>
+<p>vue init webpack zhaowa-app</p>
+</blockquote>
+<p>program.args[0] &#x3D;&gt; ‘webpack’<br>&#x2F;&#x2F; 是否包含斜杠 &#x3D;&gt; 路径层级 &#x3D;&gt;非默认预制模板<br>const hasSlash &#x3D; template.indexOf(‘&#x2F;‘)&gt;-1</p>
+<p>&#x2F;&#x2F; 项目名称<br>rawName &#x3D; program.args[1]</p>
+<p>&#x2F;&#x2F;输入是否为空 &#x3D;&gt; 是否以当前文件目录作为项目根目录<br>const inPlace &#x3D; !rawName || ‘.’</p>
+<p>&#x2F;&#x2F;调整当前目录作为构建目录的根路径<br>const name &#x3D; inPlace ….</p>
+<p>&#x2F;&#x2F;本地目录模板仓库路径拼接 &#x2F;zhaowa&#x2F;.vue-templates&#x2F;webpack<br>const tmp &#x3D; path.join(home,’…’)</p>
+<h3 id="lib-generate-js"><a href="#lib-generate-js" class="headerlink" title="&#x2F;lib&#x2F;generate.js"></a>&#x2F;lib&#x2F;generate.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 静态网页文件生成器</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Metalsmith</span></span><br><span class="line"><span class="comment">// 模板引擎</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Handlebars</span></span><br><span class="line"><span class="comment">// 多条件匹配工具</span></span><br><span class="line"><span class="keyword">const</span> multimatch</span><br></pre></td></tr></table></figure>
+
+<h3 id="lib-ask-js"><a href="#lib-ask-js" class="headerlink" title="&#x2F;lib&#x2F;ask.js"></a>&#x2F;lib&#x2F;ask.js</h3><p>解析传进来的模板有哪些要询问的</p>
+<p>inquirer.prompt</p>
+<h3 id="lib-filter-js-过滤不需要的"><a href="#lib-filter-js-过滤不需要的" class="headerlink" title="&#x2F;lib&#x2F;filter.js 过滤不需要的"></a>&#x2F;lib&#x2F;filter.js 过滤不需要的</h3><h2 id="vue-cli-3-x-x"><a href="#vue-cli-3-x-x" class="headerlink" title="vue-cli_3.x.x"></a>vue-cli_3.x.x</h2><h3 id="lib-create-js"><a href="#lib-create-js" class="headerlink" title="&#x2F;lib&#x2F;create.js"></a>&#x2F;lib&#x2F;create.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> creator = <span class="keyword">new</span> <span class="title class_">Creator</span>(name, targetDir, <span class="title function_">getPromptModules</span>())</span><br><span class="line"><span class="keyword">await</span> creator.<span class="title function_">create</span>(options)</span><br></pre></td></tr></table></figure>
+
+<h3 id="lib-Creator-js"><a href="#lib-Creator-js" class="headerlink" title="&#x2F;lib&#x2F;Creator.js"></a>&#x2F;lib&#x2F;Creator.js</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">class</span> <span class="title class_">Creator</span> <span class="keyword">extends</span> <span class="title class_ inherited__">EventEmitter</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>用户创建指令 -&gt; 创建参数解析 -&gt; 加载模板(远端&#x2F;本地) – prompts –&gt; 处理文件路径 -&gt; 文件层级处理 -&gt; 文件模板渲染(plugins) -&gt; 产出包</p>
+<p>如何书写 node 脚本工具</p>
+
       
     </div>
 
@@ -387,7 +743,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-25 17:20:04" itemprop="dateModified" datetime="2024-01-25T17:20:04+08:00">2024-01-25</time>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -395,11 +751,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
                 </span>
             </span>
 
@@ -497,7 +849,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-16 17:01:59" itemprop="dateModified" datetime="2024-01-16T17:01:59+08:00">2024-01-16</time>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -505,11 +857,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
                 </span>
             </span>
 
@@ -621,7 +969,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-15 17:30:39" itemprop="dateModified" datetime="2024-01-15T17:30:39+08:00">2024-01-15</time>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -629,11 +977,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
                 </span>
             </span>
 
@@ -787,6 +1131,187 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/45434.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/45434.html" class="post-title-link" itemprop="url">vue 基础 v5</a>
+        </h2>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-06 20:07:53" itemprop="dateCreated datePublished" datetime="2024-01-06T20:07:53+08:00">2024-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<ul>
+<li><a href="#vue-%E5%9F%BA%E7%A1%80">vue 基础</a><ul>
+<li><a href="#%E7%90%86%E8%AE%BA">理论</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E5%AF%B9-mvvm-%E7%9A%84%E4%BA%86%E8%A7%A3">面试题：对 MVVM 的了解</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%99%E6%B3%95">写法</a><ul>
+<li><a href="#vue-%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8-mvvm-%E5%BC%80%E5%8F%91">vue 如何利用 mvvm 开发?</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">生命周期</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98vue-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">面试题：vue 的生命周期</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%91%E5%90%AC">监听</a><ul>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98computed-%E5%92%8C-watch">面试题：computed 和 watch</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8C%87%E4%BB%A4--%E6%9D%A1%E4%BB%B6">指令 &amp; 条件</a><ul>
+<li><a href="#%E6%9D%A1%E4%BB%B6">条件</a></li>
+<li><a href="#v-for--v-if-%E5%9C%A8%E5%90%8C%E4%B8%80%E8%8A%82%E7%82%B9%E4%BD%BF%E7%94%A8%E6%97%B6">v-for &amp; v-if 在同一节点使用时</a></li>
+<li><a href="#v-model-v-once-v-text-v-html-v-bind">v-model v-once v-text v-html v-bind</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4">自定义指令</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E4%BB%B6---v-on">事件 - v-on</a><ul>
+<li><a href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6">修饰符</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E7%9A%84%E8%AE%BE%E8%AE%A1---%E4%B8%BA%E4%BD%95-vue-%E6%8A%8A%E4%BA%8B%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%9C%A8%E6%A8%A1%E6%9D%BF%E4%B8%8A%E8%80%8C%E4%B8%8D%E6%98%AF-js-%E4%B8%AD">事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E4%BB%B6%E5%8C%96">组件化</a><ul>
+<li><a href="#%E4%B8%80%E8%88%AC%E7%BB%84%E4%BB%B6--%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6--%E6%8F%92%E4%BB%B6">一般组件 + 动态组件 &#x3D;&gt; 插件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="vue-基础"><a href="#vue-基础" class="headerlink" title="vue 基础"></a>vue 基础</h2><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><h4 id="面试题：对-MVVM-的了解"><a href="#面试题：对-MVVM-的了解" class="headerlink" title="面试题：对 MVVM 的了解"></a>面试题：对 MVVM 的了解</h4><ul>
+<li>Web 应用发展史<ol>
+<li>语义化模板</li>
+<li>MVC - model view controller</li>
+<li>MVVM - model view viewModel<ol>
+<li>数据本身会通过 model 挂在在 viewModel，vm 会劫持数据并同步至渲染层</li>
+<li>视图层发生外部变化，会同样回调给 vw，返回给 model</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="写法"><a href="#写法" class="headerlink" title="写法"></a>写法</h3><h4 id="vue-如何利用-mvvm-开发"><a href="#vue-如何利用-mvvm-开发" class="headerlink" title="vue 如何利用 mvvm 开发?"></a>vue 如何利用 mvvm 开发?</h4><p>数据双向绑定</p>
+<ol>
+<li>利用花括号，构筑了数据与 vm 的双向绑定关系 &#x3D;》 buildTemplate | compile</li>
+<li>通过视图绑定监听事件来处理数据 &#x3D;》v-model &#x3D;&#x3D;&#x3D; :value @input &#x3D;&gt; 节点处理流程</li>
+</ol>
+<p><strong>buildTemplate &#x3D;》 render()</strong></p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h4 id="面试题：vue-的生命周期"><a href="#面试题：vue-的生命周期" class="headerlink" title="面试题：vue 的生命周期"></a>面试题：vue 的生命周期</h4><p>创建阶段: beforeCreate &#x3D;&gt; created &#x3D;&gt; beforeMount &#x3D;&gt; mounted</p>
+<p>更新阶段: beforeUpdate &#x3D;&gt; updated</p>
+<p>销毁阶段: beforeDestroy &#x3D;》 destroyed</p>
+<p><font color=LightSkyBlue>beforeCreate</font>： new Vue() - 创建实例阶段<br><font color=LightSkyBlue>created</font>: data | props | method | computed - 数据创建</p>
+<p><font color=orange>beforeMount</font>: vDom(虚拟节点) - 数据操作以及虚拟 dom 的变化 但不能涉及 dom<br><font color=orange>mounted</font>: Dom 更新</p>
+<p><font color=CadetBlue>beforeUpdate</font>： vDom - 完成更新，dom 还未更新<br><font color=CadetBlue>updated</font>： dom 完成更新 &#x3D;》 谨慎做更新数据操作</p>
+<p><font color=Green>beforeDestroy</font>：实例尚未销毁 - 清空 eventBus setTimeOut<br><font color=Green>destroyed</font>：完全销毁</p>
+<p>补充：key &#x3D;》 diff &#x3D;》 dom diff &#x3D;》 节点 id</p>
+<h3 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h3><h4 id="面试题：computed-和-watch"><a href="#面试题：computed-和-watch" class="headerlink" title="面试题：computed 和 watch"></a>面试题：computed 和 watch</h4><p>相同点：</p>
+<ol>
+<li><strong>基于 vue 的依赖收集机制</strong>进行采集</li>
+<li>都是被依赖的变化所触发，从而进行处理回调</li>
+</ol>
+<p>不同点：</p>
+<ol>
+<li>入&#x2F;出：computed 多入单出，watch 单入多出</li>
+<li>性能：computed 存在缓存，不收调用次数的性能损耗；watch 只在监听的值变化时，不包含生成 immediate</li>
+<li>computed 关注结果，watch 关注过程</li>
+</ol>
+<p>问：computed 缓存和响应式如何实现的?</p>
+<p>完整过程：</p>
+<ol>
+<li>流程：new Vue() &#x3D;&gt; 初始化 computed(initState) &#x3D;&gt; createComputedGetter(key) &#x3D;&gt; mount</li>
+<li>劫持：getter 属性变化区分是否是最新状态 dirty</li>
+<li>target depend &lt;&#x3D;&#x3D;&gt; 原值和依赖之间的关系链</li>
+</ol>
+<h3 id="指令-条件"><a href="#指令-条件" class="headerlink" title="指令 &amp; 条件"></a>指令 &amp; 条件</h3><h4 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h4><p>v-if | v-show<br>v-else | v-else-if</p>
+<p>v-for</p>
+<h4 id="v-for-v-if-在同一节点使用时"><a href="#v-for-v-if-在同一节点使用时" class="headerlink" title="v-for &amp; v-if 在同一节点使用时"></a>v-for &amp; v-if 在同一节点使用时</h4><p>vue2.x v-for 会优先作用<br>vue3.x v-if 总是优先于 v-for</p>
+<h4 id="v-model-v-once-v-text-v-html-v-bind"><a href="#v-model-v-once-v-text-v-html-v-bind" class="headerlink" title="v-model v-once v-text v-html v-bind"></a>v-model v-once v-text v-html v-bind</h4><h4 id="自定义指令"><a href="#自定义指令" class="headerlink" title="自定义指令"></a>自定义指令</h4><h3 id="事件-v-on"><a href="#事件-v-on" class="headerlink" title="事件 - v-on"></a>事件 - v-on</h3><h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>.stop .prevent .once .capture .self .passive</p>
+<h4 id="事件的设计-为何-vue-把事件设计在模板上而不是-js-中"><a href="#事件的设计-为何-vue-把事件设计在模板上而不是-js-中" class="headerlink" title="事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中"></a>事件的设计 - 为何 vue 把事件设计在模板上而不是 js 中</h4><ol>
+<li>模板定位视图绑定的触发源 + 触发源寻找触发事件的逻辑 —— 方便定位</li>
+<li>js 与视图绑定解耦 —— 更便于测试隔离</li>
+<li>vm 销毁，自动解绑事件 —— 便于回收</li>
+</ol>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><h4 id="一般组件-动态组件-插件"><a href="#一般组件-动态组件-插件" class="headerlink" title="一般组件 + 动态组件 &#x3D;&gt; 插件"></a>一般组件 + 动态组件 &#x3D;&gt; 插件</h4>
+      
+    </div>
+
+    
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/58364.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -819,7 +1344,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-08 08:46:38" itemprop="dateModified" datetime="2024-01-08T08:46:38+08:00">2024-01-08</time>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -827,11 +1352,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
+                  <a href="/categories/JS/" itemprop="url" rel="index"><span itemprop="name">JS</span></a>
                 </span>
             </span>
 
@@ -869,451 +1390,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/7303.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="右眼">
-      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吉吉邦德">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/7303.html" class="post-title-link" itemprop="url">Promise规范及应用</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-08 08:58:28" itemprop="dateCreated datePublished" datetime="2023-12-08T08:58:28+08:00">2023-12-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-12 19:07:11" itemprop="dateModified" datetime="2023-12-12T19:07:11+08:00">2023-12-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>13k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>12 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2023-12-11-Promise-规范及应用"><a href="#2023-12-11-Promise-规范及应用" class="headerlink" title="2023&#x2F;12&#x2F;11 Promise 规范及应用"></a>2023&#x2F;12&#x2F;11 Promise 规范及应用</h1><ul>
-<li><a href="#20231211-promise-%E8%A7%84%E8%8C%83%E5%8F%8A%E5%BA%94%E7%94%A8">2023&#x2F;12&#x2F;11 Promise 规范及应用</a><ul>
-<li><a href="#1-%E5%BC%82%E6%AD%A5%E7%9A%84%E9%80%BB%E8%BE%91">1 异步的逻辑</a></li>
-<li><a href="#2-%E5%BC%82%E6%AD%A5%E7%9A%84%E5%8F%91%E5%B1%95">2 异步的发展</a><ul>
-<li><a href="#callback">Callback</a></li>
-<li><a href="#promise">Promise</a></li>
-<li><a href="#generator">Generator</a></li>
-<li><a href="#async--await">async &#x2F; await</a></li>
-</ul>
-</li>
-<li><a href="#3-promise-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3">3 Promise 深入理解</a><ul>
-<li><a href="#31-%E5%88%9D%E6%8E%A2-promise">3.1 初探 Promise</a><ul>
-<li><a href="#%E8%A7%84%E5%88%99">规则</a></li>
-<li><a href="#%E6%B5%8B%E8%AF%95">测试</a></li>
-<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
-</ul>
-</li>
-<li><a href="#32-promise-%E8%BF%9B%E9%98%B6">3.2 Promise 进阶</a><ul>
-<li><a href="#%E8%A7%84%E5%88%99-1">规则</a></li>
-<li><a href="#%E5%AE%9E%E7%8E%B0">实现</a></li>
-<li><a href="#%E9%97%AE%E9%A2%98-1">问题</a></li>
-</ul>
-</li>
-<li><a href="#33-promise-%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8">3.3 Promise 的链式调用</a><ul>
-<li><a href="#%E8%A7%84%E5%88%99-2">规则</a></li>
-<li><a href="#%E5%AE%9E%E7%8E%B0-1">实现</a></li>
-<li><a href="#%E9%80%89%E8%AF%BBresolvepromise-%E8%A7%84%E8%8C%83">选读：resolvePromise 规范</a></li>
-<li><a href="#%E5%AE%9E%E7%8E%B0-2">实现</a></li>
-</ul>
-</li>
-<li><a href="#34-promise-%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3">3.4 Promise 的一些理解</a><ul>
-<li><a href="#%E9%93%BE%E5%BC%8F%E6%89%A7%E8%A1%8C">链式执行</a></li>
-<li><a href="#%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91">手动触发</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/7303.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/3835.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="右眼">
-      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吉吉邦德">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/3835.html" class="post-title-link" itemprop="url">OOP与继承</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-04 09:06:37 / 修改时间：14:50:05" itemprop="dateCreated datePublished" datetime="2023-12-04T09:06:37+08:00">2023-12-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2023-12-4-OOP与继承"><a href="#2023-12-4-OOP与继承" class="headerlink" title="2023&#x2F;12&#x2F;4 OOP与继承"></a>2023&#x2F;12&#x2F;4 OOP与继承</h1><ul>
-<li>器：工具，JS，VUE，React…</li>
-<li>术：用前端做了什么项目。React设计了什么，针对了什么问题，解决了什么</li>
-<li>道：知识体系 -&gt; 以道驭术</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/3835.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/4503.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="右眼">
-      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吉吉邦德">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/4503.html" class="post-title-link" itemprop="url">this指针/闭包/作用域</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-25 11:26:38" itemprop="dateCreated datePublished" datetime="2023-11-25T11:26:38+08:00">2023-11-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-04 14:48:31" itemprop="dateModified" datetime="2023-12-04T14:48:31+08:00">2023-12-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/%E5%9F%B9%E8%AE%AD%E8%AF%BE/" itemprop="url" rel="index"><span itemprop="name">培训课</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2023-11-26-this指针-闭包-作用域"><a href="#2023-11-26-this指针-闭包-作用域" class="headerlink" title="2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域"></a>2023&#x2F;11&#x2F;26 this指针&#x2F;闭包&#x2F;作用域</h1><p><strong>面试时必知必会</strong>  </p>
-<ol>
-<li>JS</li>
-<li>布局</li>
-<li>端(小程序、web)</li>
-<li>技术栈(Vue、React)</li>
-</ol>
-<p><strong>争取学习</strong>  </p>
-<ol>
-<li>辅助技术栈</li>
-<li>热门模块和工程化</li>
-</ol>
-<p><strong>为我所用</strong><br>实战 | 算法 | 模式</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/4503.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/36796.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="右眼">
-      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吉吉邦德">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/36796.html" class="post-title-link" itemprop="url">什么是Nginx?</a>
-        </h2>
-
-        <div class="post-meta">
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-09-12 10:10:42" itemprop="dateCreated datePublished" datetime="2023-09-12T10:10:42+08:00">2023-09-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-27 14:29:55" itemprop="dateModified" datetime="2023-11-27T14:29:55+08:00">2023-11-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>299</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是Nginx？"><a href="#什么是Nginx？" class="headerlink" title="什么是Nginx？"></a>什么是Nginx？</h1><p><strong>Nginx</strong>(engine x) 是一个高性能的HTTP和反向代理Web服务器，同时也提供IMAP&#x2F;POP3&#x2F;SMTP服务。<br><strong>特点</strong>是1.占有内存少 2.并发能力强<br><strong>Nginx</strong>几乎可以做到7*24h不间断运行，能在不间断服务下进行软件版本的升级，其代码完全由C语言从头写成，官方数据表示能同时支持5w个并发连接数的响应。</p>
-<h1 id="正向代理-反向代理"><a href="#正向代理-反向代理" class="headerlink" title="正向代理&#x2F;反向代理"></a>正向代理&#x2F;反向代理</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>代理客户端的，安装在自己电脑上的，如<strong>VPN</strong></p>
-<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>代理服务端的，客户端只用访问同一域名，客户无感知浏览服务资源</p>
-<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><p><strong>Nginx</strong>提供2种负载均衡策略——内置策略和扩展策略。<br>内置策略主要有轮询、加权轮询、Ip hash等。</p>
-
       
     </div>
 
@@ -1402,20 +1478,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1446,7 +1522,7 @@
         <div class="widget-wrap">
           <div id="myCanvasContainer" class="widget tagcloud">
             <canvas width="250" height="250" id="resCanvas" style="width:100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li></ul>
             </canvas>
           </div>
         </div>
@@ -1478,12 +1554,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">50k</span>
+    <span title="站点总字数">57k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">46 分钟</span>
+    <span title="站点阅读时长">52 分钟</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动 -->
