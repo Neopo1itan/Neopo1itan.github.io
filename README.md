@@ -4,12 +4,14 @@
  * @Author: 雷宇琦
  * @Date: 2023-07-10 16:01:45
  * @LastEditors: 雷宇琦
- * @LastEditTime: 2024-01-25 17:07:08
+ * @LastEditTime: 2024-04-11 17:21:25
 -->
 
 # Welcome to JJBond
 
-**<font face="Helvetica" color="#C0C0C0">这是 Yan 的 Blog,目前正在建设中...</font>**
+**<font face="Helvetica" color="#C0C0C0">这是 Yan 的 Blog,目前正在建设中...</font>**  
+<https://jjbond.cn/>  
+<https://neopo1itan.github.io/>
 
 ## 前端爪哇教育学习
 
@@ -30,6 +32,10 @@
 ### 2024.01.16 vue3.x 源码
 
 ### 2024.01.25 vue-cli
+
+### 2024.03.25 浏览器 Browser
+
+### 2024.04.11 函数式编程
 
 ## Task List
 
