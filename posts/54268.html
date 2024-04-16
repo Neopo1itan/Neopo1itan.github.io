@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jjbond.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":false,"sidebar_rss":{"text":"RSS","icon":"fa fa-rss","color":"burlywood","link":"atom.xml"}},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="vue2 存在的问题 代码结构：以整体的包为形式存在 性能优化的空间：ObjectDefineProperty 对象的方法，要对数组进行操作的话需要再自己封装一层，且所有值都是响应式的(性能损耗) 选项式的配置模式：不好维护庞大的项目，可维护性 浏览器真的需要老版本吗  vue3 的问题 太多的 breaking changes 太多不兼容的内容 生态影响 发布节奏太快">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3.x 源码">
+<meta property="og:url" content="https://jjbond.cn/posts/54268.html">
+<meta property="og:site_name" content="吉吉邦德">
+<meta property="og:description" content="vue2 存在的问题 代码结构：以整体的包为形式存在 性能优化的空间：ObjectDefineProperty 对象的方法，要对数组进行操作的话需要再自己封装一层，且所有值都是响应式的(性能损耗) 选项式的配置模式：不好维护庞大的项目，可维护性 浏览器真的需要老版本吗  vue3 的问题 太多的 breaking changes 太多不兼容的内容 生态影响 发布节奏太快">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-16T07:33:05.000Z">
+<meta property="article:modified_time" content="2024-04-15T07:42:55.077Z">
+<meta property="article:author" content="右眼">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jjbond.cn/posts/54268.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vue3.x 源码 | 吉吉邦德</title>
+
+  <!-- 球形气泡标签云 -->
+  <script type="text/javascript" src="/js/bubble.js"></script>
+
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="吉吉邦德" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+      <a target="_blank" rel="noopener" href="https://github.com/Neopo1itan/" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#1f3e5c; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a ><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">吉吉邦德</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-regular fa-desktop fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-regular fa-tags fa-fw"></i>标签<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-regular fa-shapes fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-regular fa-inbox fa-fw"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-rss">
+
+    <a href="/atom.xml" rel="section"><i class="fa fa-rss fa-fw"></i>RSS</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jjbond.cn/posts/54268.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="右眼">
+      <meta itemprop="description" content="任何时间 任何地点<br>超级侦探 认真办案">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吉吉邦德">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue3.x 源码
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-16 15:33:05" itemprop="dateCreated datePublished" datetime="2024-01-16T15:33:05+08:00">2024-01-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-15 15:42:55" itemprop="dateModified" datetime="2024-04-15T15:42:55+08:00">2024-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="vue2-存在的问题"><a href="#vue2-存在的问题" class="headerlink" title="vue2 存在的问题"></a>vue2 存在的问题</h2><ul>
+<li>代码结构：以整体的包为形式存在</li>
+<li>性能优化的空间：ObjectDefineProperty 对象的方法，要对数组进行操作的话需要再自己封装一层，且所有值都是响应式的(性能损耗)</li>
+<li>选项式的配置模式：不好维护庞大的项目，可维护性</li>
+<li>浏览器真的需要老版本吗</li>
+</ul>
+<h2 id="vue3-的问题"><a href="#vue3-的问题" class="headerlink" title="vue3 的问题"></a>vue3 的问题</h2><ul>
+<li>太多的 <strong>breaking changes</strong> 太多不兼容的内容</li>
+<li>生态影响</li>
+<li>发布节奏太快<span id="more"></span></li>
+<li><a href="#vue2-%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98">vue2 存在的问题</a></li>
+<li><a href="#vue3-%E7%9A%84%E9%97%AE%E9%A2%98">vue3 的问题</a></li>
+<li><a href="#vue3-%E7%9A%84%E4%BC%98%E5%8C%96">vue3 的优化</a><ul>
+<li><a href="#%E7%BB%93%E6%9E%84%E4%B8%8A%E7%9A%84%E4%BC%98%E5%8C%96---monorepo">结构上的优化 - monorepo</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD%E4%B8%8A%E7%9A%84%E4%BC%98%E5%8C%96">性能上的优化</a></li>
+<li><a href="#%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96">编译优化</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8A%AB%E6%8C%81%E4%BC%98%E5%8C%96">数据劫持优化</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91">模板编译</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-proxy-%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F">基于 proxy 的响应式</a></li>
+<li><a href="#%E6%89%8B%E5%86%99-definereactive">手写 defineReactive</a></li>
+</ul>
+<h2 id="vue3-的优化"><a href="#vue3-的优化" class="headerlink" title="vue3 的优化"></a>vue3 的优化</h2><h3 id="结构上的优化-monorepo"><a href="#结构上的优化-monorepo" class="headerlink" title="结构上的优化 - monorepo"></a>结构上的优化 - monorepo</h3><p>原子结构 可独立拆分引用 &#x3D;&gt; 可做业务上的拆分</p>
+<h3 id="性能上的优化"><a href="#性能上的优化" class="headerlink" title="性能上的优化"></a>性能上的优化</h3><ul>
+<li><p>移除了很多使用率低的 api</p>
+</li>
+<li><p><strong>tree-shaking</strong> &#x3D;&gt; 产物打包优化</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> components <span class="keyword">from</span> <span class="string">&#x27;components&#x27;</span></span><br><span class="line"><span class="comment">//components.input</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; input &#125; <span class="keyword">from</span> <span class="string">&#x27;components&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; ref, computed, watch &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编译优化"><a href="#编译优化" class="headerlink" title="编译优化"></a>编译优化</h3><p>compile 阶段对静态的模板进行分析 &#x3D;&gt; 分析树 &lt;&#x3D; PatchFlag</p>
+<h3 id="数据劫持优化"><a href="#数据劫持优化" class="headerlink" title="数据劫持优化"></a>数据劫持优化</h3><p><strong>vue2.x</strong><br><em>object.defineProperty</em></p>
+<ol>
+<li>无法检测对象属性的增加和删除 &#x3D;&gt; $set $delete</li>
+<li>数组 &#x3D;&gt; push pop…</li>
+<li>层级较深 &#x3D;&gt; 递归遍历</li>
+</ol>
+<p><strong>vue3.x</strong><br>proxy &#x3D;&gt; 底层优化</p>
+<h2 id="模板编译"><a href="#模板编译" class="headerlink" title="模板编译"></a>模板编译</h2><ol>
+<li>词法分析阶段(baseParse)：template &#x3D;&gt; AST(抽象语法树)</li>
+<li>指令和语法的转化阶段(transform)：AST &#x3D;&gt; 解析不同的节点进行区分 &#x3D;&gt; 不同类型的转换</li>
+<li>可执行函数的生成阶段(generator)：转化后 AST 生成渲染函数</li>
+</ol>
+<ul>
+<li>主编译入口：core&#x2F;packages&#x2F;compiler-core&#x2F;src&#x2F;index.ts</li>
+</ul>
+<h2 id="基于-proxy-的响应式"><a href="#基于-proxy-的响应式" class="headerlink" title="基于 proxy 的响应式"></a>基于 proxy 的响应式</h2><ol>
+<li>数据劫持 | 数据响应：检测数据变化 &#x3D;&gt; 函数监听化执行</li>
+<li>依赖收集 (effect)<ul>
+<li>当前 vm 实例上挂载 effect &#x3D;&gt; 当前 activeEffect 切换为 effect &#x3D;&gt; 在 effect 上创建 deps 等属性用于传递依赖</li>
+<li>结合 1+2 变量访问 &#x3D;&gt; 触发对应的 get() &#x3D;&gt; 创建 deps 对象(targetMap) &#x3D;&gt; tagetMap 中的 Deps 可以作为属性进行添加(depsMap)</li>
+<li>depsMap 会被添加 activeEffect - 被收集的订阅方 activeEffect 中也同时存在 deps 数组中用于存放关联方的 depsMap - 订阅者</li>
+</ul>
+</li>
+<li>派发更新 ref<ol>
+<li>依赖的 set()被触发 &#x3D;&gt; Reflect.set()修改对应属性 &#x3D;&gt; 获取到 targetMap 订阅方(depsMap) &#x3D;&gt; 链条传递 &#x3D;&gt; 触发渲染</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>主响应式入口&#x2F;core&#x2F;packages&#x2F;reactivity&#x2F;src&#x2F;index.ts</li>
+</ul>
+<h2 id="手写-defineReactive"><a href="#手写-defineReactive" class="headerlink" title="手写 defineReactive"></a>手写 defineReactive</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Vue</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">options</span>) &#123;</span><br><span class="line">		<span class="keyword">const</span> data = options.<span class="property">data</span></span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">_data</span> = data</span><br><span class="line"></span><br><span class="line">		<span class="comment">//数据劫持</span></span><br><span class="line">		<span class="title function_">_proxy</span>(<span class="variable language_">this</span>, <span class="string">&#x27;_data&#x27;</span>, data)</span><br><span class="line"></span><br><span class="line">		<span class="comment">//核心逻辑</span></span><br><span class="line">		<span class="title function_">observe</span>(data)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">Watch</span>(</span><br><span class="line">			<span class="variable language_">this</span>,</span><br><span class="line">			<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> data.<span class="property">name</span> + <span class="string">&#x27;创建响应式&#x27;</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">				<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;watch cb:&#x27;</span>, <span class="variable language_">this</span>.<span class="property">value</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> _proxy = <span class="keyword">function</span> (<span class="params">vm, sourceKey, data</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(data)</span><br><span class="line"></span><br><span class="line">	keys.<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(vm, key, &#123;</span><br><span class="line">			<span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> vm[sourceKey][key]</span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="title function_">set</span>(<span class="params">val</span>) &#123;</span><br><span class="line">				vm[sourceKey][key] = val</span><br><span class="line">			&#125;,</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> observe = <span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> ob = <span class="keyword">new</span> <span class="title class_">Observe</span>(data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Observe</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">data</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="title function_">walk</span>(data)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">walk</span>(<span class="params">data</span>) &#123;</span><br><span class="line">		<span class="title class_">Object</span>.<span class="title function_">keys</span>(data).<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">let</span> val = obj[key]</span><br><span class="line">			<span class="keyword">const</span> dep = <span class="keyword">new</span> <span class="title class_">Dep</span>()</span><br><span class="line"></span><br><span class="line">			<span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, key, &#123;</span><br><span class="line">				<span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">					<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;依赖收集&#x27;</span>)</span><br><span class="line">					dep.<span class="title function_">depend</span>()</span><br><span class="line">					<span class="keyword">return</span> val</span><br><span class="line">				&#125;,</span><br><span class="line">				<span class="title function_">set</span>(<span class="params">newVal</span>) &#123;</span><br><span class="line">					<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;派发更新&#x27;</span>)</span><br><span class="line">					val = newVal</span><br><span class="line">					dep.<span class="title function_">notify</span>()</span><br><span class="line">				&#125;,</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dep</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">id</span> = <span class="title class_">Dep</span>.<span class="property">uid</span>++</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">subs</span> = []</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="title function_">addSub</span>(<span class="params">sub</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">subs</span>.<span class="title function_">push</span>(sub)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">depend</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="title class_">Dep</span>.<span class="property">target</span>) &#123;</span><br><span class="line">			<span class="title class_">Dep</span>.<span class="property">target</span>.<span class="title function_">addDep</span>(<span class="variable language_">this</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">notify</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">subs</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">sub</span>) =&gt;</span> sub.<span class="title function_">update</span>())</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_">removeSub</span>(<span class="params">sub</span>) &#123;</span><br><span class="line">		<span class="keyword">const</span> subIndex = <span class="variable language_">this</span>.<span class="property">subs</span>.<span class="title function_">indexOf</span>(sub)</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">subs</span>.<span class="title function_">splices</span>(subIndex, <span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Dep</span>.<span class="property">uid</span> = <span class="number">0</span></span><br><span class="line"><span class="title class_">Dep</span>.<span class="property">target</span> = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Watch</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params">vm, render, cb</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">vm</span> = vm</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">render</span> = render</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">cb</span> = cb</span><br><span class="line"></span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">deps</span> = []</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">depsIds</span> = <span class="keyword">new</span> <span class="title class_">Set</span>()</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">newDeps</span> = []</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">newDepsIds</span> = <span class="keyword">new</span> <span class="title class_">Set</span>()</span><br><span class="line"></span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">value</span> = <span class="variable language_">this</span>.<span class="title function_">get</span>()</span><br><span class="line">		<span class="variable language_">this</span>.<span class="title function_">cb</span>(<span class="variable language_">this</span>.<span class="property">value</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="title class_">Dep</span>.<span class="property">taget</span> = <span class="variable language_">this</span></span><br><span class="line">		<span class="comment">//重置</span></span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">newDeps</span> = []</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">newDepsIds</span> = <span class="keyword">new</span> <span class="title class_">Set</span>()</span><br><span class="line"></span><br><span class="line">		<span class="keyword">const</span> value = <span class="variable language_">this</span>.<span class="title function_">render</span>()</span><br><span class="line"></span><br><span class="line">		<span class="title class_">Dep</span>.<span class="property">target</span> = <span class="literal">null</span></span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">deps</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">oldDep</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">const</span> notExistInNewDeps = !<span class="variable language_">this</span>.<span class="property">newDepsIds</span>.<span class="title function_">has</span>(oldDep.<span class="property">id</span>)</span><br><span class="line">			<span class="keyword">if</span> (notExistInNewDeps) &#123;</span><br><span class="line">				oldDep.<span class="title function_">removeSub</span>(<span class="variable language_">this</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line"></span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">deps</span> = <span class="variable language_">this</span>.<span class="property">newDeps</span></span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">depsIds</span> = <span class="variable language_">this</span>.<span class="property">newDepsIds</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> value</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="title function_">addDep</span>(<span class="params">dep</span>) &#123;</span><br><span class="line">		<span class="keyword">const</span> depId = dep.<span class="property">id</span></span><br><span class="line">		<span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">newDepsIds</span>.<span class="title function_">has</span>(depId)) &#123;</span><br><span class="line">			<span class="variable language_">this</span>.<span class="property">newDeps</span>.<span class="title function_">push</span>(dep)</span><br><span class="line">			<span class="variable language_">this</span>.<span class="property">newDepsIds</span>.<span class="title function_">add</span>(depId)</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (!<span class="variable language_">this</span>.<span class="property">depsIds</span>.<span class="title function_">has</span>(depId)) &#123;</span><br><span class="line">				dep.<span class="title function_">addSub</span>(<span class="variable language_">this</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="title function_">update</span>(<span class="params"></span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">value</span> = <span class="variable language_">this</span>.<span class="title function_">get</span>()</span><br><span class="line">		<span class="variable language_">this</span>.<span class="title function_">cb</span>(<span class="variable language_">this</span>.<span class="property">value</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:16px;">-------------本文结束<i class="fa fa-bolt"></i>感谢阅读-------------</div>
+    
+</div>
+      </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>右眼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://jjbond.cn/posts/54268.html" title="vue3.x 源码">https://jjbond.cn/posts/54268.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/5805.html" rel="prev" title="vue2.x 源码">
+      <i class="fa fa-chevron-left"></i> vue2.x 源码
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/38044.html" rel="next" title="vue-cli 详解">
+      vue-cli 详解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81ODY4My8zNTE0NQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue2-%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">vue2 存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue3-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">vue3 的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue3-%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">vue3 的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%B8%8A%E7%9A%84%E4%BC%98%E5%8C%96-monorepo"><span class="nav-number">3.1.</span> <span class="nav-text">结构上的优化 - monorepo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%B8%8A%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">性能上的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E4%BC%98%E5%8C%96"><span class="nav-number">3.3.</span> <span class="nav-text">编译优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%AB%E6%8C%81%E4%BC%98%E5%8C%96"><span class="nav-number">3.4.</span> <span class="nav-text">数据劫持优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E7%BC%96%E8%AF%91"><span class="nav-number">4.</span> <span class="nav-text">模板编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-proxy-%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">基于 proxy 的响应式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%86%99-defineReactive"><span class="nav-number">6.</span> <span class="nav-text">手写 defineReactive</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="右眼"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">右眼</p>
+  <div class="site-description" itemprop="description">任何时间 任何地点<br>超级侦探 认真办案</div>
+</div>
+
+
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Neopo1itan/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Neopo1itan&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/youyan030" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;youyan030" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://steamcommunity.com/id/youyanww/" title="Steam → https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;youyanww&#x2F;" rel="noopener" target="_blank"><i class="fab fa-steam fa-fw"></i>Steam</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/895680/video" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;895680&#x2F;video" rel="noopener" target="_blank"><i class="fa fa-wheelchair fa-fw"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+      
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=320 height=240 src="//music.163.com/outchain/player?type=0&id=8545160772&auto=1&height=430"></iframe>
+    
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+          <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width:100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS/" rel="tag">JS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+          </div>
+        </div>
+    
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">右眼</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">59k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">53 分钟</span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动 -->
+    <span>个人网站&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp吉吉邦德</span>
+  </div>
+
+
+
+<!--添加运行时间--> 
+</br>
+<span id="sitetime"></span> 
+<script language=javascript> 
+  function siteTime(){ 
+    window.setTimeout("siteTime()", 1000); 
+    var seconds = 1000; 
+    var minutes = seconds * 60; 
+    var hours = minutes * 60; 
+    var days = hours * 24; 
+    var years = days * 365; 
+    var today = new Date(); 
+    var todayYear = today.getFullYear(); 
+    var todayMonth = today.getMonth()+1; 
+    var todayDate = today.getDate(); 
+    var todayHour = today.getHours(); 
+    var todayMinute = today.getMinutes(); 
+    var todaySecond = today.getSeconds(); 
+    /* 
+    Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳) 
+    year - 作为date对象的年份，为4位年份值 
+    month - 0-11之间的整数，做为date对象的月份 
+    day - 1-31之间的整数，做为date对象的天数 
+    hours - 0(午夜24点)-23之间的整数，做为date对象的小时数 
+    minutes - 0-59之间的整数，做为date对象的分钟数 
+    seconds - 0-59之间的整数，做为date对象的秒数 
+    microseconds - 0-999之间的整数，做为date对象的毫秒数 
+    */ 
+    var t1 = Date.UTC(2023,07,06,15,49,36); //北京时间2018-2-13 00:00:00 
+    var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond); 
+    var diff = t2-t1; 
+    var diffYears = Math.floor(diff/years); 
+    var diffDays = Math.floor((diff/days)-diffYears*365); 
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours); 
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes); 
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds); 
+    document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒"; 
+    } 
+    siteTime(); 
+</script> 
+<!--// 添加运行时间-->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+    
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: true,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
